@@ -1,10 +1,40 @@
+"use client";
 import React from "react";
 // Assuming your image imports are now correctly configured or images are in the public folder
 import autoimg from "@/assets/autof.webp"; // Or import from public if using next/image correctly
 import photoimg from "@/assets/photop.webp"; // Or import from public if using next/image correctly
 import Image from "next/image";
+import DliToPpfdCalc from "@/components/CALCS/DliToPpfdCalc";
+import PpfToLuxCalc from "@/components/CALCS/PpfdToLuxCalc";
+import LuxToPpfd from "@/components/CALCS/LuxToPpfdCalc";
+import LumensToPpfCalc from "@/components/CALCS/LumensToPpfCalc";
+import PpfToLumens from "@/components/CALCS/PpfToLumensCalc";
 // Removed: import ImageSlide from "@/components/ImageSlider/ImageSlide";
+const conversionFactors: { [key: string]: number | null } = {
+  "Natural Daylight 6500K": 43.478261, // Replace null with your factor for Option 1 (e.g., 90)
+  "Halogen Lamp 3000K": 28.913615, // Replace null with your factor for Option 2 (e.g., 80)
+  "High CRI LED 6500K": 5.802603, // Replace null with your factor for Option 3 (e.g., 70)
+  "High CRI LED 4000K": 5.6108597, // Replace null with your factor for Option 4 (e.g., 95)
+  "High CRI LED 3000K": 5.2555701, // Replace null with your factor for Option 5 (e.g., 54)
+  "Low CRI LED 6500K": 7.4588939, // Replace null with your factor for Option 6
+  "Low CRI LED 3500K": 6.235595, // Replace null with your factor for Option 7
+  "HPS 2000K": 7.7079295, // Replace null with your factor for Option 8
+  "CMH 3000K": 5.5092988, // Replace null with your factor for Option 9 "Fluorescent Lamp 5000K": 74112821, // Replace null with your factor for Option 10
+  "Monochromatic Red LED 650 nm": 13.012295, // Replace null with your factor for Option 11
+  "Monochromatic Blue LED 450 nm": 8.654105, // Replace null with your factor for Option 12
+  "Red + Blue LED 450+650 nm": 11.270037, // Replace null with your factor for Option 13
+  "Red + Blue + White LED 450+650nm+3500K": 38.926554, // Replace null with your factor for Option 14
+};
 
+// Helper function to format option keys into more readable text
+const formatOptionText = (key: string): string => {
+  // Simple formatting: replace hyphens with spaces and capitalize first letter of each word
+  return key
+    .replace(/-/g, " ")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
 const LightCalc = () => {
   // Using the imported image objects directly for the side-by-side view (next/image prefers the imported object)
   const CHART_IMAGES = [autoimg, photoimg];
@@ -79,13 +109,12 @@ const LightCalc = () => {
         {/* Hours and PPFD to DLI Calculator Section */}
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-xl sm:text-2xl font-semibold mb-3">
-            Hours and PPFD to DLI
+            PPFD to DLI
           </h2>{" "}
           {/* Added responsive text size */}
           {/* Calculator Input/Output Placeholder - Actual calculator logic will go here */}
           <div className="border p-4 mb-4">
-            {/* Calculator UI elements (inputs, button, output) will be placed here */}
-            <p>Calculator UI Placeholder</p>
+            <DliToPpfdCalc />
           </div>
           {/* Explanation for this calculator */}
           <p className="text-gray-700 text-sm sm:text-base">
@@ -102,11 +131,16 @@ const LightCalc = () => {
 
         {/* PPF to LUX Calculator Section */}
         <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-3">PPF to LUX</h2>{" "}
+          <h2 className="text-xl sm:text-2xl font-semibold mb-3">
+            PPFD to Lux
+          </h2>{" "}
           {/* Added responsive text size */}
           {/* Calculator Input/Output Placeholder */}
           <div className="border p-4 mb-4">
-            <p>Calculator UI Placeholder</p>
+            <PpfToLuxCalc
+              conversionFactors={conversionFactors}
+              formatOptionText={formatOptionText}
+            />
           </div>
           {/* Explanation for this calculator */}
           <p className="text-gray-700 text-sm sm:text-base">
@@ -125,11 +159,16 @@ const LightCalc = () => {
 
         {/* LUX to PPF Calculator Section */}
         <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-3">LUX to PPF</h2>{" "}
+          <h2 className="text-xl sm:text-2xl font-semibold mb-3">
+            Lux to PPFD
+          </h2>{" "}
           {/* Added responsive text size */}
           {/* Calculator Input/Output Placeholder */}
           <div className="border p-4 mb-4">
-            <p>Calculator UI Placeholder</p>
+            <LuxToPpfd
+              conversionFactors={conversionFactors}
+              formatOptionText={formatOptionText}
+            />
           </div>
           {/* Explanation for this calculator */}
           <p className="text-gray-700 text-sm sm:text-base">
@@ -154,7 +193,38 @@ const LightCalc = () => {
           {/* Added responsive text size */}
           {/* Calculator Input/Output Placeholder */}
           <div className="border p-4 mb-4">
-            <p>Calculator UI Placeholder</p>
+            <LumensToPpfCalc
+              conversionFactors={conversionFactors}
+              formatOptionText={formatOptionText}
+            />
+          </div>
+          {/* Explanation for this calculator */}
+          <p className="text-gray-700 text-sm sm:text-base">
+            {" "}
+            {/* Added responsive text size */}
+            Lumens measure the total amount of visible light emitted by a
+            source, weighted according to human eye sensitivity. PPF measures
+            the total amount of photosynthetically active radiation (PAR)
+            relevant to plants. Plants utilize a different spectrum of light
+            than humans perceive most brightly (e.g., they use more blue and red
+            light, less green). Therefore, converting Lumens to PPF is **not a
+            reliable method** for assessing a grow lights effectiveness for
+            plants. This calculation is provided for informational purposes but
+            is highly dependent on the lights spectrum and should not be used
+            for precise grow light planning.
+          </p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-3">
+            PPF to Lumens
+          </h2>{" "}
+          {/* Added responsive text size */}
+          {/* Calculator Input/Output Placeholder */}
+          <div className="border p-4 mb-4">
+            <PpfToLumens
+              conversionFactors={conversionFactors}
+              formatOptionText={formatOptionText}
+            />
           </div>
           {/* Explanation for this calculator */}
           <p className="text-gray-700 text-sm sm:text-base">
