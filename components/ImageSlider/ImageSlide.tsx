@@ -1,11 +1,13 @@
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image"; // Import StaticImageData
 import { useState } from "react";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react"; // Assuming lucide-react is installed
 
+// Update the type to correctly accept StaticImageData
 type ImageSliderProps = {
-  imageUrls: string[];
+  imageUrls: StaticImageData[];
+  alt: string; // Changed from string[] to StaticImageData[]
 };
 
 const ImageSlide = ({ imageUrls }: ImageSliderProps) => {
@@ -48,10 +50,11 @@ const ImageSlide = ({ imageUrls }: ImageSliderProps) => {
       <Image
         src={imageUrls[imageIndex]}
         alt="Slide"
-        // Use fill or specific sizes based on needs. Using specific sizes with w-full h-auto object-contain is common.
-        // Adjust these sizes or use layout="fill" based on your design requirements.
-        width={600} // Reduced example base width
-        height={400} // Reduced example base height
+        // When using StaticImageData, Next.js provides width/height.
+        // You might still provide these props for layout or SEO, but Next.js can infer from the imported data.
+        // Keeping sensible defaults here.
+        width={600}
+        height={400}
         className="w-full h-auto object-contain" // Changed object-cover to object-contain, removed aspect-video
       />
       {/* Left Arrow Button */}

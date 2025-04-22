@@ -2,18 +2,37 @@
 
 import React, { useRef, useState } from "react";
 
-// Define placeholder conversion factors (LUX per PPFD) for 14 different light types.
-// IMPORTANT: Replace the 'null' values below with your actual conversion factors (numbers).
+// Define conversion factors (LUX per PPFD) for different light types.
 // These factors are highly spectrum-dependent and vary between specific light fixtures.
-interface PpfdToLuxCalcProps {
-  conversionFactors: { [key: string]: number | null };
-  formatOptionText: (key: string) => string;
-}
+// Replace the values with your actual conversion factors (numbers).
+const conversionFactors: { [key: string]: number | null } = {
+  "Natural Daylight 6500K": 43.478261,
+  "Halogen Lamp 3000K": 28.913615,
+  "High CRI LED 6500K": 5.802603,
+  "High CRI LED 4000K": 5.6108597,
+  "High CRI LED 3000K": 5.2555701,
+  "Low CRI LED 6500K": 7.4588939,
+  "Low CRI LED 3500K": 6.235595,
+  "HPS 2000K": 7.7079295,
+  "CMH 3000K": 5.5092988,
+  "Fluorescent Lamp 5000K": 74.112821, // Corrected factor based on common values (was very high)
+  "Monochromatic Red LED 650 nm": 13.012295,
+  "Monochromatic Blue LED 450 nm": 8.654105,
+  "Red + Blue LED 450+650 nm": 11.270037,
+  "Red + Blue + White LED 450+650nm+3500K": 38.926554,
+};
 
-const PpfdToLuxCalc: React.FC<PpfdToLuxCalcProps> = ({
-  conversionFactors,
-  formatOptionText,
-}) => {
+// Helper function to format option keys into more readable text
+const formatOptionText = (key: string): string => {
+  // Simple formatting: replace hyphens with spaces and capitalize first letter of each word
+  return key
+    .replace(/-/g, " ")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
+const PpfdToLuxCalc: React.FC = () => {
   // Create a ref for the PPFD input element
   const ppfdInputRef = useRef<HTMLInputElement>(null);
 
@@ -58,18 +77,19 @@ const PpfdToLuxCalc: React.FC<PpfdToLuxCalcProps> = ({
     // Get the conversion factor based on the selected light type
     const conversionFactor = conversionFactors[lightType];
 
-    // Check if a valid conversion factor exists and is not null for the selected type
     if (conversionFactor === undefined || conversionFactor === null) {
       setError(
-        `Conversion factor not available for ${formatOptionText(
+        `Conversion factor not available for "${formatOptionText(
           lightType
-        )}. Please add the factor.`
+        )}". Please add the factor.`
       );
       return;
     }
     if (conversionFactor <= 0) {
       setError(
-        `Conversion factor for ${formatOptionText(lightType)} must be positive.`
+        `Conversion factor for "${formatOptionText(
+          lightType
+        )}" must be positive.`
       );
       return;
     }
@@ -84,62 +104,75 @@ const PpfdToLuxCalc: React.FC<PpfdToLuxCalcProps> = ({
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow">
+    <>
+      {" "}
+      {/* Use fragment to avoid extra div if this is placed inside another container */}
+      <h3 className="text-lg font-semibold mb-3 text-gray-800">
+        PPFD to LUX Calculator
+      </h3>
       {/* Explanation about the approximation */}
       <p className="text-gray-700 text-sm sm:text-base mb-4">
         This calculator converts PPFD (Photosynthetic Photon Flux Density) to
         LUX (a measure of illuminance based on human vision). **Note:** This
         conversion is highly approximate and depends heavily on the light
-        sources spectral distribution. The factors used here are typical
-        examples. A proper PAR meter is needed for accurate PPFD measurements.
+        sources spectral distribution.
       </p>
-
+      {/* PPFD Input */}
       <div className="mb-4">
+        {" "}
+        {/* Added margin-bottom */}
         <label
           htmlFor="ppfdInput"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
+          {" "}
+          {/* Block label for better layout */}
           PPFD (μmol/s/m²):
         </label>
         <input
           type="number"
           id="ppfdInput" // Unique ID for the label
           ref={ppfdInputRef} // Attach the ref to the input
-          defaultValue={100} // Sets the initial default value
+          defaultValue={300} // Sets the initial default value
           min={0} // Minimum allowed value
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" // Basic Tailwind styling
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" // Tailwind form styling
         />
       </div>
       {/* Light Type Select */}
       <div className="mb-6">
+        {" "}
+        {/* Added margin-bottom */}
         <label
-          htmlFor="lightTypeSelect"
+          htmlFor="lightTypeSelectPpfd"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
-          Spectrum:
+          {" "}
+          {/* Block label for better layout */}
+          Light Source Type:
         </label>
         <select
-          id="lightTypeSelect" // Unique ID for the label
+          id="lightTypeSelectPpfd" // Unique ID
           value={lightType} // Bind the select value to the state
           onChange={handleLightTypeChange} // Handle changes with the state update function
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" // Basic Tailwind styling
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" // Tailwind form styling
         >
-          {/* Map over the conversionFactors keys to create 14 options */}
+          {/* Map over the conversionFactors keys to create options */}
           {Object.keys(conversionFactors).map((key) => (
             <option key={key} value={key}>
-              {formatOptionText(key)}{" "}
-              {/* Use the helper function to format text */}
+              {formatOptionText(key)} {/* Use the formatting function */}
             </option>
           ))}
         </select>
       </div>
       {/* Calculate Button */}
       <div className="mb-4">
+        {" "}
+        {/* Added margin-bottom */}
         <button
           onClick={calcPPFDToLUX}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" // Basic Tailwind styling
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" // Tailwind button styling with transition
         >
-          Calculate
+          Calculate LUX
         </button>
       </div>
       {/* Display Error Message */}
@@ -149,23 +182,22 @@ const PpfdToLuxCalc: React.FC<PpfdToLuxCalcProps> = ({
           role="alert"
         >
           {" "}
-          {/* Basic Tailwind error styling */}
+          {/* Tailwind error styling */}
           <span className="block sm:inline">{error}</span>
         </div>
       )}
-      {/* Display Result */}
       {luxResult !== null && !error && (
         <div
           className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
           role="alert"
         >
           {" "}
-          {/* Basic Tailwind success styling */}
-          <span className="font-bold">Calculated = </span>{" "}
-          {luxResult.toFixed(0)} lux
+          {/* Tailwind success styling */}
+          <span className="font-bold">Calculated LUX:</span>{" "}
+          {luxResult.toFixed(2)} lux
         </div>
       )}
-    </div>
+    </>
   );
 };
 
