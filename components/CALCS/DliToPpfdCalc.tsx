@@ -9,7 +9,7 @@ const DliToPpfdCalc: React.FC = () => {
   const [dliResult, setDliResult] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const calcDLItoPPFD = () => {
+  const calcPpfdAndHoursToDli = () => {
     setDliResult(null);
     setError(null);
 
@@ -89,7 +89,7 @@ const DliToPpfdCalc: React.FC = () => {
         {" "}
         {/* Added margin-top */}
         <button
-          onClick={calcDLItoPPFD}
+          onClick={calcPpfdAndHoursToDli}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" // Tailwind button styling with transition
         >
           Calculate DLI

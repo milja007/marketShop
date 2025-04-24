@@ -9,11 +9,24 @@ interface GenericLightCalcProps {
   outputLabel: string; // Label for the result display
   inputDefaultValue: number; // Default value for the input
   conversionFactors: { [key: string]: number | null }; // The specific set of factors for this calculation
-  formatOptionText: (key: string) => string; // Helper function to format option text
-  calculateFunction: (inputValue: number, factor: number) => number; // The specific calculation logic
+
+  calculationType:
+    | "ppfd-to-lux"
+    | "lux-to-ppfd"
+    | "lumens-to-ppf"
+    | "ppf-to-lumens";
   outputUnit: string; // The unit for the output result
   noteText: string; // Explanatory note about the calculation/approximation
 }
+
+const formatOptionText = (key: string): string => {
+  return key
+    .replace(/-/g, " ")
+    .replace(/(\d+)\s?(nm|K|k)/g, "($1$2)") // Add parenthesis around units like (650nm), (3000K)
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
 
 const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
   title,
@@ -21,8 +34,7 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
   outputLabel,
   inputDefaultValue,
   conversionFactors,
-  formatOptionText,
-  calculateFunction,
+  calculationType,
   outputUnit,
   noteText,
 }) => {
@@ -92,8 +104,37 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
     }
 
     try {
-      const calculatedResult = calculateFunction(inputValue, conversionFactor);
-      // Check for NaN or Infinity results post-calculation
+      let calculatedResult: number;
+
+      // --- Use the calculationType to determine the logic ---
+      switch (calculationType) {
+        case "ppfd-to-lux":
+          // PPFD (input) * Factor (LUX per PPFD) = LUX (output)
+          calculatedResult = inputValue * conversionFactor;
+          break;
+        case "lux-to-ppfd":
+          // LUX (input) * Factor (PPFD per LUX) = PPFD (output)
+          // Note: Factor is pre-calculated inverse (1 / (LUX per PPFD))
+          // Zero factor check is done above
+          calculatedResult = inputValue * conversionFactor;
+          break;
+        case "lumens-to-ppf":
+          // Lumens (input) * Factor (PPF per Lumen) = PPF (output)
+          calculatedResult = inputValue * conversionFactor;
+          break;
+        case "ppf-to-lumens":
+          // PPF (input) * Factor (Lumens per PPF) = Lumens (output)
+          // Note: Factor is pre-calculated inverse (1 / (PPF per Lumen))
+          // Zero factor check is done above
+          calculatedResult = inputValue * conversionFactor;
+          break;
+        default:
+          // Should not happen if types are correct
+          console.error("Unknown calculation type:", calculationType);
+          throw new Error("Invalid calculation type specified.");
+      }
+      // --- End of calculation logic switch ---
+
       if (isNaN(calculatedResult) || !isFinite(calculatedResult)) {
         setError(
           "Calculation resulted in an invalid number. Check input and factors."

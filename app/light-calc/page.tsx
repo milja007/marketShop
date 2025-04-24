@@ -1,6 +1,3 @@
-"use client"; // This directive indicates this is a Client Component in Next.js
-
-import React from "react";
 import Image from "next/image";
 
 // Asset imports (ensure these paths are correct for your setup)
@@ -68,59 +65,6 @@ const ppfToLumensFactors: { [key: string]: number | null } = Object.entries(
   return acc;
 }, {} as { [key: string]: number | null });
 
-// Helper function to format option keys
-const formatOptionText = (key: string): string => {
-  return key
-    .replace(/-/g, " ")
-    .replace(/(\d+)\s?(nm|K|k)/g, "($1$2)") // Add parenthesis around units like (650nm), (3000K)
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
-// --- End Shared Data Definition ---
-
-// PPFD (input) * Factor (LUX per PPFD) = LUX (output)
-const calculatePpfdToLux = (ppfd: number, factor: number): number => {
-  // Simple multiplication is correct here.
-  return ppfd * factor;
-};
-
-// LUX (input) * Factor (PPFD per LUX) = PPFD (output)
-// Note: The 'factor' passed here is expected to be the pre-calculated inverse (1 / (LUX per PPFD))
-const calculateLuxToPpfd = (lux: number, factor: number): number => {
-  // We pre-calculated the factor as PPFD per LUX, so we multiply.
-  // We still check if the factor is non-zero to avoid potential issues,
-  // though the factor calculation should ideally prevent null/zero factors.
-  if (factor === 0) {
-    // This case shouldn't happen if luxToPpfdFactors are generated correctly
-    // from non-zero ppfdToLuxFactors, but it's safe to check.
-    console.error("Error: LUX to PPFD conversion factor is zero.");
-    // Returning NaN or throwing an error are options. Let's throw for clarity.
-    throw new Error("LUX to PPFD conversion factor cannot be zero.");
-  }
-  // Since factor is PPFD/LUX, multiplication gives PPFD.
-  return lux * factor;
-};
-
-// Lumens (input) * Factor (PPF per Lumen) = PPF (output)
-// Note: The 'factor' passed here MUST be PPF per Lumen.
-const calculateLumensToPpf = (lumens: number, factor: number): number => {
-  // Simple multiplication is correct, assuming the factor is correct.
-  return lumens * factor;
-};
-
-// PPF (input) * Factor (Lumens per PPF) = Lumens (output)
-// Note: The 'factor' passed here is expected to be the pre-calculated inverse (1 / (PPF per Lumen))
-const calculatePpfToLumens = (ppf: number, factor: number): number => {
-  // We pre-calculated the factor as Lumens per PPF, so we multiply.
-  // Add check for zero factor.
-  if (factor === 0) {
-    console.error("Error: PPF to Lumens conversion factor is zero.");
-    throw new Error("PPF to Lumens conversion factor cannot be zero.");
-  }
-  // Since factor is Lumens/PPF, multiplication gives Lumens.
-  return ppf * factor;
-};
 const LightCalc = () => {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -169,8 +113,7 @@ const LightCalc = () => {
               outputLabel="LUX:"
               inputDefaultValue={100}
               conversionFactors={ppfdToLuxFactors}
-              formatOptionText={formatOptionText}
-              calculateFunction={calculatePpfdToLux}
+              calculationType={"ppfd-to-lux"}
               outputUnit="lux"
               noteText="Approximate conversion from PPFD to LUX." // Shorter note
             />
@@ -183,8 +126,7 @@ const LightCalc = () => {
               outputLabel="PPFD:"
               inputDefaultValue={5000}
               conversionFactors={luxToPpfdFactors}
-              formatOptionText={formatOptionText}
-              calculateFunction={calculateLuxToPpfd}
+              calculationType={"lux-to-ppfd"}
               outputUnit="μmol/s/m²"
               noteText="Approximate conversion from LUX to PPFD." // Shorter note
             />
@@ -208,8 +150,7 @@ const LightCalc = () => {
               outputLabel="PPF:"
               inputDefaultValue={10000}
               conversionFactors={lumensToPpfFactors} // ** NEEDS REAL FACTORS **
-              formatOptionText={formatOptionText}
-              calculateFunction={calculateLumensToPpf}
+              calculationType={"lumens-to-ppf"}
               outputUnit="μmol/s"
               noteText="Estimates PPF from Lumens. Requires accurate factors!" // Shorter note
             />
@@ -222,8 +163,7 @@ const LightCalc = () => {
               outputLabel="Lumens:"
               inputDefaultValue={200}
               conversionFactors={ppfToLumensFactors} // ** NEEDS REAL FACTORS **
-              formatOptionText={formatOptionText}
-              calculateFunction={calculatePpfToLumens}
+              calculationType={"ppf-to-lumens"}
               outputUnit="lm" // Standard unit for lumens
               noteText="Estimates Lumens from PPF. Requires accurate factors!" // Shorter note
             />
