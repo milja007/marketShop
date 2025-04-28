@@ -50,6 +50,7 @@ const ImageSlide = ({ imageUrls }: ImageSliderProps) => {
       <Image
         src={imageUrls[imageIndex]}
         alt="Slide"
+        priority
         // When using StaticImageData, Next.js provides width/height.
         // You might still provide these props for layout or SEO, but Next.js can infer from the imported data.
         // Keeping sensible defaults here.
