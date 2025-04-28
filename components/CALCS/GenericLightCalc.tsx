@@ -153,16 +153,18 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
 
   return (
     <>
-      <h3 className="text-xl font-semibold mb-3 text-gray-800">{title}</h3>
-      <p className="text-gray-600 text-sm mb-4">{noteText}</p>
+      <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-100">
+        {title}
+      </h3>
+      <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+        {noteText}
+      </p>
 
       {/* Input Field */}
       <div className="mb-5">
-        {" "}
-        {/* Increased margin */}
         <label
           htmlFor={`input-${title.replace(/\s+/g, "-")}`}
-          className="block text-gray-700 text-sm font-bold mb-2"
+          className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2"
         >
           {inputLabel}
         </label>
@@ -172,18 +174,16 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
           ref={inputRef}
           defaultValue={inputDefaultValue}
           min={0}
-          step="any" // Allow floating point numbers
-          className="shadow-sm appearance-none border border-gray-300 rounded max-w-xs w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" // Adjusted styling: max-w-xs
+          step="any"
+          className="shadow-sm appearance-none border border-gray-300 dark:border-gray-600 rounded max-w-xs w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
       </div>
 
       {/* Light Type Select */}
       <div className="mb-6">
-        {" "}
-        {/* Increased margin */}
         <label
           htmlFor={`lightTypeSelect-${title.replace(/\s+/g, "-")}`}
-          className="block text-gray-700 text-sm font-bold mb-2"
+          className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2"
         >
           Light Source Type:
         </label>
@@ -191,7 +191,7 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
           id={`lightTypeSelect-${title.replace(/\s+/g, "-")}`}
           value={lightType}
           onChange={handleLightTypeChange}
-          className="shadow-sm appearance-none border border-gray-300 rounded max-w-xs w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white" // Adjusted styling: max-w-xs
+          className="shadow-sm appearance-none border border-gray-300 dark:border-gray-600 rounded max-w-xs w-full py-2 px-3 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >
           {Object.keys(conversionFactors).map((key) => (
             <option key={key} value={key}>
@@ -203,11 +203,9 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
 
       {/* Calculate Button */}
       <div className="mt-6">
-        {" "}
-        {/* Added margin-top */}
         <button
           onClick={performCalculation}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" // Adjusted styling
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
         >
           Calculate {outputLabel.replace("Calculated ", "").replace(":", "")}
         </button>
@@ -216,7 +214,7 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
       {/* Display Error Message */}
       {error && (
         <div
-          className="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative max-w-md" // Added max-width
+          className="mt-4 bg-red-100 dark:bg-red-300 border border-red-400 dark:border-red-500 text-red-700 dark:text-red-900 px-4 py-3 rounded relative max-w-md"
           role="alert"
         >
           <span className="block sm:inline">{error}</span>
@@ -226,12 +224,11 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
       {/* Display Result */}
       {result !== null && !error && (
         <div
-          className="mt-4 bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded relative max-w-md" // Added max-width and adjusted text color
+          className="mt-4 bg-green-100 dark:bg-green-300 border border-green-400 dark:border-green-500 text-green-800 dark:text-green-900 px-4 py-3 rounded relative max-w-md"
           role="alert"
         >
           <span className="font-bold">{outputLabel}</span>{" "}
-          <span className="text-lg">{result.toFixed(2)}</span> {outputUnit}{" "}
-          {/* Made result slightly larger */}
+          <span className="text-lg">{result.toFixed(2)}</span> {outputUnit}
         </div>
       )}
     </>
