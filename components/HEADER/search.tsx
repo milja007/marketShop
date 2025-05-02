@@ -1,10 +1,10 @@
-import React from "react";
+import SearchSvg from "./SVGS/SearchSvg";
 
-interface SearchProps {
-  className?: string;
-}
+// interface SearchProps {
+//   className?: string;
+// }
 
-const Search: React.FC<SearchProps> = ({ className = "" }) => {
+const Search = () => {
   return (
     <div
       className={`
@@ -13,7 +13,7 @@ const Search: React.FC<SearchProps> = ({ className = "" }) => {
         md:w-10 md:focus-within:w-[60vw]
         lg:w-[32rem] lg:focus-within:w-[32rem]
         xl:w-[32rem] xl:max-w-full
-        ${className}
+        
       `}
     >
       <input
@@ -36,19 +36,7 @@ const Search: React.FC<SearchProps> = ({ className = "" }) => {
           flex items-center
         "
       >
-        <svg
-          className="h-5 w-5 text-gray-500"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-4.35-4.35M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"
-          />
-        </svg>
+        <SearchSvg />
       </div>
     </div>
   );
