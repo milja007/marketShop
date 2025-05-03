@@ -12,6 +12,7 @@ const LinkNavbar = () => {
     "subc8",
     "subc9",
     "subc10",
+    "sub11",
   ];
 
   const categories = [
