@@ -22,7 +22,20 @@ const Navbar: React.FC = () => {
 
       <div className="hidden md:flex items-center space-x-4 flex-1 justify-center md:mr-16 xl:mr-24">
         <Search />
-        <button className="md:ml-8 xl:ml-12">All categories</button>
+        <button
+          className="
+    md:ml-8 xl:ml-12
+    bg-amber-600 text-white font-semibold
+    py-2 px-4
+    rounded-lg
+    shadow-md
+    hover:bg-amber-700
+    focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2
+    transition-colors duration-200
+  "
+        >
+          All categories
+        </button>
       </div>
 
       <div className="flex space-x-4 ">

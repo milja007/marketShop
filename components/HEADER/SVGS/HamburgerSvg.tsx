@@ -1,4 +1,13 @@
+"use client";
+
+import { useState } from "react";
+
 const HamburgerSvg = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function openMenu() {
+    setMenuOpen((open) => !open);
+  }
   return (
     <svg
       className="w-6 h-6 text-gray-700 md:hidden"
@@ -6,6 +15,7 @@ const HamburgerSvg = () => {
       stroke="currentColor"
       strokeWidth={2}
       viewBox="0 0 24 24"
+      onClick={openMenu}
     >
       <path
         strokeLinecap="round"

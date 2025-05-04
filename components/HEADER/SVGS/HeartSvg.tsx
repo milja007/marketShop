@@ -1,7 +1,7 @@
 const HeartSvg = () => {
   return (
     <svg
-      className="w-6 h-6 text-black"
+      className="w-6 h-6 text-gray-700"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
