@@ -1,6 +1,7 @@
 "use client"; // This directive indicates this is a Client Component in Next.js
 
 import React, { useRef, useState } from "react";
+import { ppfdToLuxFactors } from "@/data(fake)/calculatorFactors";
 
 // Define the props interface for the generic calculator
 interface GenericLightCalcProps {
@@ -8,7 +9,6 @@ interface GenericLightCalcProps {
   inputLabel: string; // Label for the input field
   outputLabel: string; // Label for the result display
   inputDefaultValue: number; // Default value for the input
-  conversionFactors: { [key: string]: number | null }; // The specific set of factors for this calculation
 
   calculationType:
     | "ppfd-to-lux"
@@ -33,7 +33,6 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
   inputLabel,
   outputLabel,
   inputDefaultValue,
-  conversionFactors,
   calculationType,
   outputUnit,
   noteText,
@@ -43,7 +42,7 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
 
   // State to manage the selected light source type (defaulting to the first option key)
   const [lightType, setLightType] = useState<string>(
-    Object.keys(conversionFactors)[0]
+    Object.keys(ppfdToLuxFactors)[0]
   );
   // State to store the calculated result
   const [result, setResult] = useState<number | null>(null);
@@ -77,7 +76,7 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
       return;
     }
 
-    const conversionFactor = conversionFactors[lightType];
+    const conversionFactor = ppfdToLuxFactors[lightType];
 
     if (conversionFactor === undefined || conversionFactor === null) {
       setError(
@@ -193,7 +192,7 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
           onChange={handleLightTypeChange}
           className="shadow-sm appearance-none border border-gray-300 dark:border-gray-600 rounded max-w-xs w-full py-2 px-3 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         >
-          {Object.keys(conversionFactors).map((key) => (
+          {Object.keys(ppfdToLuxFactors).map((key) => (
             <option key={key} value={key}>
               {formatOptionText(key)}
             </option>
