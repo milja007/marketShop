@@ -1,13 +1,13 @@
 import Link from "next/link";
 import React from "react";
 import Arrowsvg from "./SVGS/Arrowsvg";
-import { menuData } from "@/data(fake)/categories";
+import { MENUDATA } from "@/data(fake)/CATEGORIES";
 
 const LinkNavbar = () => {
   return (
     <nav className="bg-gray-200 border-b border-gray-300 w-full">
       <ul className="flex justify-center max-w-screen-xl mx-auto relative">
-        {menuData.map((category) => (
+        {MENUDATA.map((category) => (
           <li
             key={category.name}
             className="group relative font-semibold px-3 py-2 text-sm  text-gray-700 

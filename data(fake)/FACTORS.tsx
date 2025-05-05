@@ -1,4 +1,4 @@
-export const ppfdToLuxFactors: { [key: string]: number | null } = {
+export const PPFDTOLUXFACTORS: { [key: string]: number | null } = {
   "Natural Daylight 6500K": 43.478261,
   "Halogen Lamp 3000K": 28.913615,
   "High CRI LED 6500K": 5.802603,
@@ -15,8 +15,8 @@ export const ppfdToLuxFactors: { [key: string]: number | null } = {
   "Red + Blue + White LED 450+650nm+3500K": 38.926554,
 };
 
-export const luxToPpfdFactors: { [key: string]: number | null } =
-  Object.entries(ppfdToLuxFactors).reduce((acc, [key, value]) => {
+export const LUXTOPPFDFACTORS: { [key: string]: number | null } =
+  Object.entries(PPFDTOLUXFACTORS).reduce((acc, [key, value]) => {
     acc[key] = value !== null && value !== 0 ? 1 / value : null; // Calculate inverse safely
     return acc;
   }, {} as { [key: string]: number | null });
@@ -26,7 +26,7 @@ export const luxToPpfdFactors: { [key: string]: number | null } =
 // You MUST provide accurate factors based on the light source's spectrum and total output.
 // Using LUX/PPFD factors here is INCORRECT placeholder logic.
 // Replace 'null' or the copied values with REAL data for accurate Lumens/PPF conversions.
-export const lumensToPpfFactors: { [key: string]: number | null } = {
+export const LUMENSTOPPFFACTORS: { [key: string]: number | null } = {
   "Natural Daylight 6500K": 0.02300000043701883,
   "Halogen Lamp 3000K": 0.03458599986579914,
   "High CRI LED 6500K": 0.1723399979665701,
@@ -44,8 +44,8 @@ export const lumensToPpfFactors: { [key: string]: number | null } = {
 };
 
 // Calculate inverse for PPF to Lumens (Lumens per PPF)
-export const ppfToLumensFactors: { [key: string]: number | null } =
-  Object.entries(lumensToPpfFactors).reduce((acc, [key, value]) => {
+export const PPFTOLUMENSFACTORS: { [key: string]: number | null } =
+  Object.entries(LUMENSTOPPFFACTORS).reduce((acc, [key, value]) => {
     acc[key] = value !== null && value !== 0 ? 1 / value : null;
     return acc;
   }, {} as { [key: string]: number | null });

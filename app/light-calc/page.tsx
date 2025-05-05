@@ -11,6 +11,11 @@ import DliToPpfdCalc from "@/components/CALCS/DliToPpfdCalc"; // Assuming this e
 import GenericLightCalc from "@/components/CALCS/GenericLightCalc";
 import ImageSlide from "@/components/ImageSlider/ImageSlide";
 
+import { PPFDTOLUXFACTORS } from "@/data(fake)/FACTORS";
+import { PPFTOLUMENSFACTORS } from "@/data(fake)/FACTORS";
+import { LUXTOPPFDFACTORS } from "@/data(fake)/FACTORS";
+import { LUMENSTOPPFFACTORS } from "@/data(fake)/FACTORS";
+
 const LightCalc = () => {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -58,6 +63,7 @@ const LightCalc = () => {
               inputLabel="PPFD (μmol/s/m²):"
               outputLabel="LUX:"
               inputDefaultValue={100}
+              conversionFactors={PPFDTOLUXFACTORS}
               calculationType="ppfd-to-lux"
               outputUnit="lux"
               noteText="Approximate conversion from PPFD to LUX."
@@ -71,7 +77,7 @@ const LightCalc = () => {
               inputLabel="LUX:"
               outputLabel="PPFD:"
               inputDefaultValue={5000}
-              conversionFactors={luxToPpfdFactors}
+              conversionFactors={LUXTOPPFDFACTORS}
               calculationType="lux-to-ppfd"
               outputUnit="μmol/s/m²"
               noteText="Approximate conversion from LUX to PPFD."
@@ -96,7 +102,7 @@ const LightCalc = () => {
               inputLabel="Lumens (lm):"
               outputLabel="PPF:"
               inputDefaultValue={10000}
-              conversionFactors={lumensToPpfFactors}
+              conversionFactors={LUMENSTOPPFFACTORS}
               calculationType="lumens-to-ppf"
               outputUnit="μmol/s"
               noteText="Estimates PPF from Lumens. Requires accurate factors!"
@@ -110,7 +116,7 @@ const LightCalc = () => {
               inputLabel="PPF (μmol/s):"
               outputLabel="Lumens:"
               inputDefaultValue={200}
-              conversionFactors={ppfToLumensFactors}
+              conversionFactors={PPFTOLUMENSFACTORS}
               calculationType="ppf-to-lumens"
               outputUnit="lm"
               noteText="Estimates Lumens from PPF. Requires accurate factors!"

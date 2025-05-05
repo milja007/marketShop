@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { menuData } from "@/data(fake)/categories";
+import { MENUDATA } from "@/data(fake)/CATEGORIES";
 
 // Placeholder SVGs — swap in your own icons if you like
 const LoginSvg = () => (
@@ -106,7 +106,7 @@ function MobileMenu() {
 
         {/* Menu Items */}
         <ul className="flex-grow overflow-y-auto p-2">
-          {menuData.map((cat) => (
+          {MENUDATA.map((cat) => (
             <li key={cat.name} className="mb-2">
               <button
                 className="w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 hover:text-emerald-900 rounded transition-colors duration-150"

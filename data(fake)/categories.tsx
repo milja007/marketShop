@@ -9,7 +9,7 @@ interface Category {
   subcategories: Subcategory[];
 }
 
-export const menuData: Category[] = [
+export const MENUDATA: Category[] = [
   {
     name: "Grow Tents",
     slug: "/grow-tents", // This slug will be used for the main category link
