@@ -1,75 +1,86 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import autof from "@/assets/autof.webp";
 
-const Footern1 = () => {
-  return (
-    <footer className="bg-gray-100 py-12">
-      <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 lg:grid-cols-4 gap-8 items-start">
-        {/* Logo cell */}
-        <div>
-          <Image
-            src={autof}
-            alt="Company logo"
-            width={200}
-            height={100}
-            className="w-32 h-auto ml-14"
-            priority
-          />
-        </div>
+import visa from "@/assets/bank-7073043_1280.webp";
+import master from "@/assets/mastercard-157441_1280.webp";
+import banking from "@/assets/bank-988164_1280.webp";
+import banktr from "@/assets/online-shopping-6404106_1280.webp";
+import whatsapp from "@/assets/whatappslika.webp";
 
-        {/* Customer support cell */}
-        <div className="flex flex-col space-y-2">
-          <h3 className="text-lg font-semibold">Customer support</h3>
-          <p>tel: 2002020</p>
-          <p>mail: bornna@gg</p>
-          <p>whatsapp: dwedwe</p>
-        </div>
+const Footer1 = () => (
+  <footer
+    role="contentinfo"
+    aria-label="Website Footer"
+    className="bg-gradient-to-br bg-green-200 text-gray-900 dark:from-gray-800 dark:via-gray-900 dark:to-black dark:text-gray-300 font-sans"
+  >
+    <div className="max-w-5xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* Logo */}
+      <div className="flex flex-col items-start space-y-4">
+        <Image
+          src={banktr}
+          alt="Company logo"
+          width={200}
+          height={100}
+          className="w-32 h-auto"
+          priority
+        />
+        <p className="text-sm text-gray-700 dark:text-gray-400">
+          Your trusted partner in secure online payments.
+        </p>
+      </div>
 
-        {/* Reviews & Social wrapper: spans both columns and centers its content */}
-        <div className="col-span-2 grid grid-cols-1 justify-items-center items-start space-y-8 text-center lg:grid-cols-2 lg:gap-5">
-          {/* Reviews cell */}
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold">Reviews</h3>
-            <div className="flex flex-col items-center space-y-2">
-              <div className="flex space-x-4">
-                <Image
-                  src={autof}
-                  alt="Review snapshot"
-                  width={80}
-                  height={80}
-                  className="w-20 h-auto rounded"
-                  priority
-                />
-                <p className="mt-8 lg:mt-0 ">
-                  wij scoren een 9,5{" "}
-                  <Link href="" className="text-blue-600 underline ">
-                    Web review
-                  </Link>
-                </p>
-              </div>
-            </div>
-          </div>
+      {/* Customer Support */}
+      <nav aria-label="Customer Support" className="flex flex-col space-y-4">
+        <h3 className="text-lg font-semibold tracking-wide text-gray-900 dark:text-gray-100">
+          Customer Support
+        </h3>
+        <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-400">
+          <li>Tel: 0994171467</li>
+          <li>Email: borna.milja@gmail.com</li>
+          <li>WhatsApp: +385994171467</li>
+        </ul>
+      </nav>
 
-          {/* Social media cell */}
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Follow us on social media</h2>
-            <div className="flex space-x-4">
-              <button className="px-4 py-2 bg-blue-700 text-white rounded">
-                Facebook
-              </button>
-              <button className="px-4 py-2 bg-pink-500 text-white rounded">
-                Instagram
-              </button>
-            </div>
-            <Link href="/" className="text-sm text-gray-700 underline">
-              Sign up for our newsletter
-            </Link>
+      {/* Reviews */}
+      <div className="flex flex-col items-center space-y-4 text-center">
+        <h3 className="text-lg font-semibold tracking-wide text-gray-900 dark:text-gray-100">
+          Reviews
+        </h3>
+        <div className="flex flex-col items-center space-y-2">
+          <div className="flex items-center space-x-4">
+            <Image
+              src={whatsapp}
+              alt="Review snapshot"
+              width={199}
+              height={122}
+              className="w-20 h-auto rounded"
+              priority
+            />
+            <p className="text-sm text-gray-700 dark:text-gray-400">
+              We score a 9.5
+              <Link href="" className="text-blue-600 underline ml-1">
+                Web review
+              </Link>
+            </p>
           </div>
         </div>
       </div>
-    </footer>
-  );
-};
 
-export default Footern1;
+      {/* Social & Payment */}
+      <div className="flex flex-col space-y-6 items-center">
+        <h3 className="text-lg font-semibold tracking-wide text-gray-900 dark:text-gray-100">
+          Many Card Options
+        </h3>
+        <div className="flex space-x-4">
+          <Image src={banking} alt="" width={44} height={44} />
+          <Image src={master} alt="" width={44} height={44} />
+          <Image src={visa} alt="" width={44} height={44} />
+        </div>
+        <div className="flex space-x-4 mt-2 text-gray-700 dark:text-gray-400"></div>
+      </div>
+    </div>
+  </footer>
+);
+
+export default Footer1;

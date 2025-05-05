@@ -3,7 +3,7 @@ import Footern1 from "./Footern1";
 
 const Footer = () => (
   <>
-    <Footern1 />;
+    <Footern1 />
     <Footer2 />
   </>
 );
