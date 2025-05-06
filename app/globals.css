@@ -6,16 +6,22 @@
 }
 
 @theme inline {
+  /* your existing tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* add your two new colors */
+  --color-cactus: #587156;
+  --color-feta: #f0fcea;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    /* you can override cactus/feta here if you ever want dark-mode variants */
   }
 }
 
