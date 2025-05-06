@@ -1,6 +1,13 @@
 import React from "react"; // Import React
 import Link from "next/link"; // Bring back Link
-import { Facebook, Instagram, Twitter, Github, Linkedin } from "lucide-react";
+import kartic1 from "@/assets/FOOTER/KARTICE/icon-payment-americanexpress.webp";
+import kartic2 from "@/assets/FOOTER/KARTICE/icon-payment-banktransfer.webp";
+import kartic3 from "@/assets/FOOTER/KARTICE/icon-payment-cash.png";
+import kartic4 from "@/assets/FOOTER/KARTICE/icon-payment-maestro.webp";
+import kartic5 from "@/assets/FOOTER/KARTICE/icon-payment-mastercard.webp";
+import kartic6 from "@/assets/FOOTER/KARTICE/icon-payment-mistercash.webp";
+import kartic7 from "@/assets/FOOTER/KARTICE/icon-payment-visa.webp";
+import Image from "next/image";
 
 const Footer2 = () => (
   <footer
@@ -13,9 +20,9 @@ const Footer2 = () => (
       {/* Customer Service */}
       <nav aria-label="Customer Service" className="flex flex-col space-y-4">
         {/* Adjusted heading color for light mode */}
-        <h3 className="text-lg font-semibold tracking-wide text-green-100 dark:text-green-300">
+        <h1 className="text-lg font-bold tracking-wide text-green-100 dark:text-green-300">
           Customer service
-        </h3>
+        </h1>
         <ul className="space-y-2">
           <li>
             <Link
@@ -86,9 +93,9 @@ const Footer2 = () => (
       {/* My Account */}
       <nav aria-label="My Account" className="flex flex-col space-y-4">
         {/* Adjusted heading color for light mode */}
-        <h3 className="text-lg font-semibold tracking-wide text-green-100 dark:text-green-300">
+        <h1 className="text-lg font-bold tracking-wide text-green-100 dark:text-green-300">
           My account
-        </h3>
+        </h1>
         <ul className="space-y-2">
           <li>
             <Link
@@ -132,15 +139,15 @@ const Footer2 = () => (
       {/* Information */}
       <nav aria-label="Information" className="flex flex-col space-y-4">
         {/* Adjusted heading color for light mode */}
-        <h3 className="text-lg font-semibold tracking-wide text-green-100 dark:text-green-300">
+        <h1 className="text-lg font-bold tracking-wide text-green-100 dark:text-green-300">
           Information
-        </h3>
+        </h1>
         <ul className="space-y-2">
           <li>
             <Link
               href="/grow-lights"
               // Added base text color, adjusted hover color for light mode
-              className="text-sm font-semibold text-green-100 hover:text-white dark:text-gray-300 dark:hover:text-green-400 transition-transform transform hover:translate-x-1"
+              className="text-sm font-bold text-green-100 hover:text-white dark:text-gray-300 dark:hover:text-green-400 transition-transform transform hover:translate-x-1"
             >
               Grow Lights
             </Link>
@@ -187,9 +194,9 @@ const Footer2 = () => (
       {/* Contact & Newsletter */}
       <div className="flex flex-col space-y-4">
         {/* Adjusted heading color for light mode */}
-        <h3 className="text-lg font-semibold tracking-wide text-green-100 dark:text-green-300">
+        <h1 className="text-lg font-bold tracking-wide text-green-100 dark:text-green-300">
           Contact
-        </h3>
+        </h1>
         {/* Adjusted contact info text color for light mode */}
         <ul className="space-y-1 text-sm text-green-200 dark:text-gray-400">
           <li className="font-semibold">INT eCommerce B.M.</li>
@@ -212,41 +219,13 @@ const Footer2 = () => (
         </p>
         {/* Adjusted icon container text color and link hover color for light mode */}
         <div className="mt-4 md:mt-0 flex space-x-4 text-green-100 dark:text-gray-300">
-          <Link
-            href="#"
-            aria-label="LinkedIn" // Added aria-label for accessibility
-            className="font-semibold hover:text-white dark:hover:text-green-400 transition"
-          >
-            <Linkedin size={20} />
-          </Link>
-          <Link
-            href="#"
-            aria-label="Github" // Added aria-label
-            className="font-semibold hover:text-white dark:hover:text-green-400 transition"
-          >
-            <Github size={20} />
-          </Link>
-          <Link
-            href="#"
-            aria-label="Facebook" // Added aria-label
-            className="font-semibold hover:text-white dark:hover:text-green-400 transition"
-          >
-            <Facebook size={20} />
-          </Link>
-          <Link
-            href="#"
-            aria-label="Instagram" // Added aria-label
-            className="font-semibold hover:text-white dark:hover:text-green-400 transition"
-          >
-            <Instagram size={20} />
-          </Link>
-          <Link
-            href="#"
-            aria-label="Twitter" // Added aria-label
-            className="font-semibold hover:text-white dark:hover:text-green-400 transition"
-          >
-            <Twitter size={20} />
-          </Link>
+          <Image src={kartic1} alt="" width={30} height={30} />
+          <Image src={kartic2} alt="" width={30} height={30} />
+          <Image src={kartic3} alt="" width={30} height={30} />
+          <Image src={kartic4} alt="" width={30} height={30} />
+          <Image src={kartic5} alt="" width={30} height={30} />
+          <Image src={kartic6} alt="" width={30} height={30} />
+          <Image src={kartic7} alt="" width={30} height={30} />
         </div>
       </div>
     </div>

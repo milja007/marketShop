@@ -1,10 +1,10 @@
 import Image from "next/image";
 
 // Asset imports (ensure these paths are correct for your setup)
-import autoimg from "@/assets/autof.webp";
-import photoimg from "@/assets/photop.webp";
-import budimg from "@/assets/wide-sml-purple-punch.jpg";
-import purpleimg from "@/assets/shutterstock_1522132451-1.webp";
+import autoimg from "@/assets/KALKULATOR/autof.webp";
+import photoimg from "@//assets/KALKULATOR/photop.webp";
+import budimg from "@//assets/KALKULATOR/wide-sml-purple-punch.jpg";
+import purpleimg from "@//assets/KALKULATOR/shutterstock_1522132451-1.webp";
 
 // Import the calculator components
 import DliToPpfdCalc from "@/components/CALCS/DliToPpfdCalc"; // Assuming this exists and is styled similarly
