@@ -5,14 +5,14 @@ import BokiGrowLogo from "./SVGS/GrowLogo";
 import CartSvg from "./SVGS/CartSvg";
 import HeartSvg from "./SVGS/HeartSvg";
 import LoginSvg from "./SVGS/LoginSvg";
-import HomeSvg from "./SVGS/HomeSvg";
+
 import HamburgerSvg from "./SVGS/HamburgerSvg";
 
 const Navbar: React.FC = () => {
   return (
     <nav
       className="flex justify-between items-center
-    px-8 xl:px-12 h-16 w-full
+    px-8 xl:px-12 h-20 w-full
     bg-white dark:bg-gray-900"
     >
       <div className="flex space-x-4 items-center">
@@ -22,9 +22,12 @@ const Navbar: React.FC = () => {
 
       <div className="hidden md:flex items-center space-x-4 flex-1 justify-center md:mr-16 xl:mr-24">
         <Search />
+      </div>
+
+      <div className="flex space-x-4 ">
         <button
           className="
-    md:ml-8 xl:ml-12
+    md:ml-8 hidden md:flex
     bg-cactus text-white font-semibold
     py-2 px-4
     rounded-lg
@@ -36,10 +39,7 @@ const Navbar: React.FC = () => {
         >
           All categories
         </button>
-      </div>
 
-      <div className="flex space-x-4 ">
-        <HomeSvg />
         <LoginSvg />
 
         <HeartSvg />

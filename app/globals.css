@@ -15,6 +15,7 @@
   /* add your two new colors */
   --color-cactus: #587156;
   --color-feta: #f0fcea;
+  --color-alabaster: #f8f8f7;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -12,7 +12,7 @@ const Header: React.FC = () => (
 
     <div className="h-14 bg-white dark:bg-gray-900"></div>
 
-    <div className="sticky top-0 z-40 w-full bg-white dark:bg-gray-900 md:hidden">
+    <div className="sticky top-15 z-50 w-full bg-white dark:bg-gray-900 md:hidden">
       <Search />
     </div>
 
