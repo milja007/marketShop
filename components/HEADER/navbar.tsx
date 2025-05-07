@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
         <button
           className="
     md:ml-8 xl:ml-12
-    bg-amber-600 text-white font-semibold
+    bg-cactus text-white font-semibold
     py-2 px-4
     rounded-lg
     shadow-md
