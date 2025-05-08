@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
             transition-colors duration-200
           "
         >
-          All categories
+          All categoriess
         </button>
         <LoginSvg />
         <HeartSvg />
