@@ -13,12 +13,13 @@ const Navbar: React.FC = () => {
   return (
     <nav
       className="flex justify-between items-center
-        px-4 sm:px-8 xl:px-12 h-20 w-full
-        bg-white dark:bg-gray-900"
+    px-4 sm:px-8 xl:px-12 h-20 w-full
+    bg-white dark:bg-gray-900"
     >
-      {/* Left Section */}
+      {/* Left Section: Hamburger and Logo */}
       <div className="flex items-baseline">
         <HamburgerSvg />
+        {/* Logo: Hidden on MD and LG when search is active */}
         <div
           className={`
             ml-2 sm:ml-4 transition-all duration-300 ease-in-out
@@ -29,12 +30,19 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Middle/Search Section: always grows on lg+ */}
-      <div className="hidden lg:flex items-center mx-2 lg:flex-1 min-w-0 transition-all duration-300 ease-in-out">
+      {/* Middle/Search Section: Adapts based on searchIsActive */}
+      {/* On MD and LG: when search is active, this container grows to take available space. */}
+      {/* When inactive, it's pushed to the right by ml-auto. */}
+      <div
+        className={`
+          hidden md:flex items-center mx-2 transition-all duration-300 ease-in-out
+          ${searchIsActive ? "flex-1" : ""}
+        `}
+      >
         <Search isActive={searchIsActive} onFocusChange={setSearchIsActive} />
       </div>
 
-      {/* Right Section */}
+      {/* Right Section: Buttons and Icons */}
       <div className="flex space-x-2 sm:space-x-4 items-center">
         <button
           className="
