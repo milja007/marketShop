@@ -1,6 +1,6 @@
 // src/components/Navbar.tsx
 import React from "react";
-import Search from "./Search";
+import Search from "./search";
 import BokiGrowLogo from "./SVGS/GrowLogo";
 import CartSvg from "./SVGS/CartSvg";
 import HeartSvg from "./SVGS/HeartSvg";
