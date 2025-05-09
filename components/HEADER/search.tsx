@@ -17,7 +17,6 @@ const Search: React.FC<SearchProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // ... (useEffect hooks and handlers remain the same) ...
   useEffect(() => {
     if (isMdSearchActive && inputRef.current) {
       inputRef.current.focus();
@@ -41,22 +40,34 @@ const Search: React.FC<SearchProps> = ({
   }, [isMdSearchActive, onMdSearchClose]);
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleGlobalKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape" && isMdSearchActive && onMdSearchClose) {
         onMdSearchClose();
         if (inputRef.current) inputRef.current.value = "";
       }
     };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener("keydown", handleGlobalKeyDown);
+    return () => document.removeEventListener("keydown", handleGlobalKeyDown);
   }, [isMdSearchActive, onMdSearchClose]);
+
+  const performSearch = () => {
+    if (inputRef.current?.value) {
+      const searchTerm = inputRef.current.value;
+      console.log("Submitaj ovo bejbi:", searchTerm);
+    } else {
+      inputRef.current?.focus();
+    }
+  };
 
   const handleSearchIconClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (inputRef.current?.value) {
-      console.log("Submitting search:", inputRef.current.value);
-    } else {
-      inputRef.current?.focus();
+    performSearch();
+  };
+
+  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Prevent default form submission if it were inside a form
+      performSearch();
     }
   };
 
@@ -68,7 +79,6 @@ const Search: React.FC<SearchProps> = ({
     }
   };
 
-  // --- Class Definitions ---
   let containerClasses = `relative flex items-center transition-all duration-300 ease-in-out group`;
   const inputBaseClasses = `h-10 border border-gray-300 rounded-lg py-1 text-sm focus:outline-none focus:ring-1 focus:ring-cactus focus:border-cactus bg-white text-black dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 transition-all duration-300 ease-in-out`;
   let currentInputClasses = "";
@@ -83,8 +93,7 @@ const Search: React.FC<SearchProps> = ({
     } else {
       containerClasses += ` md:w-10 md:cursor-pointer lg:w-[40rem] xl:w-full`;
       currentInputClasses = `${inputBaseClasses} md:w-0 md:opacity-0 md:pointer-events-none lg:w-[40rem] lg:opacity-100 lg:pl-4 lg:pr-10 xl:w-full xl:opacity-100 xl:pl-4 xl:pr-10`;
-      // For Navbar MD-inactive state: hide clickable button on MD, show on LG+
-      iconButtonConditionalClasses = "md:hidden lg:inline-flex"; // Use inline-flex for better SVG alignment in button
+      iconButtonConditionalClasses = "md:hidden lg:inline-flex";
     }
   } else {
     containerClasses += ` w-full max-w-full mx-auto mt-2`;
@@ -92,7 +101,6 @@ const Search: React.FC<SearchProps> = ({
   }
 
   const finalClickableSearchButtonClasses = `${clickableSearchButtonBaseClasses} ${iconButtonConditionalClasses}`;
-  // --- End Class Definitions ---
 
   return (
     <div
@@ -113,7 +121,6 @@ const Search: React.FC<SearchProps> = ({
           <CloseSvgIcon />
         </button>
       )}
-
       <input
         ref={inputRef}
         type="text"
@@ -124,22 +131,18 @@ const Search: React.FC<SearchProps> = ({
             onMdSearchToggle();
           }
         }}
-        // onBlur logic can be added here if needed
+        onKeyDown={handleInputKeyDown}
       />
-
-      {/* Visual Icon for MD Inactive State (Navbar context only) */}
       {onMdSearchToggle !== undefined && !isMdSearchActive && (
         <div className="hidden md:flex lg:hidden items-center justify-center h-full w-full text-gray-500 dark:text-gray-400 pointer-events-none">
           <SearchSvgIcon />
         </div>
       )}
-
-      {/* Clickable Search/Submit Icon Button */}
       <button
         type="button"
         onClick={handleSearchIconClick}
         aria-label={inputRef.current?.value ? "Submit search" : "Search"}
-        className={finalClickableSearchButtonClasses} // Use the updated class string
+        className={finalClickableSearchButtonClasses}
       >
         <SearchSvgIcon />
       </button>

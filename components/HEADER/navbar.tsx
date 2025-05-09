@@ -1,13 +1,10 @@
-// ./Navbar.tsx
-// No "use client" directive here - this is now a Server Component
-
 import React from "react";
 import HamburgerSvg from "./SVGS/HamburgerSvg";
 import Languaesvg from "./SVGS/Languaesvg";
 import LoginSvg from "./SVGS/LoginSvg";
 import HeartSvg from "./SVGS/HeartSvg";
 import CartSvg from "./SVGS/CartSvg";
-import InteractiveNavGroup from "./ClientNavb"; // Import the new Client Component
+import InteractiveNavGroup from "./ClientNavb";
 
 const Navbar: React.FC = () => {
   return (
@@ -16,18 +13,12 @@ const Navbar: React.FC = () => {
       px-4 sm:px-8 xl:px-12 h-16 w-full
       bg-white dark:bg-gray-900"
     >
-      {/* Left Section: Hamburger (static) */}
       <div className="flex items-center">
-        {" "}
-        {/* Simplified wrapper */}
         <HamburgerSvg />
-        {/* The BokiGrowLogo is now part of InteractiveNavGroup and will be positioned by it */}
       </div>
 
-      {/* Middle Section: Delegated to the Client Component */}
       <InteractiveNavGroup />
 
-      {/* Right Section: Static buttons and icons */}
       <div className="flex space-x-2 sm:space-x-4 items-center">
         <button
           className="
