@@ -1,49 +1,47 @@
-// src/components/Navbar.tsx
-import React from "react";
-import Search from "./search";
-import BokiGrowLogo from "./SVGS/GrowLogo";
-import CartSvg from "./SVGS/CartSvg";
-import HeartSvg from "./SVGS/HeartSvg";
-import LoginSvg from "./SVGS/LoginSvg";
+// ./Navbar.tsx
+// No "use client" directive here - this is now a Server Component
 
+import React from "react";
 import HamburgerSvg from "./SVGS/HamburgerSvg";
+import Languaesvg from "./SVGS/Languaesvg";
+import LoginSvg from "./SVGS/LoginSvg";
+import HeartSvg from "./SVGS/HeartSvg";
+import CartSvg from "./SVGS/CartSvg";
+import InteractiveNavGroup from "./ClientNavb"; // Import the new Client Component
 
 const Navbar: React.FC = () => {
   return (
     <nav
       className="flex justify-between items-center
-    px-8 xl:px-12 h-20 w-full
-    bg-white dark:bg-gray-900"
+      px-4 sm:px-8 xl:px-12 h-16 w-full
+      bg-white dark:bg-gray-900"
     >
-      <div className="flex space-x-4 items-center">
+      {/* Left Section: Hamburger (static) */}
+      <div className="flex items-center">
+        {" "}
+        {/* Simplified wrapper */}
         <HamburgerSvg />
-        <BokiGrowLogo className="w-32 h-auto text-green-700" />
+        {/* The BokiGrowLogo is now part of InteractiveNavGroup and will be positioned by it */}
       </div>
 
-      <div className="hidden md:flex items-center space-x-4 flex-1 justify-center md:mr-16 xl:mr-24">
-        <Search />
-      </div>
+      {/* Middle Section: Delegated to the Client Component */}
+      <InteractiveNavGroup />
 
-      <div className="flex space-x-4 ">
+      {/* Right Section: Static buttons and icons */}
+      <div className="flex space-x-2 sm:space-x-4 items-center">
         <button
           className="
-    md:ml-8 hidden md:flex
-    bg-cactus text-white font-semibold
-    py-2 px-4
-    rounded-lg
-    shadow-md
-    hover:bg-amber-700
-    focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2
-    transition-colors duration-200
-  "
+            hidden md:flex bg-cactus text-white font-semibold
+            py-2 px-4 rounded-lg shadow-md hover:bg-amber-700
+            focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2
+            transition-colors duration-200
+          "
         >
           All categories
         </button>
-
+        <Languaesvg />
         <LoginSvg />
-
         <HeartSvg />
-
         <CartSvg />
       </div>
     </nav>
