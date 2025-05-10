@@ -5,8 +5,8 @@ import { MENUDATA } from "@/data(fake)/CATEGORIES";
 import HomeSvg from "./SVGS/HomeSvg";
 const LinkNavbar = () => {
   return (
-    <nav className="bg-alabaster border-b border-gray-300 w-full font-bold mt-4">
-      <ul className="flex justify-center max-w-screen-xl mx-auto relative">
+    <nav className="bg-alabaster border-b border-gray-300 w-full font-bold mt-4 overflow-x-auto overflow-y-hidden">
+      <ul className="flex justify-center max-w-screen-xl mx-auto relative  ">
         <HomeSvg />
         {MENUDATA.map((category) => (
           <li
@@ -30,7 +30,7 @@ const LinkNavbar = () => {
             {category.subcategories && category.subcategories.length > 0 && (
               <ul
                 className={`
-                  absolute left-0 top-full mt-1.5 pt-1
+                  absolute left- top-full mt-1.5 pt-1
                   bg-white border border-gray-300 rounded-b-md shadow-lg
                   opacity-0 invisible group-hover:opacity-100 group-hover:visible /* Still works! */
                   transition-all duration-200 ease-in-out
