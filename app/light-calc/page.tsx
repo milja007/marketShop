@@ -1,15 +1,15 @@
 import Image from "next/image";
 
 // Asset imports (ensure these paths are correct for your setup)
-import autoimg from "@/assets/KALKULATOR/autof.webp";
-import photoimg from "@//assets/KALKULATOR/photop.webp";
-import budimg from "@//assets/KALKULATOR/wide-sml-purple-punch.jpg";
-import purpleimg from "@//assets/KALKULATOR/shutterstock_1522132451-1.webp";
+import autoimg from "@/public/KALKULATOR/autof.webp";
+import photoimg from "@/public/KALKULATOR/photop.webp";
+import budimg from "@/public/KALKULATOR/budzeleni.jpg";
+import purpleimg from "@/public/KALKULATOR/poljetrave.jpg";
 
 // Import the calculator components
 import DliToPpfdCalc from "@/components/CALCS/DliToPpfdCalc"; // Assuming this exists and is styled similarly
 import GenericLightCalc from "@/components/CALCS/GenericLightCalc";
-import ImageSlide from "@/components/ImageSlider/ImageSlide";
+import ImageSlide from "@/components/CALCS/ImageSlide";
 
 import { PPFDTOLUXFACTORS } from "@/data(fake)/FACTORS";
 import { PPFTOLUMENSFACTORS } from "@/data(fake)/FACTORS";
