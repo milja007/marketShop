@@ -1,9 +1,18 @@
+import { StaticImageData } from "next/image";
+import seeds from "@/public/HEADER/seeds.jpeg";
+import growbox from "@/public/HEADER/growbox.png";
+import lightning from "@/public/HEADER/lights.png";
+import ventilation from "@/public/HEADER/vent.png";
+import liquidsubstrates from "@/public/HEADER/nutrients.png";
+import accessories from "@/public/HEADER/supplies.png";
+
 interface Subcategory {
   name: string;
   slug: string;
 }
 
 interface Category {
+  src: StaticImageData;
   name: string;
   slug: string;
   subcategories: Subcategory[];
@@ -11,6 +20,23 @@ interface Category {
 
 export const MENUDATA: Category[] = [
   {
+    src: seeds,
+    name: "Seeds",
+    slug: "/seeds",
+    subcategories: [
+      { name: "Sweet Seeds", slug: "/seeds/sweet-seeds" },
+      { name: "Royal Queen Seeds", slug: "/seeds/royal-queen-seeds" },
+      { name: "Kannabia", slug: "/seeds/kannabia" },
+      { name: "T.H.Seeds", slug: "/seeds/th-seeds" },
+      { name: "Bulk Seed Bank", slug: "/seeds/bulk-seed-bank" },
+      { name: "Sensi Seeds", slug: "/seeds/sensi-seeds" },
+      { name: "00 Seeds", slug: "/seeds/00-seeds" },
+      { name: "Barney's Farm", slug: "/seeds/barneys-farm" },
+      { name: "Dutch Passion", slug: "/seeds/dutch-passion" },
+    ],
+  },
+  {
+    src: growbox,
     name: "Growbox",
     slug: "/growbox",
     subcategories: [
@@ -20,6 +46,7 @@ export const MENUDATA: Category[] = [
     ],
   },
   {
+    src: lightning,
     name: "Lighting",
     slug: "/lighting",
     subcategories: [
@@ -34,6 +61,7 @@ export const MENUDATA: Category[] = [
     ],
   },
   {
+    src: ventilation,
     name: "Ventilation",
     slug: "/ventilation",
     subcategories: [
@@ -49,6 +77,7 @@ export const MENUDATA: Category[] = [
     ],
   },
   {
+    src: liquidsubstrates,
     name: "Liquids and Substrates",
     slug: "/liquids-and-substrates",
     subcategories: [
@@ -63,23 +92,9 @@ export const MENUDATA: Category[] = [
       { name: "Additives", slug: "/liquids-and-substrates/additives" },
     ],
   },
+
   {
-    name: "Hydroponic",
-    slug: "/hydroponic",
-    subcategories: [
-      { name: "Aeroponic", slug: "/hydroponic/aeroponic" },
-      { name: "Propagators", slug: "/hydroponic/propagators" },
-      {
-        name: "Recirculating System",
-        slug: "/hydroponic/recirculating-system",
-      },
-      { name: "EBB & Flood", slug: "/hydroponic/ebb-and-flood" },
-      { name: "NFT System", slug: "/hydroponic/nft-system" },
-      { name: "DWC System", slug: "/hydroponic/dwc-system" },
-      { name: "Autopot", slug: "/hydroponic/autopot" },
-    ],
-  },
-  {
+    src: accessories,
     name: "Accessories",
     slug: "/accessories",
     subcategories: [
@@ -89,38 +104,6 @@ export const MENUDATA: Category[] = [
       { name: "Trimmers", slug: "/accessories/trimmers" },
       { name: "Integra", slug: "/accessories/integra" },
       { name: "Equipment", slug: "/accessories/equipment" },
-    ],
-  },
-  {
-    name: "Pots",
-    slug: "/pots",
-    subcategories: [
-      { name: "Pots", slug: "/pots/pots" },
-      { name: "Pot Saucers", slug: "/pots/pot-saucers" },
-      { name: "Trays", slug: "/pots/trays" },
-    ],
-  },
-  {
-    name: "Seeds",
-    slug: "/seeds",
-    subcategories: [
-      { name: "Sweet Seeds", slug: "/seeds/sweet-seeds" },
-      { name: "Royal Queen Seeds", slug: "/seeds/royal-queen-seeds" },
-      { name: "Kannabia", slug: "/seeds/kannabia" },
-      { name: "T.H.Seeds", slug: "/seeds/th-seeds" },
-      { name: "Bulk Seed Bank", slug: "/seeds/bulk-seed-bank" },
-      { name: "Sensi Seeds", slug: "/seeds/sensi-seeds" },
-      { name: "00 Seeds", slug: "/seeds/00-seeds" },
-      { name: "Barney's Farm", slug: "/seeds/barneys-farm" },
-      { name: "Dutch Passion", slug: "/seeds/dutch-passion" },
-      { name: "Paradise Seeds", slug: "/seeds/paradise-seeds" },
-      { name: "Victory Seeds", slug: "/seeds/victory-seeds" },
-      { name: "Anaconda Seeds", slug: "/seeds/anaconda-seeds" },
-      { name: "Silent Seeds", slug: "/seeds/silent-seeds" },
-      { name: "Delicious Seeds", slug: "/seeds/delicious-seeds" },
-      { name: "World of Seeds", slug: "/seeds/world-of-seeds" },
-      { name: "Fast Buds", slug: "/seeds/fast-buds" },
-      { name: "Ripper Seeds", slug: "/seeds/ripper-seeds" },
     ],
   },
 ];

@@ -15,16 +15,15 @@ const ClientNavb: React.FC = () => {
     setIsMdSearchActive(false);
   };
 
-  const searchWrapperBaseClasses =
-    "hidden md:flex items-center transition-all duration-300 ease-in-out mx-2";
+  const searchWrapperBaseClasses = "hidden md:flex items-center  mx-4";
   let searchWrapperConditionalClasses = "";
 
   if (isMdSearchActive) {
+    searchWrapperConditionalClasses = "md:flex-1 md:justify-start lg:flex-1 ";
+  }
+  if (!isMdSearchActive) {
     searchWrapperConditionalClasses =
-      "md:flex-1 md:justify-start lg:flex-1 xl:flex-1";
-  } else {
-    searchWrapperConditionalClasses =
-      "md:w-auto md:justify-center md:mr-16 lg:w-auto lg:mr-16 xl:flex-1";
+      "md:w-auto md:justify-center  lg:w-auto  ";
   }
   const finalSearchWrapperClasses = `${searchWrapperBaseClasses} ${searchWrapperConditionalClasses}`;
 
@@ -32,16 +31,16 @@ const ClientNavb: React.FC = () => {
     <div className="flex items-center flex-1">
       <div
         className={`
-          transition-all duration-300 ease-in-out
+         
           ${
             isMdSearchActive
               ? "md:w-0 md:opacity-0 md:hidden"
               : "md:w-auto md:opacity-100"
           }
-          lg:w-auto lg:opacity-100 lg:flex mr-4 {/* Always visible on LG+, with margin */}
+          lg:w-auto lg:opacity-100 lg:flex 
         `}
       >
-        <BokiGrowLogo className="w-32 h-auto text-green-700" />
+        <BokiGrowLogo className="w-70 h-auto text-green-700" />
       </div>
 
       <div className={finalSearchWrapperClasses}>

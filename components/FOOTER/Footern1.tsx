@@ -2,11 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import iphone from "@/assets/FOOTER/IPHONE/service-image.webp";
+import iphone from "@/public/FOOTER/iphonehand.webp";
 import { Facebook, Instagram, Twitter, Github, Linkedin } from "lucide-react";
-import review1 from "@/assets/FOOTER/REVIEW/google-e1700567735289.png";
-import review2 from "@/assets/FOOTER/REVIEW/images.png";
-import socials from "@/assets/FOOTER/REVIEW/social-networking.png";
+import review1 from "@/public/FOOTER/googlesvg.png";
+import review2 from "@/public/FOOTER/reviewsvg.png";
+import socials from "@/public/FOOTER/socials.png";
 const Footer1 = () => (
   <footer
     role="contentinfo"
@@ -19,8 +19,8 @@ const Footer1 = () => (
       <Image
         src={iphone}
         alt="Company logo"
-        width={99}
-        height={99}
+        width={222}
+        height={222}
         className="w-44 h-auto lg:-mt-15"
         priority
       />
@@ -36,16 +36,16 @@ const Footer1 = () => (
               <Image
                 src={review1}
                 alt="Review snapshot"
-                width={22}
-                height={22}
+                width={150}
+                height={150}
                 className="w-10 h-auto rounded"
                 priority
               />
               <Image
                 src={review2}
                 alt="Review snapshot"
-                width={22}
-                height={22}
+                width={150}
+                height={150}
                 className="w-10 h-auto rounded"
                 priority
               />
@@ -89,8 +89,8 @@ const Footer1 = () => (
         <Image
           src={socials}
           alt="Review snapshot"
-          width={111}
-          height={111}
+          width={333}
+          height={333}
           className="w-44 h-auto rounded"
           priority
         />

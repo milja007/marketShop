@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { MENUDATA } from "@/data(fake)/CATEGORIES";
+import Image from "next/image";
 
 // Placeholder SVGs — swap in your own icons if you like
 const LoginSvg = () => (
@@ -105,27 +106,30 @@ function MobileMenu() {
         </div>
 
         {/* Menu Items */}
-        <ul className="flex-grow overflow-y-auto p-2">
+        <ul className=" ">
           {MENUDATA.map((cat) => (
-            <li key={cat.name} className="mb-2">
-              <button
-                className="w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 hover:text-emerald-900 rounded transition-colors duration-150"
-                onClick={() =>
-                  setOpenCategory(openCategory === cat.name ? null : cat.name)
-                }
-              >
-                <span>{cat.name}</span>
-                {cat.subcategories && <Arrowsvg />}
-              </button>
+            <li key={cat.name} className="flex flex-col ">
+              <div className="flex items-center">
+                <Image src={cat.src} alt="cat" width={25} height={25} />
+                <button
+                  className="w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 hover:text-emerald-900 rounded transition-colors duration-150"
+                  onClick={() =>
+                    setOpenCategory(openCategory === cat.name ? null : cat.name)
+                  }
+                >
+                  <span>{cat.name}</span>
+                  {cat.subcategories && <Arrowsvg />}
+                </button>
+              </div>
 
               {/* Submenu (click‐to‐open) */}
               {cat.subcategories && openCategory === cat.name && (
-                <ul className="mt-1 bg-white border border-gray-300 rounded shadow-lg">
+                <ul className=" mt-1 bg-white border border-gray-300 rounded shadow-lg ">
                   {cat.subcategories.map((sub) => (
                     <li key={sub.name}>
                       <Link
                         href={sub.slug}
-                        className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-900"
+                        className="block  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-900"
                         onClick={closeMenu}
                       >
                         {sub.name}

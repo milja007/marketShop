@@ -80,7 +80,7 @@ const Search: React.FC<SearchProps> = ({
   };
 
   let containerClasses = `relative flex items-center transition-all duration-300 ease-in-out group`;
-  const inputBaseClasses = `h-10 border border-gray-300 rounded-lg py-1 text-sm focus:outline-none focus:ring-1 focus:ring-cactus focus:border-cactus bg-white text-black dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 transition-all duration-300 ease-in-out`;
+  const inputBaseClasses = `h-10 border border-gray-300 rounded-lg py-1 text-sm focus:outline-none focus:ring-1 focus:ring-cactus focus:border-cactus bg-white text-black dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 `;
   let currentInputClasses = "";
 
   const clickableSearchButtonBaseClasses = `absolute right-3 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 dark:text-gray-400 group-hover:text-cactus focus:outline-none`;
@@ -88,11 +88,12 @@ const Search: React.FC<SearchProps> = ({
 
   if (onMdSearchToggle !== undefined) {
     if (isMdSearchActive) {
-      containerClasses += ` md:w-full lg:w-[40rem] xl:w-full`;
-      currentInputClasses = `${inputBaseClasses} md:w-full md:opacity-100 md:pl-10 md:pr-10 lg:w-[40rem] lg:opacity-100 lg:pl-4 lg:pr-10 xl:w-full xl:opacity-100 xl:pl-4 xl:pr-10`;
-    } else {
-      containerClasses += ` md:w-10 md:cursor-pointer lg:w-[40rem] xl:w-full`;
-      currentInputClasses = `${inputBaseClasses} md:w-0 md:opacity-0 md:pointer-events-none lg:w-[40rem] lg:opacity-100 lg:pl-4 lg:pr-10 xl:w-full xl:opacity-100 xl:pl-4 xl:pr-10`;
+      containerClasses += ` md:w-full lg:w-[30rem] xl:w-[45rem] `;
+      currentInputClasses = `${inputBaseClasses} md:w-full md:opacity-100 md:pl-10 md:pr-10 lg:w-[30rem] lg:opacity-100 lg:pl-4 lg:pr-10 xl:w-full  `;
+    }
+    if (!isMdSearchActive) {
+      containerClasses += ` md:w-10 md:cursor-pointer lg:w-[30rem] xl:w-[45rem]  `;
+      currentInputClasses = `${inputBaseClasses} md:w-0 md:opacity-0 md:pointer-events-none lg:w-[30rem] lg:opacity-100 lg:pl-4 lg:pr-10 xl:w-full  `;
       iconButtonConditionalClasses = "md:hidden lg:inline-flex";
     }
   } else {
@@ -134,7 +135,7 @@ const Search: React.FC<SearchProps> = ({
         onKeyDown={handleInputKeyDown}
       />
       {onMdSearchToggle !== undefined && !isMdSearchActive && (
-        <div className="hidden md:flex lg:hidden items-center justify-center h-full w-full text-gray-500 dark:text-gray-400 pointer-events-none">
+        <div className="hidden md:flex md:justify-end lg:hidden items-center justify-center h-full w-full text-gray-500 dark:text-gray-400 pointer-events-none">
           <SearchSvgIcon />
         </div>
       )}

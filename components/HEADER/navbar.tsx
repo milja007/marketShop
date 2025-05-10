@@ -4,7 +4,7 @@ import Languaesvg from "./SVGS/Languaesvg";
 import LoginSvg from "./SVGS/LoginSvg";
 import HeartSvg from "./SVGS/HeartSvg";
 import CartSvg from "./SVGS/CartSvg";
-import InteractiveNavGroup from "./ClientNavb";
+import ClientNavb from "./ClientNavb";
 
 const Navbar: React.FC = () => {
   return (
@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
         <HamburgerSvg />
       </div>
 
-      <InteractiveNavGroup />
+      <ClientNavb />
 
       <div className="flex space-x-2 sm:space-x-4 items-center">
         <button

@@ -2,13 +2,13 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import kartic1 from "@/assets/FOOTER/KARTICE/icon-payment-americanexpress.webp";
-import kartic2 from "@/assets/FOOTER/KARTICE/icon-payment-banktransfer.webp";
-import kartic3 from "@/assets/FOOTER/KARTICE/icon-payment-cash.png";
-import kartic4 from "@/assets/FOOTER/KARTICE/icon-payment-maestro.webp";
-import kartic5 from "@/assets/FOOTER/KARTICE/icon-payment-mastercard.webp";
-import kartic6 from "@/assets/FOOTER/KARTICE/icon-payment-mistercash.webp";
-import kartic7 from "@/assets/FOOTER/KARTICE/icon-payment-visa.webp";
+import kartic3 from "@/public/FOOTER/CARDS/americaex.webp";
+import kartic6 from "@/public/FOOTER/CARDS/bancontc.webp";
+import kartic2 from "@/public/FOOTER/CARDS/bankc.webp";
+import kartic7 from "@/public/FOOTER/CARDS/cashc.png";
+import kartic5 from "@/public/FOOTER/CARDS/maestroc.webp";
+import kartic4 from "@/public/FOOTER/CARDS/masterc2.webp";
+import kartic1 from "@/public/FOOTER/CARDS/visac.webp";
 
 const Footer2 = () => (
   <footer
