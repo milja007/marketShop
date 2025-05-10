@@ -16,6 +16,8 @@
   --color-cactus: #587156;
   --color-feta: #f0fcea;
   --color-alabaster: #f8f8f7;
+
+  --breakpoint-450px: 450px;
 }
 
 @media (prefers-color-scheme: dark) {

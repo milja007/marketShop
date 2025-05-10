@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
 
       <ClientNavb />
 
-      <div className="flex space-x-2 sm:space-x-4 items-center">
+      <div className="flex space-x-2 sm:space-x-4 items-center  ">
         <button
           className="
             hidden md:flex bg-cactus text-white font-semibold

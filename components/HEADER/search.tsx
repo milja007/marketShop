@@ -88,17 +88,17 @@ const Search: React.FC<SearchProps> = ({
 
   if (onMdSearchToggle !== undefined) {
     if (isMdSearchActive) {
-      containerClasses += ` md:w-full lg:w-[30rem] xl:w-[45rem] `;
-      currentInputClasses = `${inputBaseClasses} md:w-full md:opacity-100 md:pl-10 md:pr-10 lg:w-[30rem] lg:opacity-100 lg:pl-4 lg:pr-10 xl:w-full  `;
+      containerClasses += ` md:w-full lg:w-[24rem] xl:w-[39rem] 2xl:w-[55rem]  `;
+      currentInputClasses = `${inputBaseClasses} md:w-full md:opacity-100 md:pl-10 md:pr-10 lg:w-full lg:opacity-100 lg:pl-4 lg:pr-10 xl:w-full    `;
     }
     if (!isMdSearchActive) {
-      containerClasses += ` md:w-10 md:cursor-pointer lg:w-[30rem] xl:w-[45rem]  `;
-      currentInputClasses = `${inputBaseClasses} md:w-0 md:opacity-0 md:pointer-events-none lg:w-[30rem] lg:opacity-100 lg:pl-4 lg:pr-10 xl:w-full  `;
+      containerClasses += ` md:w-10 md:cursor-pointer lg:w-[24rem] xl:w-[39rem]  2xl:w-[55rem] `;
+      currentInputClasses = `${inputBaseClasses} md:w-0 md:opacity-0 md:pointer-events-none lg:w-full lg:opacity-100 lg:pl-4 lg:pr-10 xl:w-full   `;
       iconButtonConditionalClasses = "md:hidden lg:inline-flex";
     }
   } else {
-    containerClasses += ` w-full max-w-full mx-auto mt-2`;
-    currentInputClasses = `${inputBaseClasses} w-full opacity-100 pl-4 pr-10`;
+    containerClasses += ` w-full max-w-full mx-auto mt-2 450px:w-105`;
+    currentInputClasses = `${inputBaseClasses} w-full opacity-100 pl-4 pr-10 [500px]:w-20`;
   }
 
   const finalClickableSearchButtonClasses = `${clickableSearchButtonBaseClasses} ${iconButtonConditionalClasses}`;

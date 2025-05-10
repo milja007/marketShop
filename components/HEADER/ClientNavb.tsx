@@ -15,15 +15,14 @@ const ClientNavb: React.FC = () => {
     setIsMdSearchActive(false);
   };
 
-  const searchWrapperBaseClasses = "hidden md:flex items-center  mx-4";
+  const searchWrapperBaseClasses = "hidden md:flex items-center  mx-4    ";
   let searchWrapperConditionalClasses = "";
 
   if (isMdSearchActive) {
     searchWrapperConditionalClasses = "md:flex-1 md:justify-start lg:flex-1 ";
   }
   if (!isMdSearchActive) {
-    searchWrapperConditionalClasses =
-      "md:w-auto md:justify-center  lg:w-auto  ";
+    searchWrapperConditionalClasses = "md:w-auto md:justify-center  lg:w-auto ";
   }
   const finalSearchWrapperClasses = `${searchWrapperBaseClasses} ${searchWrapperConditionalClasses}`;
 
