@@ -110,7 +110,7 @@ function MobileMenu() {
           {MENUDATA.map((cat) => (
             <li key={cat.name} className="flex flex-col ">
               <div className="flex items-center">
-                <Image src={cat.src} alt="cat" width={25} height={25} />
+                <Image src={cat.src} alt="cat" width={25} />
                 <button
                   className="w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 hover:text-emerald-900 rounded transition-colors duration-150"
                   onClick={() =>

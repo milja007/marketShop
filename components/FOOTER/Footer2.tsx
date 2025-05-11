@@ -332,13 +332,13 @@ const Footer2 = () => (
           reserved.
         </p>
         <div className="mt-4 md:mt-0 flex space-x-4 text-white dark:text-gray-300">
-          <Image src={kartic1} alt="" width={30} height={30} />
-          <Image src={kartic2} alt="" width={30} height={30} />
-          <Image src={kartic3} alt="" width={30} height={30} />
-          <Image src={kartic4} alt="" width={30} height={30} />
-          <Image src={kartic5} alt="" width={30} height={30} />
-          <Image src={kartic6} alt="" width={30} height={30} />
-          <Image src={kartic7} alt="" width={30} height={30} />
+          <Image src={kartic1} alt="" width={30} />
+          <Image src={kartic2} alt="" width={30} />
+          <Image src={kartic3} alt="" width={30} />
+          <Image src={kartic4} alt="" width={30} />
+          <Image src={kartic5} alt="" width={30} />
+          <Image src={kartic6} alt="" width={30} />
+          <Image src={kartic7} alt="" width={30} />
         </div>
       </div>
     </div>

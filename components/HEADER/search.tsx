@@ -123,6 +123,7 @@ const Search: React.FC<SearchProps> = ({
         </button>
       )}
       <input
+        name="search"
         ref={inputRef}
         type="text"
         placeholder="Search..."
