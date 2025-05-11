@@ -118,9 +118,12 @@ const LinkNavbar: React.FC = () => {
 
   return (
     <nav className="bg-alabaster border-b border-gray-300 w-full font-bold">
-      <div className="overflow-x-auto" style={{ overflowY: "visible" }}>
-        <ul className="flex justify-start sm:justify-center max-w-screen-xl mx-auto relative min-w-max">
-          <li className="flex items-center flex-shrink-0 px-3 py-2">
+      <div
+        className="overflow-x-auto md:flex  lg:justify-center"
+        style={{ overflowY: "visible" }}
+      >
+        <ul className="flex">
+          <li className="flex ">
             <HomeSvg />
           </li>
           {typedMenudata.map((category) => (
@@ -129,7 +132,7 @@ const LinkNavbar: React.FC = () => {
               ref={(el: HTMLLIElement | null) => {
                 categoryItemRefs.current[category.name] = el;
               }} // Corrected ref
-              className="font-semibold px-3 py-2 text-sm text-gray-700
+              className="  font-semibold px-3 py-2 text-sm text-gray-700
                          border-b-5 border-transparent hover:border-green-500 h-13
                          flex-shrink-0 transition-all duration-200 cursor-default"
               onMouseEnter={() => handleCategoryMouseEnter(category)}
