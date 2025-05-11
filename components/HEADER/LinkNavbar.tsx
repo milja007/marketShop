@@ -1,35 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useLayoutEffect,
+} from "react";
 import { createPortal } from "react-dom";
 
 // Assuming SVGs are now colocated or paths are adjusted
-// If SVGS folder is inside components/LinkNavbar/
 import Arrowsvg from "./SVGS/Arrowsvg";
 import HomeSvg from "./SVGS/HomeSvg";
-// If SVGs are in a global components/SVGS folder, use:
-// import Arrowsvg from "@/components/SVGS/Arrowsvg";
-// import HomeSvg from "@/components/SVGS/HomeSvg";
 
-import { MENUDATA } from "@/data(fake)/CATEGORIES"; // This path should still work if it's an alias
-
+import { MENUDATA } from "@/data(fake)/CATEGORIES";
 import SubmenuContent from "./SubmenuContent";
 import { StaticImageData } from "next/image";
+
 export interface Subcategory {
   name: string;
   slug: string;
 }
+
 interface SubmenuPosition {
   top: number;
   left: number;
 }
+
 interface Category {
   src: StaticImageData;
   name: string;
   slug: string;
   subcategories: Subcategory[];
 }
+
 const LinkNavbar: React.FC = () => {
   const [activeCategoryName, setActiveCategoryName] = useState<string | null>(
     null
@@ -43,8 +48,13 @@ const LinkNavbar: React.FC = () => {
   >([]);
   const categoryItemRefs = useRef<Record<string, HTMLLIElement | null>>({});
   const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
   const [isMounted, setIsMounted] = useState<boolean>(false);
+
+  // Refs and state for dynamic fades
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showLeftFade, setShowLeftFade] = useState(false);
+  const [showRightFade, setShowRightFade] = useState(false);
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -53,17 +63,12 @@ const LinkNavbar: React.FC = () => {
     const parentLiElement = categoryItemRefs.current[categoryName];
     if (parentLiElement) {
       const rect = parentLiElement.getBoundingClientRect();
-      setSubmenuPosition({
-        top: rect.bottom + 2,
-        left: rect.left,
-      });
+      setSubmenuPosition({ top: rect.bottom + 2, left: rect.left });
     }
   }, []);
 
   const handleCategoryMouseEnter = (category: Category) => {
-    if (leaveTimeoutRef.current) {
-      clearTimeout(leaveTimeoutRef.current);
-    }
+    if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
     if (category.subcategories && category.subcategories.length > 0) {
       setCurrentSubcategories(category.subcategories);
       setActiveCategoryName(category.name);
@@ -82,9 +87,7 @@ const LinkNavbar: React.FC = () => {
   };
 
   const handleSubmenuMouseEnter = () => {
-    if (leaveTimeoutRef.current) {
-      clearTimeout(leaveTimeoutRef.current);
-    }
+    if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
   };
 
   const handleSubmenuMouseLeave = () => {
@@ -108,22 +111,93 @@ const LinkNavbar: React.FC = () => {
 
   useEffect(() => {
     return () => {
-      if (leaveTimeoutRef.current) {
-        clearTimeout(leaveTimeoutRef.current);
-      }
+      if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
     };
   }, []);
 
   const typedMenudata = MENUDATA as Category[];
 
+  // Memoized function to update fade visibility
+  const updateFades = useCallback(() => {
+    const container = scrollContainerRef.current;
+    if (!container) {
+      // Default to no fades if container isn't rendered yet
+      setShowLeftFade(false);
+      setShowRightFade(false);
+      return;
+    }
+
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    const scrollThreshold = 5; // A small buffer (e.g., 5px) to prevent flicker at edges
+
+    // Check if scrolling is actually possible
+    const canScroll = scrollWidth > clientWidth + scrollThreshold;
+
+    if (!canScroll) {
+      setShowLeftFade(false);
+      setShowRightFade(false);
+      return;
+    }
+
+    // Determine if at the start or end of scroll
+    const atStart = scrollLeft < scrollThreshold;
+    const atEnd = scrollWidth - clientWidth - scrollLeft < scrollThreshold;
+
+    setShowLeftFade(!atStart); // Show left fade if not at the very start
+    setShowRightFade(!atEnd); // Show right fade if not at the very end
+  }, []); // Empty dependency array: function is stable as it only uses refs and setState
+
+  // Effect for initial fade check, resize events, and when menu data changes (which might alter scrollWidth)
+  useLayoutEffect(() => {
+    // Initial check once DOM is ready
+    updateFades();
+
+    const handleResize = () => updateFades();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [updateFades, typedMenudata]); // Re-run if MENUDATA changes or updateFades function identity changes (it won't here)
+
+  // Effect for handling scroll events on the container, using requestAnimationFrame
+  useEffect(() => {
+    const scrollElement = scrollContainerRef.current;
+    if (!scrollElement) return;
+
+    let ticking = false; // To ensure updateFades is not called too frequently
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateFades();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    scrollElement.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      scrollElement.removeEventListener("scroll", handleScroll);
+    };
+  }, [updateFades]); // Re-run if updateFades function identity changes (it won't here)
+
   return (
     <nav className="bg-alabaster border-b border-gray-300 w-full font-bold">
       <div
-        className="overflow-x-auto md:flex  lg:justify-center"
+        ref={scrollContainerRef}
+        className={`
+          overflow-x-auto md:flex lg:justify-center relative
+          custom-horizontal-scrollbar scroll-fade-container
+          ${showLeftFade ? "show-fade-left" : ""}
+          ${showRightFade ? "show-fade-right" : ""}
+        `}
         style={{ overflowY: "visible" }}
       >
         <ul className="flex">
-          <li className="flex ">
+          <li className="flex items-center mr-5">
             <HomeSvg />
           </li>
           {typedMenudata.map((category) => (
@@ -131,9 +205,9 @@ const LinkNavbar: React.FC = () => {
               key={category.name}
               ref={(el: HTMLLIElement | null) => {
                 categoryItemRefs.current[category.name] = el;
-              }} // Corrected ref
-              className="  font-semibold px-3 py-2 text-sm text-gray-700
-                         border-b-5 border-transparent hover:border-green-500 h-13
+              }}
+              className="font-semibold px-1 py-2 text-sm text-gray-700
+                         border-b-3 border-transparent hover:border-green-500 h-13
                          flex-shrink-0 transition-all duration-200 cursor-default"
               onMouseEnter={() => handleCategoryMouseEnter(category)}
               onMouseLeave={handleCategoryMouseLeave}
@@ -162,6 +236,7 @@ const LinkNavbar: React.FC = () => {
               position: "fixed",
               top: `${submenuPosition.top}px`,
               left: `${submenuPosition.left}px`,
+              zIndex: 50,
             }}
             onMouseEnter={handleSubmenuMouseEnter}
             onMouseLeave={handleSubmenuMouseLeave}

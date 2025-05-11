@@ -78,7 +78,7 @@ export const MENUDATA: Category[] = [
   },
   {
     src: liquidsubstrates,
-    name: "Liquids and Substrates",
+    name: "Nutrients",
     slug: "/liquids-and-substrates",
     subcategories: [
       { name: "Fertilizers", slug: "/liquids-and-substrates/fertilizers" },
