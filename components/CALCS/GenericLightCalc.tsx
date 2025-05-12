@@ -152,7 +152,7 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
   };
 
   return (
-    <>
+    <div className="flex flex-col border border-amber-300 w-80 mt-20 mb-20 ml-10">
       <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-100">
         {title}
       </h3>
@@ -231,7 +231,7 @@ const GenericLightCalc: React.FC<GenericLightCalcProps> = ({
           <span className="text-lg">{result.toFixed(2)}</span> {outputUnit}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

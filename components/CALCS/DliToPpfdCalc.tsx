@@ -38,11 +38,16 @@ const DliToPpfdCalc: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col border border-amber-300 w-80 mt-20 mb-20 ml-10 ">
       {/* Title */}
       <h3 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">
         PPFD and Time to DLI
       </h3>
+
+      <p className="text-sm text-gray-150">
+        Approximate conversion from PPFD to DLI
+      </p>
+      <br />
 
       {/* PPFD Input */}
       <div className="mb-4">
@@ -58,7 +63,7 @@ const DliToPpfdCalc: React.FC = () => {
           ref={ppfdInputRef}
           defaultValue={300}
           min={0}
-          className="shadow appearance-none border border-gray-300 dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border border-gray-300 dark:border-gray-600 rounded w-80 py-2 px-3 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
 
@@ -77,7 +82,7 @@ const DliToPpfdCalc: React.FC = () => {
           defaultValue={18}
           min={0}
           max={24}
-          className="shadow appearance-none border border-gray-300 dark:border-gray-600 rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border border-gray-300 dark:border-gray-600 rounded w-80 py-2 px-3 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
 
@@ -111,7 +116,7 @@ const DliToPpfdCalc: React.FC = () => {
           {dliResult.toFixed(2)} mol/m²/day
         </div>
       )}
-    </>
+    </div>
   );
 };
 

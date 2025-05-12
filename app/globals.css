@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "tw-animate-css";
+@import "tw-animate-css"; /* Consider checking this library for existing fade-in utilities */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -97,20 +97,38 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* ==== START: Custom FadeIn Animation for Image Slider ==== */
+@layer utilities {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-in-out; /* Duration and easing can be adjusted */
+  }
+}
+/* ==== END: Custom FadeIn Animation for Image Slider ==== */
+
 @media (prefers-color-scheme: dark) {
   :root {
     /* Dark mode theme variables */
 
     /* If --color-alabaster (and thus bg-alabaster) changes visually in dark mode,
-       you would need to update --color-alabaster-rgb here as well to match.
-       For example, if dark mode alabaster was #1c1c1b:
-       --color-alabaster-rgb: 28, 28, 27;
-       If it doesn't change, the :root definition above is sufficient.
-    */
+        you would need to update --color-alabaster-rgb here as well to match.
+        For example, if dark mode alabaster was #1c1c1b:
+        --color-alabaster-rgb: 28, 28, 27;
+        If it doesn't change, the :root definition above is sufficient.
+     */
   }
 }
 
-body { /* Default body font */
+body {
+  /* Default body font */
 }
 
 /* --- Custom Horizontal Scrollbar Styles for LinkNavbar --- */

@@ -21,21 +21,17 @@ export default function Home() {
 
   if (query.isLoading) return <div>Loading...</div>;
   return (
-    <div>
+    <div className="bg-slate-50">
       <section>
-        <MaxWidthWrapper>
-          <div className="flex flex-col items-center justify-center ">
-            <button
-              onClick={() =>
-                mutation.mutate({ id: 1, name: "Borna Miljkovic" })
-              }
-            >
-              CreateUser
-            </button>
-            {query.data?.map((user: dataType) => (
-              <div key={user.id}> {user.name}</div>
-            ))}
-          </div>
+        <MaxWidthWrapper className="pb-24 pt-10 lg:grid lg:grid-cols-3 sm:pb-32 lg:gap-x-0 xl:gap-x-8 lg:pt-24 xl:pt-32 lg:pb-52">
+          <button
+            onClick={() => mutation.mutate({ id: 1, name: "Borna Miljkovic" })}
+          >
+            CreateUser
+          </button>
+          {query.data?.map((user: dataType) => (
+            <div key={user.id}> {user.name}</div>
+          ))}
         </MaxWidthWrapper>
       </section>
     </div>
