@@ -14,7 +14,7 @@ import { createPortal } from "react-dom";
 import Arrowsvg from "./SVGS/Arrowsvg";
 import HomeSvg from "./SVGS/HomeSvg";
 
-import { MENUDATA } from "@/data(fake)/CATEGORIES";
+import { MENUDATA } from "@/data(fake)/CONSTANTS/CATEGORIES";
 import SubmenuContent from "./SubmenuContent";
 import { StaticImageData } from "next/image";
 

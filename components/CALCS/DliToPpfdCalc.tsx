@@ -38,7 +38,7 @@ const DliToPpfdCalc: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col border border-amber-300 w-80 mt-20 mb-20 ml-10 ">
+    <div className="flex flex-col   w-80 mt-20 mb-20 ml-10 ">
       {/* Title */}
       <h3 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">
         PPFD and Time to DLI

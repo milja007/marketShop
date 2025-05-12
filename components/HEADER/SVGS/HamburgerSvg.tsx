@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { MENUDATA } from "@/data(fake)/CATEGORIES";
+import { MENUDATA } from "@/data(fake)/CONSTANTS/CATEGORIES";
 import Image from "next/image";
 
 // Placeholder SVGs — swap in your own icons if you like
