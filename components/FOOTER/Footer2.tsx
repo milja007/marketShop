@@ -1,6 +1,7 @@
+// components/Footers/Footer2.tsx
 import React from "react";
 import Link from "next/link";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 
 import kartic3 from "@/public/FOOTER/CARDS/americaex.webp";
 import kartic6 from "@/public/FOOTER/CARDS/bancontc.webp";
@@ -10,12 +11,21 @@ import kartic5 from "@/public/FOOTER/CARDS/maestroc.webp";
 import kartic4 from "@/public/FOOTER/CARDS/masterc2.webp";
 import kartic1 from "@/public/FOOTER/CARDS/visac.webp";
 
-const navLinkStyle =
-  "text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-transform transform hover:translate-x-1 block py-1";
+// Styles for mobile accordion links
+const mobileAccordionLinkStyle =
+  "text-sm font-medium text-zinc-800 hover:text-emerald-700 dark:text-zinc-300 dark:hover:text-emerald-400 transition-transform transform hover:translate-x-1 block py-1"; // Light text: zinc-800, Light hover: emerald-700
+
+// Styles for desktop navigation links in footer columns
 const desktopNavLinkStyle =
-  "text-sm font-medium text-white hover:text-feta dark:text-gray-300 dark:hover:text-green-400 transition-transform transform hover:translate-x-1 block py-1"; // Kept existing style for desktop as it's distinct
-const footerHeadingStyle =
-  "text-xl font-semibold tracking-tight text-white dark:text-green-300 mb-3"; // Unified desktop heading
+  "text-sm font-medium text-zinc-800 hover:text-emerald-700 dark:text-zinc-300 dark:hover:text-emerald-400 transition-transform transform hover:translate-x-1 block py-1"; // Light text: zinc-800, Light hover: emerald-700
+
+// Style for desktop section headings
+const desktopFooterHeadingStyle =
+  "text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-3"; // Light text: zinc-900
+
+// Style for mobile accordion summary (the clickable title)
+const mobileAccordionSummaryStyle =
+  "flex items-center justify-between py-3 text-zinc-900 dark:text-zinc-100 font-semibold text-lg cursor-pointer list-none"; // Light text: zinc-900
 
 const Footer2 = () => {
   const customerServiceLinks = [
@@ -63,46 +73,14 @@ const Footer2 = () => {
 
   const renderNavSection = (
     title: string,
-    links: { href: string; label: string }[],
-    isDesktop?: boolean
+    links: { href: string; label: string }[]
   ) => (
-    <nav
-      aria-label={title}
-      className={`${
-        isDesktop ? "hidden sm:flex" : "sm:hidden"
-      } flex-col space-y-2`}
-    >
-      <h3
-        className={`${
-          isDesktop
-            ? footerHeadingStyle
-            : "flex items-center justify-between py-3 text-white font-semibold text-lg cursor-pointer"
-        }`}
-      >
-        {title}
-        {!isDesktop && (
-          <span className="transition-transform duration-300 group-open:rotate-180">
-            ▼
-          </span>
-        )}
-      </h3>
-      <ul
-        className={`${
-          isDesktop ? "space-y-1.5" : "mt-2 pl-4 space-y-1.5 pb-3"
-        }`}
-      >
+    <nav aria-label={title} className="hidden sm:flex flex-col space-y-2">
+      <h3 className={desktopFooterHeadingStyle}>{title}</h3>
+      <ul className="space-y-1.5">
         {links.map((link) => (
           <li key={link.href}>
-            <Link
-              href={link.href}
-              className={
-                isDesktop
-                  ? desktopNavLinkStyle
-                  : navLinkStyle
-                      .replace("text-gray-700", "text-white")
-                      .replace("dark:text-gray-300", "dark:text-gray-200")
-              }
-            >
+            <Link href={link.href} className={desktopNavLinkStyle}>
               {link.label}
             </Link>
           </li>
@@ -115,11 +93,14 @@ const Footer2 = () => {
     <footer
       role="contentinfo"
       aria-label="Website Footer Section 2"
-      className="bg-cactus font-sans dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-black dark:text-gray-200" // text-gray-200 for base dark text
+      className="bg-zinc-300 font-sans dark:bg-zinc-900 dark:text-zinc-300" // Light bg: zinc-300
     >
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        <details className="sm:hidden group border-b border-gray-300 dark:border-gray-700">
-          <summary className="flex items-center justify-between py-3 text-white font-semibold text-lg cursor-pointer list-none">
+        {/* Mobile Accordions */}
+        <details className="sm:hidden group border-b border-zinc-400 dark:border-zinc-700">
+          {" "}
+          {/* Light border: zinc-400 */}
+          <summary className={mobileAccordionSummaryStyle}>
             Customer service
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
               ▾
@@ -128,15 +109,7 @@ const Footer2 = () => {
           <ul className="mt-2 pl-4 space-y-1.5 pb-3">
             {customerServiceLinks.map((link) => (
               <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={navLinkStyle
-                    .replace("text-gray-700", "text-white hover:text-feta")
-                    .replace(
-                      "dark:text-gray-300",
-                      "dark:text-gray-200 dark:hover:text-green-300"
-                    )}
-                >
+                <Link href={link.href} className={mobileAccordionLinkStyle}>
                   {link.label}
                 </Link>
               </li>
@@ -144,8 +117,10 @@ const Footer2 = () => {
           </ul>
         </details>
 
-        <details className="sm:hidden group border-b border-gray-300 dark:border-gray-700">
-          <summary className="flex items-center justify-between py-3 text-white font-semibold text-lg cursor-pointer list-none">
+        <details className="sm:hidden group border-b border-zinc-400 dark:border-zinc-700">
+          {" "}
+          {/* Light border: zinc-400 */}
+          <summary className={mobileAccordionSummaryStyle}>
             My account
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
               ▾
@@ -154,15 +129,7 @@ const Footer2 = () => {
           <ul className="mt-2 pl-4 space-y-1.5 pb-3">
             {myAccountLinks.map((link) => (
               <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={navLinkStyle
-                    .replace("text-gray-700", "text-white hover:text-feta")
-                    .replace(
-                      "dark:text-gray-300",
-                      "dark:text-gray-200 dark:hover:text-green-300"
-                    )}
-                >
+                <Link href={link.href} className={mobileAccordionLinkStyle}>
                   {link.label}
                 </Link>
               </li>
@@ -170,8 +137,10 @@ const Footer2 = () => {
           </ul>
         </details>
 
-        <details className="sm:hidden group border-b border-gray-300 dark:border-gray-700">
-          <summary className="flex items-center justify-between py-3 text-white font-semibold text-lg cursor-pointer list-none">
+        <details className="sm:hidden group border-b border-zinc-400 dark:border-zinc-700">
+          {" "}
+          {/* Light border: zinc-400 */}
+          <summary className={mobileAccordionSummaryStyle}>
             Information
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
               ▾
@@ -180,15 +149,7 @@ const Footer2 = () => {
           <ul className="mt-2 pl-4 space-y-1.5 pb-3">
             {informationLinks.map((link) => (
               <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={navLinkStyle
-                    .replace("text-gray-700", "text-white hover:text-feta")
-                    .replace(
-                      "dark:text-gray-300",
-                      "dark:text-gray-200 dark:hover:text-green-300"
-                    )}
-                >
+                <Link href={link.href} className={mobileAccordionLinkStyle}>
                   {link.label}
                 </Link>
               </li>
@@ -196,14 +157,18 @@ const Footer2 = () => {
           </ul>
         </details>
 
-        <details className="sm:hidden group border-b border-gray-300 dark:border-gray-700 last:border-none">
-          <summary className="flex items-center justify-between py-3 text-white font-semibold text-lg cursor-pointer list-none">
+        <details className="sm:hidden group border-b border-zinc-400 dark:border-zinc-700 last:border-none">
+          {" "}
+          {/* Light border: zinc-400 */}
+          <summary className={mobileAccordionSummaryStyle}>
             Contact
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
               ▾
             </span>
           </summary>
-          <ul className="mt-2 pl-4 space-y-1 text-sm text-white pb-3">
+          <ul className="mt-2 pl-4 space-y-1 text-sm text-zinc-800 dark:text-zinc-300 pb-3">
+            {" "}
+            {/* Light text: zinc-800 */}
             {contactInfo.map((line, index) => (
               <li key={index} className="font-medium">
                 {line}
@@ -212,13 +177,16 @@ const Footer2 = () => {
           </ul>
         </details>
 
-        {renderNavSection("Customer service", customerServiceLinks, true)}
-        {renderNavSection("My account", myAccountLinks, true)}
-        {renderNavSection("Information", informationLinks, true)}
+        {/* Desktop Sections */}
+        {renderNavSection("Customer service", customerServiceLinks)}
+        {renderNavSection("My account", myAccountLinks)}
+        {renderNavSection("Information", informationLinks)}
 
         <div className="hidden sm:flex flex-col space-y-2">
-          <h3 className={footerHeadingStyle}>Contact</h3>
-          <ul className="space-y-1 text-sm text-white dark:text-gray-300">
+          <h3 className={desktopFooterHeadingStyle}>Contact</h3>
+          <ul className="space-y-1 text-sm text-zinc-800 dark:text-zinc-300">
+            {" "}
+            {/* Light text: zinc-800 */}
             {contactInfo.map((line, index) => (
               <li key={index} className="font-medium">
                 {line}
@@ -228,10 +196,13 @@ const Footer2 = () => {
         </div>
       </div>
 
-      <div className="border-t border-white/20 dark:border-gray-700/50">
+      <div className="border-t border-zinc-400 dark:border-zinc-700">
         {" "}
+        {/* Light border: zinc-400 */}
         <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs font-medium text-white dark:text-gray-400 text-center md:text-left">
+          <p className="text-xs font-medium text-zinc-700 dark:text-zinc-400 text-center md:text-left">
+            {" "}
+            {/* Light text: zinc-700 */}
             &copy; {new Date().getFullYear()} INT eCommerce B.M. All rights
             reserved.
           </p>

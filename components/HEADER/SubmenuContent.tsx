@@ -7,9 +7,10 @@ export interface Subcategory {
 }
 interface SubmenuPortalContentProps {
   subcategories: Subcategory[];
-  style: CSSProperties;
+  style: CSSProperties; // This style comes from LinkNavbar, including position and z-index
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  // className?: string; // Optional: if you want to pass additional classes from parent
 }
 
 const SubmenuContent: React.FC<SubmenuPortalContentProps> = ({
@@ -17,21 +18,30 @@ const SubmenuContent: React.FC<SubmenuPortalContentProps> = ({
   style,
   onMouseEnter,
   onMouseLeave,
+  // className: additionalClassName = "", // For optional additional classes
 }) => (
   <ul
-    style={style}
-    className="absolute bg-white border border-gray-300 rounded-b-md shadow-lg
-               z-[100] min-w-[200px] py-1" // Ensure high z-index; py-1 for padding
+    style={style} // Applies position, top, left, and zIndex (e.g., zIndex: 50 from LinkNavbar)
+    className={`
+      bg-zinc-800 border border-zinc-700 
+      rounded-md shadow-xl 
+      min-w-[220px] py-2 text-sm
+    `} // Removed 'absolute' and 'z-[100]' as 'style' prop handles position and z-index better.
+    // Adjusted min-width and padding for aesthetics.
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
     role="menu"
     aria-orientation="vertical"
   >
     {subcategories.map((sub) => (
-      <li key={sub.name} role="none">
+      <li key={sub.name} role="none" className="px-1">
+        {" "}
+        {/* Added px-1 for containing rounded links */}
         <Link
           href={sub.slug}
-          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-900"
+          className="block px-3 py-1.5 text-zinc-200 
+                     hover:bg-zinc-700 hover:text-emerald-400 
+                     rounded-sm transition-colors duration-150"
           role="menuitem"
         >
           {sub.name}

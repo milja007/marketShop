@@ -5,7 +5,6 @@ import Link from "next/link";
 import { MENUDATA } from "@/data(fake)/CONSTANTS/CATEGORIES";
 import Image from "next/image";
 
-// Placeholder SVGs — swap in your own icons if you like
 const LoginSvg = () => (
   <svg className="w-5 h-5 ml-auto" viewBox="0 0 20 20" fill="currentColor">
     <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
@@ -48,7 +47,6 @@ function MobileMenu() {
 
   return (
     <>
-      {/* Hamburger Icon */}
       {!menuOpen && (
         <button
           onClick={openMenu}
@@ -80,7 +78,6 @@ function MobileMenu() {
         />
       )}
 
-      {/* Slide‐out Panel */}
       <div
         className={`
           fixed top-0 left-0 h-screen w-64 sm:w-72
@@ -90,7 +87,6 @@ function MobileMenu() {
           md:hidden
         `}
       >
-        {/* Menu */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200 h-16 flex-shrink-0">
           <h1 className="font-bold text-lg">MENU</h1>
           <div className="flex items-center">
@@ -105,7 +101,6 @@ function MobileMenu() {
           </div>
         </div>
 
-        {/* Menu Items */}
         <ul className=" ">
           {MENUDATA.map((cat) => (
             <li key={cat.name} className="flex flex-col ">
@@ -122,7 +117,6 @@ function MobileMenu() {
                 </button>
               </div>
 
-              {/* Submenu (click‐to‐open) */}
               {cat.subcategories && openCategory === cat.name && (
                 <ul className=" mt-1 bg-white border border-gray-300 rounded shadow-lg ">
                   {cat.subcategories.map((sub) => (
