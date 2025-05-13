@@ -1,30 +1,28 @@
-// Предполагаемый путь: components/Footers/Footern1.tsx
-// или как вы его назвали, например, Footer1.tsx
-
+// Footern1.tsx (or Footer1.tsx)
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import iphone from "@/public/FOOTER/iphonehand.webp";
-import { Facebook, Instagram, Twitter, Github, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Twitter, Github, Linkedin } from "lucide-react"; // Assuming lucide-react SVGs correctly use currentColor
 import review1 from "@/public/FOOTER/googlesvg.png";
 import review2 from "@/public/FOOTER/reviewsvg.png";
 import socials from "@/public/FOOTER/socials.png";
 
-// Define consistent link style using emerald accent
+// Updated styles with theme variables
 const linkStyle =
-  "text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 underline transition-colors duration-200";
-// Adjusted heading for new bg-zinc-200 light background
+  "text-cactus hover:text-cactus/80 dark:text-cactus dark:hover:text-cactus/80 underline transition-colors duration-200"; // Added /80 for a subtle hover change
 const headingStyle =
-  "text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100";
+  "text-2xl font-semibold tracking-tight text-foreground dark:text-foreground"; // Assuming this footer section is on bg-muted, text-foreground gives strong contrast
 const supportTextStyle =
-  "text-sm text-emerald-700 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors duration-200";
+  "text-sm text-cactus hover:text-cactus/80 dark:text-cactus dark:hover:text-cactus/80 transition-colors duration-200";
 
 const Footer1 = () => (
   <footer
     role="contentinfo"
     aria-label="Website Footer Section 1"
-    className="lg:h-85 bg-zinc-200 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200 font-sans shadow-t-lg" // Light bg: zinc-200, Text: zinc-800
+    // Updated main footer background and text. Using bg-muted.
+    className="lg:h-85 bg-muted text-foreground dark:bg-muted dark:text-foreground font-sans" // Removed shadow-t-lg
   >
     <div className="max-w-10xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:justify-between gap-15 justify-items-center items-start">
       {/* Logo Image */}
@@ -34,7 +32,7 @@ const Footer1 = () => (
           alt="App on iPhone"
           width={222}
           height={222}
-          className="w-44 h-auto lg:-mt-15 rounded-lg shadow-xl"
+          className="w-44 h-auto lg:-mt-15 rounded-lg" // Removed shadow-xl
           priority
         />
       </div>
@@ -50,7 +48,7 @@ const Footer1 = () => (
                 alt="Google Review Snippet"
                 width={150}
                 height={50}
-                className="w-10 h-auto rounded border border-zinc-300 dark:border-zinc-600" // Adjusted border
+                className="w-10 h-auto rounded border border-border" // Updated border
                 priority
               />
               <Image
@@ -58,22 +56,19 @@ const Footer1 = () => (
                 alt="Web Review Snippet"
                 width={150}
                 height={50}
-                className="w-10 h-auto rounded border border-zinc-300 dark:border-zinc-600" // Adjusted border
+                className="w-10 h-auto rounded border border-border" // Updated border
                 priority
               />
             </div>
             <div className="flex flex-col gap-3 text-sm">
-              <p className="font-medium text-zinc-800 dark:text-zinc-300">
-                {" "}
-                {/* Adjusted text for light bg */}
+              {/* Text color inherits from parent (text-foreground) or can be text-muted-foreground for less emphasis */}
+              <p className="font-medium text-muted-foreground">
                 We score a 9.5
                 <Link href="#" className={`ml-1 ${linkStyle}`}>
                   Web review
                 </Link>
               </p>
-              <p className="font-medium text-zinc-800 dark:text-zinc-300">
-                {" "}
-                {/* Adjusted text for light bg */}
+              <p className="font-medium text-muted-foreground">
                 We score a 8.6
                 <Link href="#" className={`ml-1 ${linkStyle}`}>
                   Web review
@@ -90,9 +85,8 @@ const Footer1 = () => (
         className="flex flex-col space-y-5 items-center sm:items-start"
       >
         <h3 className={headingStyle}>Customer Support</h3>
-        <ul className="space-y-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 text-center sm:text-left">
-          {" "}
-          {/* Adjusted text for light bg */}
+        {/* List items text can be muted-foreground */}
+        <ul className="space-y-2 text-sm font-medium text-muted-foreground text-center sm:text-left">
           <li>
             Tel:{" "}
             <a href="tel:0994171467" className={supportTextStyle}>
@@ -127,7 +121,7 @@ const Footer1 = () => (
           alt="Social media collage"
           width={333}
           height={333}
-          className="w-44 h-auto rounded-lg shadow-lg"
+          className="w-44 h-auto rounded-lg" // Removed shadow-lg
           priority
         />
         <div className="flex space-x-3 lg:mb-22">
@@ -142,7 +136,10 @@ const Footer1 = () => (
               key={social.label}
               href={social.href}
               aria-label={social.label}
-              className="p-2 rounded-full text-zinc-600 hover:text-emerald-600 hover:bg-zinc-300 dark:text-zinc-400 dark:hover:text-emerald-400 dark:hover:bg-zinc-700 transition-all duration-200" // Adjusted light mode text/hover bg
+              // Updated social icon link styles
+              className="p-2 rounded-full text-muted-foreground hover:text-cactus hover:bg-accent
+                         dark:text-muted-foreground dark:hover:text-cactus dark:hover:bg-accent
+                         transition-all duration-200"
             >
               <social.icon size={22} />
             </Link>

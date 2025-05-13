@@ -1,3 +1,4 @@
+/* Your existing CSS file (tailwind.css or globals.css or similar) */
 @import "tailwindcss";
 @import "tw-animate-css"; /* Consider checking this library for existing fade-in utilities */
 
@@ -7,8 +8,12 @@
   /* Default theme variables */
 
   /* RGB version of Alabaster for the fade effect.
-     Derived from --color-alabaster: #f8f8f7; (rgb(248, 248, 247)) */
-  --color-alabaster-rgb: 248, 248, 247;
+       Derived from --color-alabaster: #f8f8f7; (rgb(248, 248, 247)) */
+  --color-alabaster-rgb: 248, 248, 247; /* This might need adjustment for dark backgrounds if the fade should also be dark */
+
+  /* ---- ADDED: RGB variable for card background (light theme) ---- */
+  --card-bg-rgb: 255, 255, 255; /* Corresponds to --card: oklch(1 0 0) */
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -115,131 +120,18 @@
 /* ==== END: Custom FadeIn Animation for Image Slider ==== */
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark mode theme variables */
-
-    /* If --color-alabaster (and thus bg-alabaster) changes visually in dark mode,
-        you would need to update --color-alabaster-rgb here as well to match.
-        For example, if dark mode alabaster was #1c1c1b:
-        --color-alabaster-rgb: 28, 28, 27;
-        If it doesn't change, the :root definition above is sufficient.
-     */
-  }
+  /* This block is generally not needed if using the .dark class strategy with next-themes */
+  /* :root {
+       Dark mode theme variables can be overridden here if not using .dark class strategy
+    } */
 }
-
-body {
-  /* Default body font */
-}
-
-/* --- Custom Horizontal Scrollbar Styles for LinkNavbar --- */
-/* Applied to the div with .custom-horizontal-scrollbar class */
-
-/* WebKit (Chrome, Safari, Edge) scrollbar styling */
-.custom-horizontal-scrollbar::-webkit-scrollbar {
-  height: 4px; /* Height of the horizontal scrollbar */
-  width: 4px; /* Width of the scrollbar (for consistency, though height is primary for horizontal) */
-}
-
-.custom-horizontal-scrollbar::-webkit-scrollbar-track {
-  background: transparent; /* Makes the track area transparent */
-  border: none; /* Ensures no border on the track */
-}
-
-.custom-horizontal-scrollbar::-webkit-scrollbar-thumb {
-  background: #b0b0b0; /* Color of the draggable scrollbar thumb */
-  border-radius: 2px; /* Rounded corners for the thumb */
-}
-
-/* Attempt to hide scrollbar buttons (arrows) and corner in WebKit browsers */
-.custom-horizontal-scrollbar::-webkit-scrollbar-button,
-.custom-horizontal-scrollbar::-webkit-scrollbar-button:start:decrement,
-.custom-horizontal-scrollbar::-webkit-scrollbar-button:end:increment,
-.custom-horizontal-scrollbar::-webkit-scrollbar-button:horizontal:start:decrement,
-.custom-horizontal-scrollbar::-webkit-scrollbar-button:horizontal:end:increment,
-.custom-horizontal-scrollbar::-webkit-scrollbar-corner {
-  display: none !important; /* Forcefully hide these elements */
-  width: 0 !important;
-  height: 0 !important;
-  background: transparent !important;
-  opacity: 0 !important;
-  pointer-events: none !important; /* Make them non-interactive */
-}
-
-/* Attempt to hide the resizer element in WebKit browsers (less common for horizontal scroll) */
-.custom-horizontal-scrollbar::-webkit-resizer {
-  display: none !important;
-  background: transparent !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Firefox scrollbar styling */
-.custom-horizontal-scrollbar {
-  scrollbar-width: thin; /* Makes the scrollbar thin in Firefox */
-  scrollbar-color: #b0b0b0 transparent; /* Sets thumb and track color for Firefox */
-}
-
-/* --- Dynamic Fade Effects for Scroll Container (LinkNavbar) --- */
-/* Applied to the div with .scroll-fade-container class (which should also have position: relative) */
-
-/* Common styles for both left and right fade pseudo-elements */
-.scroll-fade-container::before, /* Left fade */
-.scroll-fade-container::after {
-  /* Right fade */
-  content: ""; /* Necessary for pseudo-elements to be generated */
-  position: absolute; /* Positioned relative to .scroll-fade-container */
-  top: 0;
-  bottom: 0; /* Cover the full height of the container */
-  width: 75px; /* Width of the fade effect. Adjust as needed. */
-  z-index: 2; /* Ensures fades are above scrolling content but potentially below other UI elements like popups. */
-  pointer-events: none; /* Allows clicks to pass through the fade overlay to the content underneath. */
-  opacity: 0; /* Fades are hidden by default. Visibility is toggled by JS. */
-  transition: opacity 0.2s ease-in-out; /* Smooth animation for appearing/disappearing. */
-}
-
-/* Styles for the left-side fade */
-.scroll-fade-container::before {
-  left: 0; /* Position at the left edge */
-  background: linear-gradient(
-    to right,
-    /* Gradient fades from left to right */ rgba(var(--color-alabaster-rgb), 1)
-      25%,
-    /* Solid alabaster color at the start of the fade */
-      rgba(var(--color-alabaster-rgb), 0) 100%
-      /* Fully transparent alabaster at the end of the fade */
-  );
-}
-
-/* Styles for the right-side fade */
-.scroll-fade-container::after {
-  right: 0; /* Position at the right edge */
-  background: linear-gradient(
-    to left,
-    /* Gradient fades from right to left */ rgba(var(--color-alabaster-rgb), 1)
-      25%,
-    /* Solid alabaster color at the start of the fade */
-      rgba(var(--color-alabaster-rgb), 0) 100%
-      /* Fully transparent alabaster at the end of the fade */
-  );
-}
-
-/* Classes added by JavaScript to show the fades when needed */
-.scroll-fade-container.show-fade-left::before {
-  opacity: 1; /* Makes the left fade visible */
-}
-
-.scroll-fade-container.show-fade-right::after {
-  opacity: 1; /* Makes the right fade visible */
-}
-
-/* Optional: Definition for .border-b-3 if not handled by Tailwind v4 utilities/arbitrary values */
-/*
-.border-b-3 {
-  border-bottom-width: 3px;
-}
-*/
 
 .dark {
+  /* This block correctly defines your dark theme variables */
+
+  /* ---- ADDED: RGB variable for card background (dark theme) ---- */
+  --card-bg-rgb: 50, 48, 54; /* Approx. for oklch(0.21 0.006 285.885) */
+
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.21 0.006 285.885);
@@ -255,8 +147,12 @@ body {
   --accent: oklch(0.274 0.006 286.033);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --border: oklch(
+    1 0 0 / 10%
+  ); /* This is white with 10% alpha, effectively light gray on dark bg */
+  --input: oklch(
+    1 0 0 / 15%
+  ); /* This is white with 15% alpha, effectively light gray on dark bg */
   --ring: oklch(0.552 0.016 285.938);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -280,4 +176,89 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* --- Custom Horizontal Scrollbar Styles for LinkNavbar --- */
+/* Applied to the div with .custom-horizontal-scrollbar class */
+.custom-horizontal-scrollbar::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+.custom-horizontal-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border: none;
+}
+.custom-horizontal-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground); /* Updated to use theme variable */
+  border-radius: 2px;
+}
+.custom-horizontal-scrollbar::-webkit-scrollbar-button,
+.custom-horizontal-scrollbar::-webkit-scrollbar-button:start:decrement,
+.custom-horizontal-scrollbar::-webkit-scrollbar-button:end:increment,
+.custom-horizontal-scrollbar::-webkit-scrollbar-button:horizontal:start:decrement,
+.custom-horizontal-scrollbar::-webkit-scrollbar-button:horizontal:end:increment,
+.custom-horizontal-scrollbar::-webkit-scrollbar-corner {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+.custom-horizontal-scrollbar::-webkit-resizer {
+  display: none !important;
+  background: transparent !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+.custom-horizontal-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted-foreground) transparent; /* Updated to use theme variable */
+}
+
+/* --- Dynamic Fade Effects for Scroll Container (LinkNavbar) --- */
+/* Applied to the div with .scroll-fade-container class */
+.scroll-fade-container::before,
+.scroll-fade-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 75px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.scroll-fade-container::before {
+  left: 0;
+  /* ---- MODIFIED: Use theme-aware --card-bg-rgb ---- */
+  background: linear-gradient(
+    to right,
+    rgba(var(--card-bg-rgb), 1) 25%,
+    rgba(var(--card-bg-rgb), 0) 100%
+  );
+}
+
+.scroll-fade-container::after {
+  right: 0;
+  /* ---- MODIFIED: Use theme-aware --card-bg-rgb ---- */
+  background: linear-gradient(
+    to left,
+    rgba(var(--card-bg-rgb), 1) 25%,
+    rgba(var(--card-bg-rgb), 0) 100%
+  );
+}
+
+.scroll-fade-container.show-fade-left::before {
+  opacity: 1;
+}
+.scroll-fade-container.show-fade-right::after {
+  opacity: 1;
+}
+
+/* Optional: .border-b-3. Tailwind allows arbitrary values like border-b-[3px] */
+.border-b-3 {
+  border-bottom-width: 3px;
 }

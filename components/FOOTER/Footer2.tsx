@@ -1,4 +1,4 @@
-// components/Footers/Footer2.tsx
+// Footer2.tsx
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,21 +11,15 @@ import kartic5 from "@/public/FOOTER/CARDS/maestroc.webp";
 import kartic4 from "@/public/FOOTER/CARDS/masterc2.webp";
 import kartic1 from "@/public/FOOTER/CARDS/visac.webp";
 
-// Styles for mobile accordion links
+// Updated styles with theme variables
 const mobileAccordionLinkStyle =
-  "text-sm font-medium text-zinc-800 hover:text-emerald-700 dark:text-zinc-300 dark:hover:text-emerald-400 transition-transform transform hover:translate-x-1 block py-1"; // Light text: zinc-800, Light hover: emerald-700
-
-// Styles for desktop navigation links in footer columns
+  "text-sm font-medium text-secondary-foreground hover:text-cactus dark:text-secondary-foreground dark:hover:text-cactus transition-transform transform hover:translate-x-1 block py-1";
 const desktopNavLinkStyle =
-  "text-sm font-medium text-zinc-800 hover:text-emerald-700 dark:text-zinc-300 dark:hover:text-emerald-400 transition-transform transform hover:translate-x-1 block py-1"; // Light text: zinc-800, Light hover: emerald-700
-
-// Style for desktop section headings
+  "text-sm font-medium text-secondary-foreground hover:text-cactus dark:text-secondary-foreground dark:hover:text-cactus transition-transform transform hover:translate-x-1 block py-1";
 const desktopFooterHeadingStyle =
-  "text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-3"; // Light text: zinc-900
-
-// Style for mobile accordion summary (the clickable title)
+  "text-xl font-semibold tracking-tight text-secondary-foreground dark:text-secondary-foreground mb-3";
 const mobileAccordionSummaryStyle =
-  "flex items-center justify-between py-3 text-zinc-900 dark:text-zinc-100 font-semibold text-lg cursor-pointer list-none"; // Light text: zinc-900
+  "flex items-center justify-between py-3 text-secondary-foreground dark:text-secondary-foreground font-semibold text-lg cursor-pointer list-none";
 
 const Footer2 = () => {
   const customerServiceLinks = [
@@ -93,13 +87,15 @@ const Footer2 = () => {
     <footer
       role="contentinfo"
       aria-label="Website Footer Section 2"
-      className="bg-zinc-300 font-sans dark:bg-zinc-900 dark:text-zinc-300" // Light bg: zinc-300
+      // Updated main footer background. Using bg-secondary.
+      // Text color will be text-secondary-foreground by default from here.
+      className="bg-secondary text-secondary-foreground font-sans dark:bg-secondary dark:text-secondary-foreground"
     >
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {/* Mobile Accordions */}
-        <details className="sm:hidden group border-b border-zinc-400 dark:border-zinc-700">
+        <details className="sm:hidden group border-b border-border">
           {" "}
-          {/* Light border: zinc-400 */}
+          {/* Updated border */}
           <summary className={mobileAccordionSummaryStyle}>
             Customer service
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
@@ -117,9 +113,9 @@ const Footer2 = () => {
           </ul>
         </details>
 
-        <details className="sm:hidden group border-b border-zinc-400 dark:border-zinc-700">
+        <details className="sm:hidden group border-b border-border">
           {" "}
-          {/* Light border: zinc-400 */}
+          {/* Updated border */}
           <summary className={mobileAccordionSummaryStyle}>
             My account
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
@@ -137,9 +133,9 @@ const Footer2 = () => {
           </ul>
         </details>
 
-        <details className="sm:hidden group border-b border-zinc-400 dark:border-zinc-700">
+        <details className="sm:hidden group border-b border-border">
           {" "}
-          {/* Light border: zinc-400 */}
+          {/* Updated border */}
           <summary className={mobileAccordionSummaryStyle}>
             Information
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
@@ -157,18 +153,17 @@ const Footer2 = () => {
           </ul>
         </details>
 
-        <details className="sm:hidden group border-b border-zinc-400 dark:border-zinc-700 last:border-none">
+        <details className="sm:hidden group border-b border-border last:border-none">
           {" "}
-          {/* Light border: zinc-400 */}
+          {/* Updated border */}
           <summary className={mobileAccordionSummaryStyle}>
             Contact
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
               ▾
             </span>
           </summary>
-          <ul className="mt-2 pl-4 space-y-1 text-sm text-zinc-800 dark:text-zinc-300 pb-3">
-            {" "}
-            {/* Light text: zinc-800 */}
+          {/* Text color for contact info list items inherits from parent (text-secondary-foreground) */}
+          <ul className="mt-2 pl-4 space-y-1 text-sm pb-3">
             {contactInfo.map((line, index) => (
               <li key={index} className="font-medium">
                 {line}
@@ -184,9 +179,8 @@ const Footer2 = () => {
 
         <div className="hidden sm:flex flex-col space-y-2">
           <h3 className={desktopFooterHeadingStyle}>Contact</h3>
-          <ul className="space-y-1 text-sm text-zinc-800 dark:text-zinc-300">
-            {" "}
-            {/* Light text: zinc-800 */}
+          {/* Text color inherits from parent (text-secondary-foreground) */}
+          <ul className="space-y-1 text-sm">
             {contactInfo.map((line, index) => (
               <li key={index} className="font-medium">
                 {line}
@@ -196,13 +190,12 @@ const Footer2 = () => {
         </div>
       </div>
 
-      <div className="border-t border-zinc-400 dark:border-zinc-700">
+      <div className="border-t border-border">
         {" "}
-        {/* Light border: zinc-400 */}
+        {/* Updated border */}
         <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs font-medium text-zinc-700 dark:text-zinc-400 text-center md:text-left">
-            {" "}
-            {/* Light text: zinc-700 */}
+          {/* Copyright text using muted-foreground for less emphasis */}
+          <p className="text-xs font-medium text-muted-foreground dark:text-muted-foreground text-center md:text-left">
             &copy; {new Date().getFullYear()} INT eCommerce B.M. All rights
             reserved.
           </p>

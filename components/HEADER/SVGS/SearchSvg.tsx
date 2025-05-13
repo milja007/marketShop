@@ -1,7 +1,7 @@
 const SearchSvg = () => {
   return (
     <svg
-      className="h-6 w-6  md:h-7 md:w-7 text-cactus"
+      className="h-6 w-6  md:h-7 md:w-7 foreground"
       fill="none"
       stroke="currentColor"
       strokeWidth={2}

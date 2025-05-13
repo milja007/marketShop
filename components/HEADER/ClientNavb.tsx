@@ -1,3 +1,4 @@
+// ClientNavb.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -15,14 +16,14 @@ const ClientNavb: React.FC = () => {
     setIsMdSearchActive(false);
   };
 
-  const searchWrapperBaseClasses = "hidden md:flex items-center  mx-4    ";
+  const searchWrapperBaseClasses = "hidden md:flex items-center mx-4";
   let searchWrapperConditionalClasses = "";
 
   if (isMdSearchActive) {
-    searchWrapperConditionalClasses = "md:flex-1 md:justify-start lg:flex-1 ";
+    searchWrapperConditionalClasses = "md:flex-1 md:justify-start lg:flex-1";
   }
   if (!isMdSearchActive) {
-    searchWrapperConditionalClasses = "md:w-auto md:justify-center  lg:w-auto ";
+    searchWrapperConditionalClasses = "md:w-auto md:justify-center lg:w-auto";
   }
   const finalSearchWrapperClasses = `${searchWrapperBaseClasses} ${searchWrapperConditionalClasses}`;
 
@@ -30,7 +31,6 @@ const ClientNavb: React.FC = () => {
     <div className="flex items-center flex-1">
       <div
         className={`
-         
           ${
             isMdSearchActive
               ? "md:w-0 md:opacity-0 md:hidden"
@@ -39,7 +39,8 @@ const ClientNavb: React.FC = () => {
           lg:w-auto lg:opacity-100 lg:flex 
         `}
       >
-        <BokiGrowLogo className="w-70 h-auto text-zinc-800" />
+        {/* Assuming BokiGrowLogo uses currentColor for its paths, it will inherit text-primary-foreground from Navbar */}
+        <BokiGrowLogo className="w-70 h-auto" />
       </div>
 
       <div className={finalSearchWrapperClasses}>

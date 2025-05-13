@@ -1,32 +1,42 @@
+// Navbar.tsx
 import React from "react";
-import HamburgerSvg from "./SVGS/HamburgerSvg";
+import HamburgerSvg from "./SVGS/HamburgerSvg"; // Assuming MobileMenu handles this
 import Languaesvg from "./SVGS/Languaesvg";
 import LoginSvg from "./SVGS/LoginSvg";
 import HeartSvg from "./SVGS/HeartSvg";
 import CartSvg from "./SVGS/CartSvg";
 import ClientNavb from "./ClientNavb";
+import MobileMenu from "./SVGS/HamburgerSvg"; // Added for hamburger functionality
 
 const Navbar: React.FC = () => {
   return (
     <nav
       className="flex justify-between items-center
       px-4 sm:px-8 xl:px-12 h-16 w-full
-      bg-zinc-500 dark:bg-gray-900"
+      bg-primary text-primary-foreground" // Updated colors
     >
-      <div className="flex items-center">
-        <HamburgerSvg />
+      <div className="flex items-center md:hidden">
+        {" "}
+        {/* Show MobileMenu trigger on small screens */}
+        <MobileMenu />
+      </div>
+      <div className="hidden md:flex items-center">
+        {" "}
+        {/* Original Hamburger for larger screens, if needed, or remove if MobileMenu is comprehensive */}
+        <HamburgerSvg />{" "}
+        {/* This could be a drawer toggle for larger screens or a different menu */}
       </div>
 
       <ClientNavb />
 
-      <div className="flex space-x-2 sm:space-x-4 items-center  ">
+      <div className="flex space-x-2 sm:space-x-4 items-center">
         <button
           className="
-            hidden md:flex bg-zinc-800 text-white font-semibold
-            py-2 px-4 rounded-lg shadow-md hover:bg-zinc-700
-            focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2
-            transition-colors duration-200
-          "
+            hidden md:flex bg-secondary text-secondary-foreground font-semibold
+            py-2 px-4 rounded-lg hover:bg-muted 
+            focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-primary
+            transition-colors duration-150
+            " // Updated colors, removed shadow, refined focus
         >
           All categories
         </button>

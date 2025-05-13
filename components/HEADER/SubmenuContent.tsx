@@ -1,3 +1,4 @@
+// SubmenuContent.tsx
 import React, { CSSProperties } from "react";
 import Link from "next/link";
 
@@ -7,10 +8,9 @@ export interface Subcategory {
 }
 interface SubmenuPortalContentProps {
   subcategories: Subcategory[];
-  style: CSSProperties; // This style comes from LinkNavbar, including position and z-index
+  style: CSSProperties;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
-  // className?: string; // Optional: if you want to pass additional classes from parent
 }
 
 const SubmenuContent: React.FC<SubmenuPortalContentProps> = ({
@@ -18,16 +18,14 @@ const SubmenuContent: React.FC<SubmenuPortalContentProps> = ({
   style,
   onMouseEnter,
   onMouseLeave,
-  // className: additionalClassName = "", // For optional additional classes
 }) => (
   <ul
-    style={style} // Applies position, top, left, and zIndex (e.g., zIndex: 50 from LinkNavbar)
+    style={style} // Applies position, top, left, and zIndex
+    // Updated with theme colors, removed shadow
     className={`
-      bg-zinc-800 border border-zinc-700 
-      rounded-md shadow-xl 
-      min-w-[220px] py-2 text-sm
-    `} // Removed 'absolute' and 'z-[100]' as 'style' prop handles position and z-index better.
-    // Adjusted min-width and padding for aesthetics.
+      bg-card border border-border text-card-foreground
+      rounded-md min-w-[220px] py-2 text-sm
+    `}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
     role="menu"
@@ -35,12 +33,11 @@ const SubmenuContent: React.FC<SubmenuPortalContentProps> = ({
   >
     {subcategories.map((sub) => (
       <li key={sub.name} role="none" className="px-1">
-        {" "}
-        {/* Added px-1 for containing rounded links */}
         <Link
           href={sub.slug}
-          className="block px-3 py-1.5 text-zinc-200 
-                     hover:bg-zinc-700 hover:text-emerald-400 
+          // Updated with theme hover colors
+          className="block px-3 py-1.5 
+                     hover:bg-accent hover:text-accent-foreground
                      rounded-sm transition-colors duration-150"
           role="menuitem"
         >

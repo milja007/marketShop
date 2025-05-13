@@ -1,9 +1,11 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/HEADER/Header";
+import Header from "@/components/HEADER/header";
 import Footer from "@/components/FOOTER/Footer";
 import { TanstackProvider } from "@/components/PROVIDERS/tanstack-provider";
+import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,14 +28,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
+      {/* NO WHITESPACE OR STRAY COMMENTS HERE */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TanstackProvider>
-          <Header />
-          {children}
-          <Footer />
+          <ThemeProvider>
+            <Header />
+            {children}
+            <Footer />
+          </ThemeProvider>
         </TanstackProvider>
       </body>
     </html>
