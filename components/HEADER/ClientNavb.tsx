@@ -39,7 +39,7 @@ const ClientNavb: React.FC = () => {
           lg:w-auto lg:opacity-100 lg:flex 
         `}
       >
-        <BokiGrowLogo className="w-70 h-auto text-green-700" />
+        <BokiGrowLogo className="w-70 h-auto text-zinc-800" />
       </div>
 
       <div className={finalSearchWrapperClasses}>

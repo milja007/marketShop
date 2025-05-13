@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
     <nav
       className="flex justify-between items-center
       px-4 sm:px-8 xl:px-12 h-16 w-full
-      bg-white dark:bg-gray-900"
+      bg-zinc-500 dark:bg-gray-900"
     >
       <div className="flex items-center">
         <HamburgerSvg />
@@ -22,8 +22,8 @@ const Navbar: React.FC = () => {
       <div className="flex space-x-2 sm:space-x-4 items-center  ">
         <button
           className="
-            hidden md:flex bg-cactus text-white font-semibold
-            py-2 px-4 rounded-lg shadow-md hover:bg-amber-700
+            hidden md:flex bg-zinc-800 text-white font-semibold
+            py-2 px-4 rounded-lg shadow-md hover:bg-zinc-700
             focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2
             transition-colors duration-200
           "
