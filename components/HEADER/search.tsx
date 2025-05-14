@@ -79,8 +79,15 @@ const Search: React.FC<SearchProps> = ({
     }
   };
 
-  let containerClasses = `relative flex items-center transition-all duration-300 ease-in-out group`;
-  const inputBaseClasses = `h-10 border  rounded-lg py-1 text-md focus:outline-zinc-900 focus:ring-1 focus:ring focus:border-white bg-zinc-800 text-white dark:bg-card dark:text-white dark:border `;
+  // In Search.tsx
+  let containerClasses = `relative flex items-center transition-all duration-300 ease-in-out group`; // This 'group' class is essential
+  const inputBaseClasses = `
+    h-10 border rounded-lg py-1 text-md 
+    placeholder:text-white  // The new class
+    focus:outline-zinc-900 focus:ring-1 focus:ring focus:border-white 
+    bg-zinc-800 text-white 
+    dark:bg-card dark:text-white dark:border
+  `;
   let currentInputClasses = "";
 
   const clickableSearchButtonBaseClasses = `absolute right-3 top-1/2 transform -translate-y-1/2 z-10 text-white dark:text-gray-400 group-hover:text-cactus focus:outline-none`;

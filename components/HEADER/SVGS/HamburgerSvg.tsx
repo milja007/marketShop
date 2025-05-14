@@ -37,7 +37,7 @@ const Arrowsvg = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
-const CloseSvg = ({ className = "w-6 h-6" }: { className?: string }) => (
+const CloseSvg = ({ className = "w-6 h-6 " }: { className?: string }) => (
   <svg
     className={className}
     fill="none"
@@ -53,7 +53,7 @@ const CloseSvg = ({ className = "w-6 h-6" }: { className?: string }) => (
   </svg>
 );
 
-const HamburgerSvg = ({ className = "w-6 h-6" }: { className?: string }) => (
+const HamburgerSvg = ({ className = "w-6 h-6 " }: { className?: string }) => (
   <svg
     className={className}
     fill="none"
@@ -139,7 +139,7 @@ function MobileMenu() {
               className={iconButtonStyle}
               aria-label="Close menu"
             >
-              <CloseSvg className="w-6 h-6" />
+              <CloseSvg className="w-6 h-6 " />
             </button>
           </div>
         </div>

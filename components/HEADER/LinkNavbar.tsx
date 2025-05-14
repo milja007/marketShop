@@ -171,7 +171,7 @@ const LinkNavbar: React.FC = () => {
 
   return (
     // Updated nav with theme colors, removed shadow
-    <nav className="bg-zinc-800 border-b border-border w-full font-sans">
+    <nav className="bg-zinc-800 dark:bg-zinc-900 border-b border-border w-full font-sans">
       <div
         ref={scrollContainerRef}
         className={`
@@ -185,7 +185,7 @@ const LinkNavbar: React.FC = () => {
         <ul className="flex text-white">
           {" "}
           {/* Default text color for items */}
-          <li className="flex items-center mr-5 text-muted-foreground hover:text-cactus transition-colors duration-150">
+          <li className="flex items-center mr-5 text-muted-foreground hover:text-white transition-colors duration-150">
             <HomeSvg /> {/* Ensure HomeSvg inherits currentColor */}
           </li>
           {typedMenudata.map((category) => (
@@ -196,7 +196,7 @@ const LinkNavbar: React.FC = () => {
               }}
               // Updated text, border colors. Using border-b-[3px] for arbitrary value.
               className="font-semibold px-1 py-2 text-sm
-                         border-b-[3px] border-transparent hover:border-secondary h-13
+                         border-b-[3px] border-transparent hover:border-secondary dark:hover:border-white   h-13
                          flex-shrink-0 transition-all duration-200 cursor-default"
               onMouseEnter={() => handleCategoryMouseEnter(category)}
               onMouseLeave={handleCategoryMouseLeave}
