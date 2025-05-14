@@ -32,10 +32,7 @@ const Navbar: React.FC = () => {
       <div className="flex space-x-2 sm:space-x-4 items-center">
         <button
           className="
-            hidden md:flex bg-zinc-800 text-white font-semibold
-            py-2 px-4 rounded-lg hover:bg-zinc-700 
-            focus:outline-none focus:ring-offset-2 focus:ring-offset-zinc-800
-            transition-colors duration-150 dark:border dark:border-white
+            hidden md:flex  bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold py-2 px-4 sm:py-2 sm:px-5 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 transition-all duration-300 text-sm sm:text-base
             " // Updated colors, removed shadow, refined focus
         >
           All categories
