@@ -2,7 +2,7 @@ const CartSvg = () => {
   return (
     <button>
       <svg
-        className="w-6 h-6 text-black hover:text-cactus"
+        className="w-6 h-6 text-black hover:text-whitee"
         fill="none"
         stroke="currentColor"
         strokeWidth={1.5}

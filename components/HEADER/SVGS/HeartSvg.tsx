@@ -2,7 +2,7 @@ const HeartSvg = () => {
   return (
     <button>
       <svg
-        className="w-6 h-6 text-black hover:text-cactus"
+        className="w-6 h-6 text-black hover:text-whitee"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"

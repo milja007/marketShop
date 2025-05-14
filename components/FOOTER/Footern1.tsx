@@ -10,13 +10,13 @@ import review2 from "@/public/FOOTER/reviewsvg.png";
 import socials from "@/public/FOOTER/socials.png";
 
 // Updated styles for light mode with "browny zinc" (stone palette)
-// Dark mode styles with text-cactus are preserved as per your original file.
+// Dark mode styles with text-whitee are preserved as per your original file.
 const linkStyle =
-  "text-stone-600 hover:text-stone-800 dark:text-cactus dark:hover:text-cactus/80 underline transition-colors duration-200";
+  "text-stone-600 hover:text-stone-800 dark:text-whitee dark:hover:text-whitee/80 underline transition-colors duration-200";
 const headingStyle =
   "text-2xl font-semibold tracking-tight text-stone-800 dark:text-foreground"; // Light mode: Dark stone heading
 const supportTextStyle =
-  "text-sm text-stone-600 hover:text-stone-800 dark:text-cactus dark:hover:text-cactus/80 transition-colors duration-200";
+  "text-sm text-stone-600 hover:text-stone-800 dark:text-whitee dark:hover:text-whitee/80 transition-colors duration-200";
 
 const Footer1 = () => (
   <footer
@@ -139,7 +139,7 @@ const Footer1 = () => (
               aria-label={social.label}
               // Light mode: stone colors. Dark mode: original.
               className="p-2 rounded-full text-stone-600 hover:text-stone-800 hover:bg-stone-100
-                         dark:text-muted-foreground dark:hover:text-cactus dark:hover:bg-accent
+                         dark:text-muted-foreground dark:hover:text-whitee dark:hover:bg-accent
                          transition-all duration-200"
             >
               <social.icon size={22} />

@@ -90,7 +90,7 @@ const Search: React.FC<SearchProps> = ({
   `;
   let currentInputClasses = "";
 
-  const clickableSearchButtonBaseClasses = `absolute right-3 top-1/2 transform -translate-y-1/2 z-10 text-white dark:text-gray-400 group-hover:text-cactus focus:outline-none`;
+  const clickableSearchButtonBaseClasses = `absolute right-3 top-1/2 transform -translate-y-1/2 z-10 text-white dark:text-gray-400 group-hover:text-whitee focus:outline-none`;
   let iconButtonConditionalClasses = "";
 
   if (onMdSearchToggle !== undefined) {

@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
             hidden md:flex bg-zinc-800 text-white font-semibold
             py-2 px-4 rounded-lg hover:bg-zinc-700 
             focus:outline-none focus:ring-offset-2 focus:ring-offset-zinc-800
-            transition-colors duration-150
+            transition-colors duration-150 dark:border dark:border-white
             " // Updated colors, removed shadow, refined focus
         >
           All categories

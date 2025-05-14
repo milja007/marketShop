@@ -11,11 +11,11 @@ import kartic5 from "@/public/FOOTER/CARDS/maestroc.webp";
 import kartic4 from "@/public/FOOTER/CARDS/masterc2.webp";
 import kartic1 from "@/public/FOOTER/CARDS/visac.webp";
 
-// Updated styles for light mode on dark bg-zinc-800. Dark mode styles with text-cactus are preserved.
+// Updated styles for light mode on dark bg-zinc-800. Dark mode styles with text-whitee are preserved.
 const mobileAccordionLinkStyle =
-  "text-sm font-medium text-zinc-300 hover:text-zinc-100 dark:text-secondary-foreground dark:hover:text-cactus transition-transform transform hover:translate-x-1 block py-1";
+  "text-sm font-medium text-zinc-300 hover:text-zinc-100 dark:text-secondary-foreground dark:hover:text-whitee transition-transform transform hover:translate-x-1 block py-1";
 const desktopNavLinkStyle =
-  "text-sm font-medium text-zinc-300 hover:text-zinc-100 dark:text-secondary-foreground dark:hover:text-cactus transition-transform transform hover:translate-x-1 block py-1";
+  "text-sm font-medium text-zinc-300 hover:text-zinc-100 dark:text-secondary-foreground dark:hover:text-whitee transition-transform transform hover:translate-x-1 block py-1";
 const desktopFooterHeadingStyle =
   "text-xl font-semibold tracking-tight text-zinc-100 dark:text-secondary-foreground mb-3"; // Light mode: Bright text for heading
 const mobileAccordionSummaryStyle =

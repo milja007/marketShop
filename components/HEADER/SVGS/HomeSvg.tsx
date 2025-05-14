@@ -4,7 +4,9 @@ const HomeSvg = () => {
     <button>
       <Link href={"/"}>
         <svg
-          className="ml-10 w-6 h-6 text-zinc-300 hover:text-cactus"
+          className="ml-10 w-8 h-8 text-white hover:text-zinc-200 font-semibold  
+                         border-b-[3px] border-transparent hover:border-secondary dark:hover:border-white   
+                         flex-shrink-0 transition-all duration-200 cursor-default"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           stroke="currentColor"

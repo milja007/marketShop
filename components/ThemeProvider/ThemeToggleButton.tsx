@@ -69,9 +69,9 @@ export function ThemeToggleButton() {
       // text-foreground will use the current theme's text color
       // hover:text-primary will use your theme's primary color for hover
       className="p-0 text-foreground hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
-      // If you want to keep a very similar hover to --color-cactus:
-      // className="text-foreground hover:text-[--color-cactus] focus:outline-none ..."
-      // You might need a dark mode equivalent for --color-cactus if it doesn't contrast well.
+      // If you want to keep a very similar hover to --color-whitee:
+      // className="text-foreground hover:text-[--color-whitee] focus:outline-none ..."
+      // You might need a dark mode equivalent for --color-whitee if it doesn't contrast well.
     >
       {isDarkMode ? (
         <SunIcon className="w-6 h-6" /> // Show Sun icon to switch to light
