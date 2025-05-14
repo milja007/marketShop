@@ -11,11 +11,13 @@ import ImageSlide from "@/components/CALCS/ImageSlide";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 import { CALCULATORSECTIONS } from "@/data(fake)/CONSTANTS/FACTORSandCALCS";
+
 const LightCalc = () => {
   return (
-    <div className="bg-slate-100 font-sans min-h-screen">
+    // Use theme's background color
+    <div className="bg-background font-sans min-h-screen">
       <section className="container mx-auto px-4 pt-12 pb-8 md:pt-16 md:pb-10">
-        <h1 className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900">
+        <h1 className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground">
           All Your Growing Light{" "}
           <span className="block sm:inline bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1 sm:py-0.5 rounded-lg shadow-md mt-2 sm:mt-0 mx-1">
             {" "}
@@ -27,7 +29,8 @@ const LightCalc = () => {
       </section>
 
       <MaxWidthWrapper className="pb-24 pt-4 lg:grid lg:grid-cols-1 sm:pb-32 lg:gap-y-16 lg:pt-6 xl:pt-8 lg:pb-52">
-        <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg flex flex-col lg:flex-row gap-8 lg:gap-10 items-center lg:items-start transition-shadow duration-300 hover:shadow-2xl overflow-hidden">
+        {/* First informational card */}
+        <div className="bg-card text-card-foreground p-6 md:p-8 rounded-xl shadow-lg dark:border dark:border-border flex flex-col lg:flex-row gap-8 lg:gap-10 items-center lg:items-start transition-shadow duration-300 hover:shadow-2xl dark:hover:shadow-[0_0_15px_rgba(var(--border),0.5)] overflow-hidden">
           <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-stretch">
             <div className="rounded-lg overflow-hidden shadow-md w-full max-w-md mx-auto lg:mx-0">
               <ImageSlide
@@ -38,9 +41,14 @@ const LightCalc = () => {
           </div>
 
           <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start justify-center lg:pl-4">
-            <p className="text-base text-gray-600 max-w-md text-center lg:text-left leading-relaxed">
-              <strong className="font-semibold text-gray-900">Firstly</strong>,
-              observe the DLI (Daily Light Integral) charts. These differ
+            {/* Changed text-muted-foreground to text-card-foreground for brighter text */}
+            <p className="text-base text-card-foreground max-w-md text-center lg:text-left leading-relaxed">
+              <strong className="font-semibold text-card-foreground">
+                {" "}
+                {/* This is already using the brightest card text color */}{" "}
+                Firstly
+              </strong>
+              , observe the DLI (Daily Light Integral) charts. These differ
               depending on whether your plant is a{" "}
               <span className="bg-orange-500 px-2 py-1 font-semibold text-white rounded shadow-sm">
                 photoperiod
@@ -63,7 +71,8 @@ const LightCalc = () => {
             calculatorComponent = <GenericLightCalc {...section.calcProps} />;
           } else {
             calculatorComponent = (
-              <div className="text-red-500 p-4">
+              // Use destructive colors for errors
+              <div className="bg-destructive/10 text-destructive p-4 rounded-md">
                 Error: Calculator type not configured correctly for ID:{" "}
                 {section.id}
               </div>
@@ -73,7 +82,8 @@ const LightCalc = () => {
           return (
             <div
               key={section.id}
-              className="bg-white p-6 md:p-8 rounded-xl shadow-lg flex flex-col lg:flex-row gap-8 lg:gap-10 items-center lg:items-start transition-shadow duration-300 hover:shadow-2xl overflow-hidden"
+              // Use card styles for these sections as well
+              className="bg-card text-card-foreground p-6 md:p-8 rounded-xl shadow-lg dark:border dark:border-border flex flex-col lg:flex-row gap-8 lg:gap-10 items-center lg:items-start transition-shadow duration-300 hover:shadow-2xl dark:hover:shadow-[0_0_15px_rgba(var(--border),0.5)] overflow-hidden"
             >
               <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-stretch">
                 {calculatorComponent}{" "}
@@ -88,13 +98,13 @@ const LightCalc = () => {
                       width={400}
                       height={240}
                       className="object-cover w-full h-full"
-                      priority={index < 1}
+                      priority={index < 1} // Prioritize LCP elements
                       loading={index < 1 ? "eager" : "lazy"}
                     />
                   </div>
                 )}
-
-                <p className="text-base text-gray-600 max-w-md text-center lg:text-left leading-relaxed">
+                {/* Changed text-muted-foreground to text-card-foreground for brighter text */}
+                <p className="text-base text-card-foreground max-w-md text-center lg:text-left leading-relaxed">
                   {section.description}
                 </p>
               </div>

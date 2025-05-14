@@ -80,10 +80,10 @@ const Search: React.FC<SearchProps> = ({
   };
 
   let containerClasses = `relative flex items-center transition-all duration-300 ease-in-out group`;
-  const inputBaseClasses = `h-10 border border-gray-300 rounded-lg py-1 text-sm focus:outline-none focus:ring-1 focus:ring-cactus focus:border-cactus bg-white text-black dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 `;
+  const inputBaseClasses = `h-10 border  rounded-lg py-1 text-md focus:outline-zinc-900 focus:ring-1 focus:ring focus:border-white bg-zinc-800 text-white dark:bg-card dark:text-white dark:border `;
   let currentInputClasses = "";
 
-  const clickableSearchButtonBaseClasses = `absolute right-3 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 dark:text-gray-400 group-hover:text-cactus focus:outline-none`;
+  const clickableSearchButtonBaseClasses = `absolute right-3 top-1/2 transform -translate-y-1/2 z-10 text-white dark:text-gray-400 group-hover:text-cactus focus:outline-none`;
   let iconButtonConditionalClasses = "";
 
   if (onMdSearchToggle !== undefined) {

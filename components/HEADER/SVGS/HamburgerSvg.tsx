@@ -7,7 +7,7 @@ import { MENUDATA } from "@/data(fake)/CONSTANTS/CATEGORIES";
 import Image, { StaticImageData } from "next/image";
 import { ThemeToggleButton } from "@/components/ThemeProvider/ThemeToggleButton";
 
-// Define Category and Subcategory interfaces (assuming they are similar to LinkNavbar)
+// Define Category and Subcategory interfaces
 interface Subcategory {
   name: string;
   slug: string;
@@ -80,14 +80,15 @@ function MobileMenu() {
     setOpenCategory(null);
   };
 
-  // Updated icon button style with theme variables
+  // Updated icon button style with "browny zinc" (stone) for light mode
   const iconButtonStyle = `
     p-2 rounded-full 
-    text-muted-foreground hover:text-primary hover:bg-muted
-    dark:text-muted-foreground dark:hover:text-primary dark:hover:bg-muted
+    text-stone-600 hover:text-stone-800 hover:bg-stone-100 /* Light mode: Stone text, darker Stone hover text, Stone hover bg */
+    dark:text-muted-foreground dark:hover:text-primary dark:hover:bg-muted /* Original dark mode styles */
     transition-colors duration-200 focus:outline-none focus:ring-2
-    focus:ring-ring focus:ring-offset-1 dark:focus:ring-offset-card 
-  `; // ring-offset from card as panel is bg-card
+    focus:ring-ring focus:ring-offset-2 focus:ring-offset-background 
+    dark:focus:ring-offset-card 
+  `;
 
   const typedMenudata = MENUDATA as Category[];
 
@@ -105,8 +106,7 @@ function MobileMenu() {
 
       {menuOpen && (
         <div
-          // Using black with alpha for overlay in both modes for simplicity
-          className="fixed inset-0 bg-black/60 dark:bg-black/70 z-40 md:hidden"
+          className="fixed inset-0 bg-black/50 dark:bg-black/70 z-40 md:hidden"
           onClick={closeMenu}
           aria-hidden="true"
         />
@@ -115,12 +115,12 @@ function MobileMenu() {
       <div
         className={`
           fixed top-0 left-0 h-screen w-64 sm:w-72
-          bg-card text-card-foreground /* Panel uses card theme */
+          bg-card text-card-foreground shadow-xl 
           z-50 flex flex-col
           transform transition-transform duration-300 ease-in-out
           ${menuOpen ? "translate-x-0" : "-translate-x-full"}
           md:hidden font-sans
-        `} // Removed shadow
+        `}
         role="dialog"
         aria-modal="true"
         aria-labelledby="menu-heading"
@@ -128,11 +128,11 @@ function MobileMenu() {
         <div className="flex items-center justify-between p-4 border-b border-border h-16 flex-shrink-0">
           <h2
             id="menu-heading"
-            className="font-bold text-lg" // Inherits text-card-foreground
+            className="font-bold text-lg text-stone-800 dark:text-card-foreground" // Browny zinc (stone) title in light mode
           >
             MENU
           </h2>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1 sm:space-x-2">
             <ThemeToggleButton />
             <button
               onClick={closeMenu}
@@ -152,60 +152,65 @@ function MobileMenu() {
                 key={cat.name}
                 className="border-b border-border last:border-b-0"
               >
-                <div
-                  className={`flex items-center px-2 py-1 transition-colors duration-150 ${
+                <div // Clickable area for category
+                  className={`flex items-center px-3 py-2 transition-colors duration-150 group ${
                     isCategoryOpen
-                      ? "bg-accent text-accent-foreground" // Selected item uses accent
-                      : "hover:bg-muted" // Hover uses muted
+                      ? "bg-stone-100 dark:bg-accent dark:text-accent-foreground" // Light: Active Stone bg. Dark: Original active.
+                      : "hover:bg-stone-100 dark:hover:bg-muted" // Light: Hover Stone bg. Dark: Original hover.
                   }`}
                 >
                   <Image
                     src={cat.src}
                     alt={`${cat.name} category icon`}
-                    width={25}
-                    height={25}
+                    width={24}
+                    height={24}
                     className="mr-3 flex-shrink-0 rounded"
                   />
                   <button
-                    className="w-full flex items-center justify-between px-1 py-2 text-sm font-semibold text-left" // Inherits text color
+                    className="w-full flex items-center justify-between text-sm text-left"
                     onClick={() =>
                       setOpenCategory(isCategoryOpen ? null : cat.name)
                     }
                     aria-expanded={isCategoryOpen}
                   >
-                    <span
-                      className={`${
-                        isCategoryOpen ? "text-cactus" : "" // Special color for open category name
-                      }`}
+                    <span // Category name styling
+                      className={` 
+                        ${
+                          isCategoryOpen
+                            ? "font-semibold text-stone-800 dark:text-accent-foreground" // Light: Darker Stone, bold. Dark: Original active.
+                            : "font-medium text-stone-700 dark:text-card-foreground" // Light: Browny Stone. Dark: Original.
+                        }`}
                     >
                       {cat.name}
                     </span>
                     {cat.subcategories && cat.subcategories.length > 0 && (
-                      <Arrowsvg
+                      <Arrowsvg // Arrow styling
                         className={`w-4 h-4 ml-2 transition-transform duration-200 ${
                           isCategoryOpen
-                            ? "rotate-90 text-cactus" // Arrow also cactus when open
-                            : ""
+                            ? "rotate-90 text-stone-800 dark:text-accent-foreground" // Light: Darker Stone. Dark: Original active.
+                            : "text-stone-500 dark:text-muted-foreground/70" // Light: Muted Stone. Dark: Original muted.
                         }`}
                       />
                     )}
                   </button>
                 </div>
 
-                <div
+                <div // Submenu container
                   className={`transition-all duration-300 ease-in-out overflow-hidden ${
                     isCategoryOpen ? "max-h-96" : "max-h-0"
                   }`}
                 >
                   {cat.subcategories && cat.subcategories.length > 0 && (
-                    // Submenu uses muted background
-                    <ul className="pl-8 pr-2 py-1 bg-muted text-muted-foreground">
+                    <ul className="pl-10 pr-2 py-1.5 bg-stone-50 dark:bg-muted text-stone-700 dark:text-muted-foreground">
+                      {" "}
+                      {/* Light: Lighter Stone bg, Stone text. Dark: Original. */}
                       {cat.subcategories.map((sub) => (
                         <li key={sub.name}>
                           <Link
                             href={sub.slug}
-                            // Submenu links hover to accent
-                            className="block px-4 py-2 text-sm hover:text-accent-foreground hover:bg-accent rounded transition-colors duration-150"
+                            className="block px-4 py-1.5 text-sm rounded transition-colors duration-150
+                                       hover:bg-stone-200 hover:text-stone-800  /* Light: Stone hover bg, Darker Stone hover text */
+                                       dark:hover:text-accent-foreground dark:hover:bg-accent /* Original dark hover */"
                             onClick={closeMenu}
                           >
                             {sub.name}

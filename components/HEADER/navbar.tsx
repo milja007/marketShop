@@ -11,9 +11,9 @@ import MobileMenu from "./SVGS/HamburgerSvg"; // Added for hamburger functionali
 const Navbar: React.FC = () => {
   return (
     <nav
-      className="flex justify-between items-center
+      className="flex justify-between items-center dark:bg-accent
       px-4 sm:px-8 xl:px-12 h-16 w-full
-      bg-primary text-primary-foreground" // Updated colors
+      bg-secondary text-secondary-foreground" // Updated colors
     >
       <div className="flex items-center md:hidden">
         {" "}
@@ -32,9 +32,9 @@ const Navbar: React.FC = () => {
       <div className="flex space-x-2 sm:space-x-4 items-center">
         <button
           className="
-            hidden md:flex bg-secondary text-secondary-foreground font-semibold
-            py-2 px-4 rounded-lg hover:bg-muted 
-            focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-primary
+            hidden md:flex bg-zinc-800 text-white font-semibold
+            py-2 px-4 rounded-lg hover:bg-zinc-700 
+            focus:outline-none focus:ring-offset-2 focus:ring-offset-zinc-800
             transition-colors duration-150
             " // Updated colors, removed shadow, refined focus
         >

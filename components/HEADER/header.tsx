@@ -1,6 +1,6 @@
 // Header.tsx
 import React from "react";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 import Search from "./Search";
 import LinkNavbar from "./LinkNavbar";
 

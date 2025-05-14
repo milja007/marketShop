@@ -11,15 +11,15 @@ import kartic5 from "@/public/FOOTER/CARDS/maestroc.webp";
 import kartic4 from "@/public/FOOTER/CARDS/masterc2.webp";
 import kartic1 from "@/public/FOOTER/CARDS/visac.webp";
 
-// Updated styles with theme variables
+// Updated styles for light mode on dark bg-zinc-800. Dark mode styles with text-cactus are preserved.
 const mobileAccordionLinkStyle =
-  "text-sm font-medium text-secondary-foreground hover:text-cactus dark:text-secondary-foreground dark:hover:text-cactus transition-transform transform hover:translate-x-1 block py-1";
+  "text-sm font-medium text-zinc-300 hover:text-zinc-100 dark:text-secondary-foreground dark:hover:text-cactus transition-transform transform hover:translate-x-1 block py-1";
 const desktopNavLinkStyle =
-  "text-sm font-medium text-secondary-foreground hover:text-cactus dark:text-secondary-foreground dark:hover:text-cactus transition-transform transform hover:translate-x-1 block py-1";
+  "text-sm font-medium text-zinc-300 hover:text-zinc-100 dark:text-secondary-foreground dark:hover:text-cactus transition-transform transform hover:translate-x-1 block py-1";
 const desktopFooterHeadingStyle =
-  "text-xl font-semibold tracking-tight text-secondary-foreground dark:text-secondary-foreground mb-3";
+  "text-xl font-semibold tracking-tight text-zinc-100 dark:text-secondary-foreground mb-3"; // Light mode: Bright text for heading
 const mobileAccordionSummaryStyle =
-  "flex items-center justify-between py-3 text-secondary-foreground dark:text-secondary-foreground font-semibold text-lg cursor-pointer list-none";
+  "flex items-center justify-between py-3 text-zinc-100 dark:text-secondary-foreground font-semibold text-lg cursor-pointer list-none"; // Light mode: Bright text for summary
 
 const Footer2 = () => {
   const customerServiceLinks = [
@@ -87,19 +87,18 @@ const Footer2 = () => {
     <footer
       role="contentinfo"
       aria-label="Website Footer Section 2"
-      // Updated main footer background. Using bg-secondary.
-      // Text color will be text-secondary-foreground by default from here.
-      className="bg-secondary text-secondary-foreground font-sans dark:bg-secondary dark:text-secondary-foreground"
+      // Light mode: bg-zinc-800 (dark), so text is light (text-zinc-300). Dark mode: original.
+      className="bg-zinc-800 text-zinc-300 font-sans dark:bg-card dark:text-secondary-foreground"
     >
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {/* Mobile Accordions */}
-        <details className="sm:hidden group border-b border-border">
+        <details className="sm:hidden group border-b border-border dark:border-border">
           {" "}
-          {/* Updated border */}
+          {/* Ensure border is theme aware if needed */}{" "}
           <summary className={mobileAccordionSummaryStyle}>
             Customer service
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
-              ▾
+              ▾ {/* This will inherit text-zinc-100 in light mode */}
             </span>
           </summary>
           <ul className="mt-2 pl-4 space-y-1.5 pb-3">
@@ -113,9 +112,8 @@ const Footer2 = () => {
           </ul>
         </details>
 
-        <details className="sm:hidden group border-b border-border">
+        <details className="sm:hidden group border-b border-border dark:border-border">
           {" "}
-          {/* Updated border */}
           <summary className={mobileAccordionSummaryStyle}>
             My account
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
@@ -133,9 +131,8 @@ const Footer2 = () => {
           </ul>
         </details>
 
-        <details className="sm:hidden group border-b border-border">
+        <details className="sm:hidden group border-b border-border dark:border-border">
           {" "}
-          {/* Updated border */}
           <summary className={mobileAccordionSummaryStyle}>
             Information
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
@@ -153,16 +150,15 @@ const Footer2 = () => {
           </ul>
         </details>
 
-        <details className="sm:hidden group border-b border-border last:border-none">
+        <details className="sm:hidden group border-b border-border dark:border-border last:border-none">
           {" "}
-          {/* Updated border */}
           <summary className={mobileAccordionSummaryStyle}>
             Contact
             <span className="transition-transform duration-300 group-open:rotate-180 text-xl">
               ▾
             </span>
           </summary>
-          {/* Text color for contact info list items inherits from parent (text-secondary-foreground) */}
+          {/* Text color for contact info list items inherits from parent (text-zinc-300 in light mode) */}
           <ul className="mt-2 pl-4 space-y-1 text-sm pb-3">
             {contactInfo.map((line, index) => (
               <li key={index} className="font-medium">
@@ -179,7 +175,7 @@ const Footer2 = () => {
 
         <div className="hidden sm:flex flex-col space-y-2">
           <h3 className={desktopFooterHeadingStyle}>Contact</h3>
-          {/* Text color inherits from parent (text-secondary-foreground) */}
+          {/* Text color inherits from parent (text-zinc-300 in light mode) */}
           <ul className="space-y-1 text-sm">
             {contactInfo.map((line, index) => (
               <li key={index} className="font-medium">
@@ -190,12 +186,12 @@ const Footer2 = () => {
         </div>
       </div>
 
-      <div className="border-t border-border">
+      <div className="border-t border-border dark:border-border">
         {" "}
-        {/* Updated border */}
+        {/* Ensure border is theme aware */}{" "}
         <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Copyright text using muted-foreground for less emphasis */}
-          <p className="text-xs font-medium text-muted-foreground dark:text-muted-foreground text-center md:text-left">
+          {/* Light mode: text-zinc-400 for muted. Dark mode: original */}
+          <p className="text-xs font-medium text-zinc-400 dark:text-muted-foreground text-center md:text-left">
             &copy; {new Date().getFullYear()} INT eCommerce B.M. All rights
             reserved.
           </p>

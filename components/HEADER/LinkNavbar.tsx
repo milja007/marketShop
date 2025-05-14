@@ -171,7 +171,7 @@ const LinkNavbar: React.FC = () => {
 
   return (
     // Updated nav with theme colors, removed shadow
-    <nav className="bg-card border-b border-border w-full font-sans">
+    <nav className="bg-zinc-800 border-b border-border w-full font-sans">
       <div
         ref={scrollContainerRef}
         className={`
@@ -182,7 +182,7 @@ const LinkNavbar: React.FC = () => {
         `}
         style={{ overflowY: "visible" }}
       >
-        <ul className="flex text-card-foreground">
+        <ul className="flex text-white">
           {" "}
           {/* Default text color for items */}
           <li className="flex items-center mr-5 text-muted-foreground hover:text-cactus transition-colors duration-150">
@@ -196,7 +196,7 @@ const LinkNavbar: React.FC = () => {
               }}
               // Updated text, border colors. Using border-b-[3px] for arbitrary value.
               className="font-semibold px-1 py-2 text-sm
-                         border-b-[3px] border-transparent hover:border-cactus h-13
+                         border-b-[3px] border-transparent hover:border-secondary h-13
                          flex-shrink-0 transition-all duration-200 cursor-default"
               onMouseEnter={() => handleCategoryMouseEnter(category)}
               onMouseLeave={handleCategoryMouseLeave}
@@ -204,8 +204,8 @@ const LinkNavbar: React.FC = () => {
               <Link
                 href={category.slug}
                 // Updated text, hover background/text colors
-                className="font-semibold px-3 py-2.5 text-sm hover:text-accent-foreground
-                           hover:bg-accent rounded-md flex items-center whitespace-nowrap
+                className="font-semibold px-3 py-2.5 text-sm 
+                           hover:bg-zinc-700 rounded-md flex items-center whitespace-nowrap
                            transition-colors duration-150"
                 onMouseEnter={() => handleCategoryMouseEnter(category)}
               >

@@ -31,29 +31,28 @@ const DliToPpfdCalc: React.FC = () => {
       return;
     }
 
-    // Calculation: DLI (mol/m²/day) = PPFD (µmol/s/m²) * Hours * 3600 (s/h) / 1,000,000 (µmol/mol)
     const result = (ppfdValue * hoursValue * 3600) / 1_000_000;
-
     setDliResult(result);
   };
 
   return (
-    <div className="flex flex-col   w-80 mt-20 mb-20 ml-10 ">
+    // Adjusted margins for better fit if parent is handling centering/spacing.
+    // Consider props for these if they need to be dynamic.
+    <div className="flex flex-col w-full max-w-xs mx-auto my-8 p-4 md:p-0">
+      {" "}
+      {/* Example: Responsive width and centering */}
       {/* Title */}
-      <h3 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">
+      <h3 className="text-xl font-semibold mb-2 text-card-foreground">
         PPFD and Time to DLI
       </h3>
-
-      <p className="text-sm text-gray-150">
-        Approximate conversion from PPFD to DLI
+      <p className="text-sm text-muted-foreground mb-4">
+        Approximate conversion from PPFD to DLI.
       </p>
-      <br />
-
       {/* PPFD Input */}
       <div className="mb-4">
         <label
           htmlFor="dli_ppfdInput"
-          className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2"
+          className="block text-sm font-medium text-card-foreground/80 mb-1"
         >
           PPFD (μmol/s/m²):
         </label>
@@ -63,15 +62,14 @@ const DliToPpfdCalc: React.FC = () => {
           ref={ppfdInputRef}
           defaultValue={300}
           min={0}
-          className="shadow appearance-none border border-gray-300 dark:border-gray-600 rounded w-80 py-2 px-3 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow-sm appearance-none border border-border rounded w-full py-2 px-3 bg-input text-foreground placeholder:text-muted-foreground/60 leading-tight focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary"
         />
       </div>
-
       {/* Time Input */}
       <div className="mb-4">
         <label
           htmlFor="dli_hoursInput"
-          className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2"
+          className="block text-sm font-medium text-card-foreground/80 mb-1"
         >
           Time (hours):
         </label>
@@ -82,34 +80,32 @@ const DliToPpfdCalc: React.FC = () => {
           defaultValue={18}
           min={0}
           max={24}
-          className="shadow appearance-none border border-gray-300 dark:border-gray-600 rounded w-80 py-2 px-3 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow-sm appearance-none border border-border rounded w-full py-2 px-3 bg-input text-foreground placeholder:text-muted-foreground/60 leading-tight focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary"
         />
       </div>
-
       {/* Calculate Button */}
       <div className="mt-6">
         <button
           onClick={calcPpfdAndHoursToDli}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-card transition duration-150 ease-in-out"
         >
           Calculate DLI
         </button>
       </div>
-
       {/* Error Message */}
       {error && (
         <div
-          className="bg-red-100 dark:bg-red-300 border border-red-400 dark:border-red-500 text-red-700 dark:text-red-900 px-4 py-3 rounded relative mt-4"
+          className="bg-destructive/20 border border-destructive/30 text-destructive px-4 py-3 rounded relative mt-4"
           role="alert"
         >
           <span className="block sm:inline">{error}</span>
         </div>
       )}
-
       {/* Result Message */}
       {dliResult !== null && !error && (
         <div
-          className="bg-green-100 dark:bg-green-300 border border-green-400 dark:border-green-500 text-green-700 dark:text-green-900 px-4 py-3 rounded relative mt-4"
+          // Using a slightly different green shade for better text contrast in dark mode
+          className="bg-green-500/15 border border-green-500/30 text-green-700 dark:text-green-300 px-4 py-3 rounded relative mt-4"
           role="alert"
         >
           <span className="font-bold">Result:</span> DLI ={" "}
