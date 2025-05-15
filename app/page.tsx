@@ -8,6 +8,7 @@ import hero1 from "@/public/HOME/Hero/hero11.jpg";
 import hero2 from "@/public/HOME/Hero/hero2.jpg";
 import hero3 from "@/public/HOME/Hero/hero3.jpg";
 
+import shipping from "@/public/HOME/shippping.jpg";
 // SVG Imports for USP Bar
 import svg1 from "@/public/HOME/Hero/SvgHero/1.svg";
 import svg2 from "@/public/HOME/Hero/SvgHero/2.svg";
@@ -23,6 +24,7 @@ import card4_homebox from "@/public/CARDS/homebox-homebox-ambient-q60-60x60x160c
 import CardHome from "@/components/CARDS/CardHome"; // Your CardHome component
 import { CategoryGrid } from "@/components/CARDS/CategoryGrid";
 import { GrowInfoSection } from "@/components/INFO/GrowInfoSection";
+import { ServiceAndRangeSection } from "@/components/HOME/ServiceAndRangeSection";
 
 interface dataType {
   id: number;
@@ -180,7 +182,6 @@ export default function Home() {
           in One Place!
         </h1>
       </section>
-
       {/* Hero Images Section (Constrained Width) */}
       <MaxWidthWrapper className="pt-10 lg:pt-12 xl:pt-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
@@ -188,13 +189,15 @@ export default function Home() {
           <div
             className={`rounded-xl shadow-xl hover:shadow-2xl focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-100 transition-all duration-300 overflow-hidden relative group ${heroCardData[0].aspectRatio}`}
           >
+            // Old way in your Home.tsx for hero images // Corrected way for
+            Home.tsx hero images
             <Image
               src={heroCardData[0].src}
               alt={heroCardData[0].alt}
-              layout="fill"
-              objectFit="cover"
-              className="transform group-hover:scale-105 transition-transform duration-300"
+              fill={true} // This is correct
+              className="transform group-hover:scale-105 transition-transform duration-300 object-cover" // Added object-cover here
               priority={heroCardData[0].priority}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Add appropriate sizes prop when using fill={true} for performance
             />
             <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end z-10 bg-gradient-to-t from-black/80 via-black/50 to-transparent group-hover:from-black/85 transition-colors duration-300">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg leading-tight mb-3 sm:mb-4">
@@ -218,7 +221,7 @@ export default function Home() {
                 <Image
                   src={card.src}
                   alt={card.alt}
-                  layout="fill"
+                  fill={true}
                   objectFit="cover"
                   className="transform group-hover:scale-105 transition-transform duration-300"
                   priority={card.priority}
@@ -239,7 +242,6 @@ export default function Home() {
           </div>
         </div>
       </MaxWidthWrapper>
-
       {/* Product Cards Section */}
       <MaxWidthWrapper className="py-12 lg:py-16">
         <div className="flex justify-between items-center mb-6 md:mb-8">
@@ -287,7 +289,6 @@ export default function Home() {
           </a>
         </div>
       </MaxWidthWrapper>
-
       {/* USP Bar Section */}
       <section
         aria-labelledby="usp-bar-heading"
@@ -327,6 +328,9 @@ export default function Home() {
       </section>
       <CategoryGrid />
       <GrowInfoSection />
+      <ServiceAndRangeSection shippingImageSrc={shipping} />{" "}
+      {/* Pass the path to your shipping image */}
+      {/* Or if using imported static image: <ServiceAndRangeSection shippingImageSrc={shippingImageStatic} /> */}
       {/* User creation button and list section (Constrained Width) */}
       <MaxWidthWrapper className="mt-12 sm:mt-16 pb-24 sm:pb-32">
         <div className="text-center">
