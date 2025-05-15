@@ -21,6 +21,8 @@ import card3_kindled from "@/public/CARDS/kind-led-k5-xl750.jpg";
 import card4_homebox from "@/public/CARDS/homebox-homebox-ambient-q60-60x60x160cm.jpg";
 
 import CardHome from "@/components/CARDS/CardHome"; // Your CardHome component
+import { CategoryGrid } from "@/components/CARDS/CategoryGrid";
+import { GrowInfoSection } from "@/components/INFO/GrowInfoSection";
 
 interface dataType {
   id: number;
@@ -242,7 +244,11 @@ export default function Home() {
       <MaxWidthWrapper className="py-12 lg:py-16">
         <div className="flex justify-between items-center mb-6 md:mb-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            Online Growshop Grow-Dutch.com
+            Online{" "}
+            <span className="block sm:inline bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 sm:py-1 rounded-lg shadow-lg mt-2 sm:mt-0 mx-1">
+              Growshop{" "}
+            </span>{" "}
+            Bok Grow.com
           </h2>
           <a
             href="/all-products"
@@ -263,11 +269,12 @@ export default function Home() {
               price={product.price}
               oldPrice={product.oldPrice}
               href={product.href}
-              buttonText={product.buttonText}
-              onButtonClick={product.onButtonClick}
-              tags={product.tags}
-              imageAspectRatio={product.imageAspectRatio}
-              objectFit={product.objectFit as "cover" | "contain" | undefined} // Cast for safety
+              buttonText="Add to Cart"
+              showQuantitySelector={true}
+              initialQuantity={3} // Starts with quantity 3
+              onAddToCart={(quantity, event) => {
+                console.log(`Add ${quantity} to cart!`);
+              }}
             />
           ))}
         </div>
@@ -318,7 +325,8 @@ export default function Home() {
           </div>
         </MaxWidthWrapper>
       </section>
-
+      <CategoryGrid />
+      <GrowInfoSection />
       {/* User creation button and list section (Constrained Width) */}
       <MaxWidthWrapper className="mt-12 sm:mt-16 pb-24 sm:pb-32">
         <div className="text-center">
