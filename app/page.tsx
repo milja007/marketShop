@@ -25,6 +25,7 @@ import CardHome from "@/components/CARDS/CardHome"; // Your CardHome component
 import { CategoryGrid } from "@/components/CARDS/CategoryGrid";
 import { GrowInfoSection } from "@/components/INFO/GrowInfoSection";
 import { ServiceAndRangeSection } from "@/components/HOME/ServiceAndRangeSection";
+import HomePageBlogSection from "@/components/HOME/HomePageBlogSection";
 
 interface dataType {
   id: number;
@@ -332,6 +333,7 @@ export default function Home() {
       {/* Pass the path to your shipping image */}
       {/* Or if using imported static image: <ServiceAndRangeSection shippingImageSrc={shippingImageStatic} /> */}
       {/* User creation button and list section (Constrained Width) */}
+      <HomePageBlogSection />
       <MaxWidthWrapper className="mt-12 sm:mt-16 pb-24 sm:pb-32">
         <div className="text-center">
           <button
