@@ -26,6 +26,7 @@ import { CategoryGrid } from "@/components/CARDS/CategoryGrid";
 import { GrowInfoSection } from "@/components/INFO/GrowInfoSection";
 import { ServiceAndRangeSection } from "@/components/HOME/ServiceAndRangeSection";
 import HomePageBlogSection from "@/components/HOME/HomePageBlogSection";
+import OurBrandsSection from "@/components/HOME/OurBrandsSection";
 
 interface dataType {
   id: number;
@@ -334,6 +335,7 @@ export default function Home() {
       {/* Or if using imported static image: <ServiceAndRangeSection shippingImageSrc={shippingImageStatic} /> */}
       {/* User creation button and list section (Constrained Width) */}
       <HomePageBlogSection />
+      <OurBrandsSection />
       <MaxWidthWrapper className="mt-12 sm:mt-16 pb-24 sm:pb-32">
         <div className="text-center">
           <button
