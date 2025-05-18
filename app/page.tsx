@@ -19,7 +19,6 @@ import CardHome from "@/components/CARDS/CardHome"; // Your CardHome component
 import { CategoryGrid } from "@/components/CARDS/CategoryGrid";
 import { GrowInfoSection } from "@/components/INFO/GrowInfoSection";
 
-import OurBrandsSection from "@/components/HOME/OurBrandsSection";
 import TitleBadge from "@/components/SPAN/TitleBadge";
 
 export default function Home() {
@@ -207,7 +206,6 @@ export default function Home() {
       </section>
       <CategoryGrid />
       <GrowInfoSection />
-      <OurBrandsSection />
     </div>
   );
 }

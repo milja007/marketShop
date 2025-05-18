@@ -170,7 +170,7 @@ const OurBrandsSection = () => {
   }
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 bg-slate-100">
+    <section className="py-12 md:py-16 lg:py-18 bg-slate-100 ">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12 text-foreground">
           Our Featured Brands
@@ -201,7 +201,7 @@ const OurBrandsSection = () => {
           ))}
         </div>
 
-        {/* Dots Navigation - Shown only if numDots > 0, and hidden on lg screens and larger */}
+        {/* Dots Navigation - Shown only if numDots > 0, and hidden on md screens and larger */}
         {numDots > 0 && (
           <div className="flex justify-center space-x-2 mt-6 lg:hidden">
             {Array.from({ length: numDots }).map((_, index) => (
