@@ -216,6 +216,13 @@
   scrollbar-color: var(--muted-foreground) transparent; /* Updated to use theme variable */
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For WebKit browsers */
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* For IE and Edge */
+  scrollbar-width: none; /* For Firefox */
+}
 /* --- Dynamic Fade Effects for Scroll Container (LinkNavbar) --- */
 /* Applied to the div with .scroll-fade-container class */
 .scroll-fade-container::before,

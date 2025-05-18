@@ -24,7 +24,7 @@ import card4_homebox from "@/public/CARDS/homebox-homebox-ambient-q60-60x60x160c
 import CardHome from "@/components/CARDS/CardHome"; // Your CardHome component
 import { CategoryGrid } from "@/components/CARDS/CategoryGrid";
 import { GrowInfoSection } from "@/components/INFO/GrowInfoSection";
-import { ServiceAndRangeSection } from "@/components/HOME/ServiceAndRangeSection";
+
 import HomePageBlogSection from "@/components/HOME/HomePageBlogSection";
 import OurBrandsSection from "@/components/HOME/OurBrandsSection";
 
@@ -330,7 +330,7 @@ export default function Home() {
       </section>
       <CategoryGrid />
       <GrowInfoSection />
-      <ServiceAndRangeSection shippingImageSrc={shipping} />{" "}
+
       {/* Pass the path to your shipping image */}
       {/* Or if using imported static image: <ServiceAndRangeSection shippingImageSrc={shippingImageStatic} /> */}
       {/* User creation button and list section (Constrained Width) */}
