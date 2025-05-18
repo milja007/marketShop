@@ -23,7 +23,6 @@ export function CategoryCardItem({ category }: CategoryCardItemProps) {
     <Link
       href={category.slug}
       passHref
-      legacyBehavior={false}
       className="group block outline-none"
       aria-label={`View ${category.name}`}
     >
@@ -36,7 +35,6 @@ export function CategoryCardItem({ category }: CategoryCardItemProps) {
             fill
             sizes="(max-width: 640px) 45vw, (max-width: 768px) 30vw, (max-width: 1024px) 22vw, (max-width: 1280px) 18vw, 15vw"
             className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-            priority={category.name === "Seeds" || category.name === "Growbox"} // Prioritize loading for LCP elements if these are typically above the fold
           />
         </div>
         <CardHeader className="p-4">

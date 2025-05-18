@@ -20,6 +20,7 @@ import { CategoryGrid } from "@/components/CARDS/CategoryGrid";
 import { GrowInfoSection } from "@/components/INFO/GrowInfoSection";
 
 import OurBrandsSection from "@/components/HOME/OurBrandsSection";
+import TitleBadge from "@/components/SPAN/TitleBadge";
 
 export default function Home() {
   const uspData = [
@@ -115,10 +116,7 @@ export default function Home() {
       {/* Main Page Heading */}
       <section className="container mx-auto px-4 pt-12 pb-8 md:pt-16 md:pb-10">
         <h1 className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900">
-          The Best Growing{" "}
-          <span className="block sm:inline bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 sm:py-1 rounded-lg shadow-lg mt-2 sm:mt-0 mx-1">
-            Equipment
-          </span>{" "}
+          The Best Growing <TitleBadge>Equipment</TitleBadge>
           <br className="hidden sm:block lg:hidden" />
           in One Place!
         </h1>
@@ -144,6 +142,7 @@ export default function Home() {
           {productsData.map((product) => (
             <CardHome
               key={product.id}
+              productId={product.id}
               imageUrl={product.imageUrl}
               imageAlt={product.imageAlt}
               brand={product.brand}
@@ -152,12 +151,16 @@ export default function Home() {
               price={product.price}
               oldPrice={product.oldPrice}
               href={product.href}
-              buttonText="Add to Cart"
+              buttonText="Add to Cart" // You were overriding buttonText from productData here
               showQuantitySelector={true}
               initialQuantity={3} // Starts with quantity 3
               onAddToCart={(quantity, event) => {
-                console.log(`Add ${quantity} to cart!`);
+                console.log(`Add ${quantity} of ${product.title} to cart!`); // Enhanced log
               }}
+              // You should also pass other props like tags if product objects have them
+              tags={product.tags}
+              imageAspectRatio={product.imageAspectRatio}
+              objectFit={product.objectFit as "cover" | "contain" | undefined}
             />
           ))}
         </div>

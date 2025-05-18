@@ -162,9 +162,9 @@ function MobileMenu() {
                   <Image
                     src={cat.src}
                     alt={`${cat.name} category icon`}
-                    width={24}
-                    height={24}
+                    width={24} // Consider adding height if aspect ratio is fixed
                     className="mr-3 flex-shrink-0 rounded"
+                    // Ensure priority is NOT set here, or is explicitly priority={false}
                   />
                   <button
                     className="w-full flex items-center justify-between text-sm text-left"
