@@ -16,17 +16,11 @@ import growtips from "@/public/BLOGS/HOME/growtips.jpg";
 import ledvshps from "@/public/BLOGS/HOME/ledvshps.jpg";
 import commonm from "@/public/BLOGS/HOME/commonmistakes.jpg";
 
-// --- USER ACTION: Import your new image for common mistakes here ---
-// import commonMistakesImage from "@/public/BLOGS/HOME/your-common-mistakes-image.jpg";
-
-// Using imported image objects directly
 const calculatorImageUrl = calculator;
 const growTipsImageUrl = growtips;
 const ledVsHpsImageUrl = ledvshps;
-// --- USER ACTION: Assign your imported image to this constant ---
-const commonMistakesImagePlaceholder = commonm; // Replace "" with commonMistakesImage after import
+const commonMistakesImage = commonm; // Using the imported variable
 
-// Simplified PostData interface
 interface PostData {
   slug: string;
   imageSrc: StaticImageData | string;
@@ -39,12 +33,12 @@ interface PostData {
 }
 
 const HomePageBlogSection = () => {
-  const currentDate = new Date(); // Current date: May 17, 2025
+  const currentDate = new Date(); // Current date: May 18, 2025
   const currentYear = currentDate.getFullYear(); // 2025
   const formattedDate = currentDate.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
-  }); // e.g., "May 17"
+  }); // e.g., "May 18"
 
   const allPosts: PostData[] = [
     {
@@ -81,7 +75,7 @@ const HomePageBlogSection = () => {
     {
       type: "blog",
       slug: "/common-led-growing-mistakes",
-      imageSrc: commonMistakesImagePlaceholder, // --- USER ACTION: Use your imported image variable
+      imageSrc: commonMistakesImage, // Using the correctly assigned variable
       altText: "Common mistakes to avoid when growing with LED lights",
       date: formattedDate,
       year: currentYear,
@@ -92,20 +86,20 @@ const HomePageBlogSection = () => {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 bg-background">
+    <section className="py-12 md:py-16 lg:py-20 bg-slate-100 dark:bg-slate-800">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-foreground">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-foreground dark:text-slate-100">
           Our Blogs
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        {/* Updated grid classes for responsive columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {allPosts.map((post) => {
             const isCalculator = post.type === "calculator";
 
-            // Determine button properties based on post type
             const buttonText = isCalculator ? "Use Calculators" : "Read More";
-            const buttonVariant = isCalculator ? "default" : "outline"; // Valid variants
-            const buttonSize = isCalculator ? "lg" : "default"; // Valid sizes
+            const buttonVariant = isCalculator ? "default" : "outline";
+            const buttonSize = isCalculator ? "lg" : "default";
             const buttonClassName = isCalculator
               ? undefined
               : "w-full md:w-auto";
@@ -113,7 +107,7 @@ const HomePageBlogSection = () => {
             return (
               <Card
                 key={post.slug}
-                className="overflow-hidden shadow-lg hover:shadow-xl group transform hover:scale-[1.02] transition-all duration-300 flex flex-col"
+                className="overflow-hidden shadow-lg hover:shadow-xl group transform hover:scale-[1.02] transition-all duration-300 flex flex-col bg-white dark:bg-slate-900"
               >
                 <Link
                   href={post.slug}
@@ -129,25 +123,31 @@ const HomePageBlogSection = () => {
                         alt={post.altText}
                         fill
                         className="object-cover group-hover:opacity-90 transition-opacity duration-300"
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        // Updated sizes prop for new grid layout
+                        sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 25vw"
                       />
                     </AspectRatio>
                   </CardHeader>
-                  <CardContent className="p-6">
+                  <CardContent className="p-4 sm:p-6 flex-grow">
+                    {" "}
+                    {/* Added flex-grow here too */}
                     {post.date && post.year && (
-                      <p className="text-sm text-muted-foreground mb-2">
+                      <p className="text-xs sm:text-sm text-muted-foreground mb-2">
                         {post.date}, {post.year}
                       </p>
                     )}
-                    <CardTitle className="text-xl lg:text-2xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
+                    {/* Adjusted title size for responsiveness with more columns */}
+                    <CardTitle className="text-lg sm:text-xl xl:text-lg font-semibold mb-2 sm:mb-3 text-foreground dark:text-slate-100 group-hover:text-primary transition-colors duration-300">
                       {post.title}
                     </CardTitle>
-                    <p className="text-muted-foreground text-sm lg:text-base line-clamp-3">
+                    <p className="text-sm text-muted-foreground dark:text-slate-400 line-clamp-3 sm:line-clamp-4 xl:line-clamp-3">
                       {post.description}
                     </p>
                   </CardContent>
                 </Link>
-                <CardFooter className="p-6 pt-0 mt-auto">
+                <CardFooter className="p-4 sm:p-6 pt-0 mt-auto">
+                  {" "}
+                  {/* Consistent padding */}
                   <Button
                     asChild
                     variant={buttonVariant}

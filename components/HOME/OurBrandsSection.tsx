@@ -170,7 +170,7 @@ const OurBrandsSection = () => {
   }
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 bg-background">
+    <section className="py-12 md:py-16 lg:py-20 bg-slate-100">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12 text-foreground">
           Our Featured Brands

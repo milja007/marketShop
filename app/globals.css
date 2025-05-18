@@ -119,13 +119,6 @@
 }
 /* ==== END: Custom FadeIn Animation for Image Slider ==== */
 
-@media (prefers-color-scheme: dark) {
-  /* This block is generally not needed if using the .dark class strategy with next-themes */
-  /* :root {
-       Dark mode theme variables can be overridden here if not using .dark class strategy
-    } */
-}
-
 .dark {
   /* This block correctly defines your dark theme variables */
 

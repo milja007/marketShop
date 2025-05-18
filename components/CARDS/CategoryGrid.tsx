@@ -6,13 +6,10 @@ export function CategoryGrid() {
   const categories = MENUDATA; // In a real app, this might come from props or an API
 
   return (
-    <section className="py-8 md:py-12 bg-background">
+    <section className="py-8 md:py-12 bg-slate-100 mb-10">
       <div className="container mx-auto px-4">
         <h2 className="mb-8 text-2xl font-bold tracking-tight text-center sm:text-3xl md:mb-12">
-          Alle categorieën
-          <span className="block text-lg font-normal text-muted-foreground mt-1">
-            All categories
-          </span>
+          All categories
         </h2>
         {categories.length > 0 ? (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
