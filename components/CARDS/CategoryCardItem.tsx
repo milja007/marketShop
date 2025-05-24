@@ -9,7 +9,7 @@ interface Subcategory {
 }
 
 interface Category {
-  src: StaticImageData;
+  src: string;
   name: string;
   slug: string;
   subcategories: Subcategory[];

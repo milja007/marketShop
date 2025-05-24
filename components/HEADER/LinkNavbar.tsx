@@ -14,7 +14,7 @@ import { createPortal } from "react-dom";
 import Arrowsvg from "./SVGS/Arrowsvg";
 import HomeSvg from "./SVGS/HomeSvg";
 
-import { MENUDATA } from "@/data(fake)/CONSTANTS/CATEGORIES";
+import MENUDATA from "@/data(fake)/CONSTANTS/CATEGORIES.json";
 import SubmenuContent from "./SubmenuContent";
 import { StaticImageData } from "next/image";
 
@@ -29,7 +29,7 @@ interface SubmenuPosition {
 }
 
 interface Category {
-  src: StaticImageData;
+  src: string;
   name: string;
   slug: string;
   subcategories: Subcategory[];

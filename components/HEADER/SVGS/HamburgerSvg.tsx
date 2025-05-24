@@ -3,8 +3,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { MENUDATA } from "@/data(fake)/CONSTANTS/CATEGORIES";
-import Image, { StaticImageData } from "next/image";
+import MENUDATA from "@/data(fake)/CONSTANTS/CATEGORIES.json";
+import Image from "next/image";
 import { ThemeToggleButton } from "@/components/ThemeProvider/ThemeToggleButton";
 
 // Define Category and Subcategory interfaces
@@ -14,7 +14,7 @@ interface Subcategory {
 }
 
 interface Category {
-  src: StaticImageData;
+  src: string;
   name: string;
   slug: string;
   subcategories?: Subcategory[];
@@ -162,8 +162,9 @@ function MobileMenu() {
                   <Image
                     src={cat.src}
                     alt={`${cat.name} category icon`}
-                    width={24} // Consider adding height if aspect ratio is fixed
-                    className="mr-3 flex-shrink-0 rounded"
+                    width={24}
+                    height={24}
+                    className="mr-3 flex-shrink-0 rounded h-auto w-auto "
                     // Ensure priority is NOT set here, or is explicitly priority={false}
                   />
                   <button

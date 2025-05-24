@@ -1,5 +1,5 @@
 // components/CategoryGrid.tsx
-import { MENUDATA } from "@/data(fake)/CONSTANTS/CATEGORIES";
+import MENUDATA from "@/data(fake)/CONSTANTS/CATEGORIES.json";
 import { CategoryCardItem } from "./CategoryCardItem";
 
 export function CategoryGrid() {
