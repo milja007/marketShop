@@ -1,3 +1,5 @@
+// In app/light-calc/page.tsx (your LightCalc component)
+
 import React from "react";
 import Image from "next/image";
 
@@ -6,16 +8,61 @@ import autoimg from "@/public/KALKULATOR/photop.jpg";
 
 // Component imports
 import DliToPpfdCalc from "@/components/CALCS/DliToPpfdCalc";
-import GenericLightCalc from "@/components/CALCS/GenericLightCalc";
+import GenericLightCalc from "@/components/CALCS/GenericLightCalc"; // Assuming this path is correct
 import ImageSlide from "@/components/CALCS/ImageSlide";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
-import { CALCULATORSECTIONS } from "@/data(fake)/CONSTANTS/FACTORSandCALCS";
+import fullCalculatorDataJson from "@/data(fake)/CONSTANTS/FACTORSandCALCS.json";
+
+// --- Type Definitions for this file (LightCalc.tsx) ---
+// (These should ideally be in a shared types file if GenericLightCalc needs them too,
+// but for now, let's ensure they are correctly defined here for LightCalc's use)
+
+// Define the specific calculation types that GenericLightCalc expects
+type SpecificCalculationType =
+  | "ppfd-to-lux"
+  | "lux-to-ppfd"
+  | "lumens-to-ppf"
+  | "ppf-to-lumens";
+
+interface FullCalculatorData {
+  ppfdToLuxFactors: { [key: string]: number | null };
+  luxToPpfdFactors: { [key: string]: number | null };
+  lumensToPpfFactors: { [key: string]: number | null };
+  ppfToLumensFactors: { [key: string]: number | null };
+  calculatorSections: CalculatorSection[];
+}
+
+interface CalcProp {
+  // This is for the data structure in your JSON's calculatorSections
+  title: string;
+  inputLabel: string;
+  outputLabel: string;
+  inputDefaultValue: number;
+  conversionFactorsKey: keyof Omit<FullCalculatorData, "calculatorSections">;
+  calculationType: string; // Keep as string here, will be validated/cast below
+  outputUnit: string;
+  noteText: string;
+}
+
+interface CalculatorSection {
+  id: string;
+  type: "DLI" | "GENERIC";
+  imageSrc: string;
+  imageAlt: string;
+  description: string;
+  calcProps?: CalcProp;
+}
+// --- End Type Definitions ---
+
+const typedFullCalculatorData = fullCalculatorDataJson as FullCalculatorData;
+const CALCULATORSECTIONS_ARRAY: CalculatorSection[] =
+  typedFullCalculatorData.calculatorSections;
 
 const LightCalc = () => {
   return (
-    // Use theme's background color
     <div className="bg-background font-sans min-h-screen">
+      {/* Header Section ... (keep as is) */}
       <section className="container mx-auto px-4 pt-12 pb-8 md:pt-16 md:pb-10">
         <h1 className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground">
           All Your Growing Light{" "}
@@ -29,7 +76,7 @@ const LightCalc = () => {
       </section>
 
       <MaxWidthWrapper className="pb-24 pt-4 lg:grid lg:grid-cols-1 sm:pb-32 lg:gap-y-16 lg:pt-6 xl:pt-8 lg:pb-52">
-        {/* First informational card */}
+        {/* First informational card ... (keep as is) */}
         <div className="bg-card text-card-foreground p-6 md:p-8 rounded-xl shadow-lg dark:border dark:border-border flex flex-col lg:flex-row gap-8 lg:gap-10 items-center lg:items-start transition-shadow duration-300 hover:shadow-2xl dark:hover:shadow-[0_0_15px_rgba(var(--border),0.5)] overflow-hidden">
           <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-stretch">
             <div className="rounded-lg overflow-hidden shadow-md w-full max-w-md mx-auto lg:mx-0">
@@ -39,13 +86,10 @@ const LightCalc = () => {
               />
             </div>
           </div>
-
           <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start justify-center lg:pl-4">
-            {/* Changed text-muted-foreground to text-card-foreground for brighter text */}
             <p className="text-base text-card-foreground max-w-md text-center lg:text-left leading-relaxed">
               <strong className="font-semibold text-card-foreground">
                 {" "}
-                {/* This is already using the brightest card text color */}{" "}
                 Firstly
               </strong>
               , observe the DLI (Daily Light Integral) charts. These differ
@@ -63,15 +107,44 @@ const LightCalc = () => {
           </div>
         </div>
 
-        {CALCULATORSECTIONS.map((section, index) => {
+        {CALCULATORSECTIONS_ARRAY.map((section, index) => {
           let calculatorComponent;
           if (section.type === "DLI") {
             calculatorComponent = <DliToPpfdCalc />;
           } else if (section.type === "GENERIC" && section.calcProps) {
-            calculatorComponent = <GenericLightCalc {...section.calcProps} />;
+            // ✅ **MODIFICATION HERE**
+            // Get the actual conversion factors object based on the key
+            const factorsObject =
+              typedFullCalculatorData[section.calcProps.conversionFactorsKey];
+
+            if (factorsObject) {
+              // Ensure calculationType is one of the specific types GenericLightCalc expects
+              const specificCalcType = section.calcProps
+                .calculationType as SpecificCalculationType;
+
+              calculatorComponent = (
+                <GenericLightCalc
+                  title={section.calcProps.title}
+                  inputLabel={section.calcProps.inputLabel}
+                  outputLabel={section.calcProps.outputLabel}
+                  inputDefaultValue={section.calcProps.inputDefaultValue}
+                  conversionFactors={factorsObject} // Pass the resolved factors object
+                  calculationType={specificCalcType} // Pass the casted/validated type
+                  outputUnit={section.calcProps.outputUnit}
+                  noteText={section.calcProps.noteText}
+                />
+              );
+            } else {
+              // Handle case where factorsObject might not be found (e.g., bad key)
+              calculatorComponent = (
+                <div className="bg-destructive/10 text-destructive p-4 rounded-md">
+                  Error: Conversion factors not found for calculator ID:{" "}
+                  {section.id}
+                </div>
+              );
+            }
           } else {
             calculatorComponent = (
-              // Use destructive colors for errors
               <div className="bg-destructive/10 text-destructive p-4 rounded-md">
                 Error: Calculator type not configured correctly for ID:{" "}
                 {section.id}
@@ -80,15 +153,14 @@ const LightCalc = () => {
           }
 
           return (
+            // Card Structure ... (keep as is)
             <div
               key={section.id}
-              // Use card styles for these sections as well
               className="bg-card text-card-foreground p-6 md:p-8 rounded-xl shadow-lg dark:border dark:border-border flex flex-col lg:flex-row gap-8 lg:gap-10 items-center lg:items-start transition-shadow duration-300 hover:shadow-2xl dark:hover:shadow-[0_0_15px_rgba(var(--border),0.5)] overflow-hidden"
             >
               <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-stretch">
-                {calculatorComponent}{" "}
+                {calculatorComponent}
               </div>
-
               <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start justify-center lg:pl-4">
                 {section.imageSrc && (
                   <div className="w-full max-w-md mx-auto lg:mx-0 mb-5 rounded-lg overflow-hidden shadow-md">
@@ -98,12 +170,11 @@ const LightCalc = () => {
                       width={400}
                       height={240}
                       className="object-cover w-full h-full"
-                      priority={index < 1} // Prioritize LCP elements
+                      priority={index < 1}
                       loading={index < 1 ? "eager" : "lazy"}
                     />
                   </div>
                 )}
-                {/* Changed text-muted-foreground to text-card-foreground for brighter text */}
                 <p className="text-base text-card-foreground max-w-md text-center lg:text-left leading-relaxed">
                   {section.description}
                 </p>
