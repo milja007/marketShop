@@ -1,22 +1,53 @@
 "use client";
 
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"; // Assuming this path is correct
-import Image, { StaticImageData } from "next/image"; // Import StaticImageData
+import Image from "next/image"; // Keep this for the USP bar images
 
-// SVG Imports for USP Bar
-import { uspData } from "@/data(fake)/HomePageData";
-
-// Product Card Images
-import { productsData } from "@/data(fake)/HomePageData";
+// Import the entire JSON object once
+import homePageJsonDataFromFile from "@/data(fake)/HomePageData.json"; // Adjusted import
 
 import CardHome from "@/components/CARDS/CardHome"; // Your CardHome component
 import { CategoryGrid } from "@/components/CARDS/CategoryGrid";
 import { GrowInfoSection } from "@/components/INFO/GrowInfoSection";
-
 import TitleBadge from "@/components/SPAN/TitleBadge";
 
+// --- Define types to match your JSON structure and component expectations ---
+// It's good practice to move these to a shared types file (e.g., src/types.ts) eventually.
+interface UspItem {
+  id: string;
+  icon: string; // Expecting string path from JSON
+  title: string;
+  subtitle: string;
+}
+
+interface ProductTag {
+  text: string;
+  color: string;
+}
+
+interface Product {
+  id: string;
+  imageUrl: string; // Expecting string path from JSON
+  imageAlt: string;
+  brand: string;
+  title: string;
+  features: string[];
+  oldPrice?: string;
+  price: string;
+  buttonText?: string; // From your JSON data
+  href: string;
+  tags?: ProductTag[];
+  imageAspectRatio?: string;
+  objectFit?: "cover" | "contain" | undefined; // Specific type for objectFit
+}
+// --- End Type Definitions ---
+
+// Extract and type the data from the imported JSON object
+const uspData: UspItem[] = homePageJsonDataFromFile.uspData as UspItem[];
+const productsData = homePageJsonDataFromFile.productsData as Product[];
+
 export default function Home() {
-  // Updated product data structure for CardHome
+  // Updated product data structure for CardHome (Your comment)
 
   return (
     <div className="bg-slate-100 min-h-screen font-sans">
@@ -46,30 +77,33 @@ export default function Home() {
           </a>
         </div>
         <div className=" grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {productsData.map((product) => (
-            <CardHome
-              key={product.id}
-              productId={product.id}
-              imageUrl={product.imageUrl}
-              imageAlt={product.imageAlt}
-              brand={product.brand}
-              title={product.title}
-              features={product.features}
-              price={product.price}
-              oldPrice={product.oldPrice}
-              href={product.href}
-              buttonText="Add to Cart" // You were overriding buttonText from productData here
-              showQuantitySelector={true}
-              initialQuantity={3} // Starts with quantity 3
-              onAddToCart={(quantity, event) => {
-                console.log(`Add ${quantity} of ${product.title} to cart!`); // Enhanced log
-              }}
-              // You should also pass other props like tags if product objects have them
-              tags={product.tags}
-              imageAspectRatio={product.imageAspectRatio}
-              objectFit={product.objectFit as "cover" | "contain" | undefined}
-            />
-          ))}
+          {productsData.map(
+            (
+              product // 'product' is now correctly typed as 'Product'
+            ) => (
+              <CardHome
+                key={product.id}
+                productId={product.id}
+                imageUrl={product.imageUrl}
+                imageAlt={product.imageAlt}
+                brand={product.brand}
+                title={product.title}
+                features={product.features}
+                price={product.price}
+                oldPrice={product.oldPrice}
+                href={product.href}
+                buttonText="Add to Cart" // Your original override
+                showQuantitySelector={true}
+                initialQuantity={3} // Starts with quantity 3
+                onAddToCart={(quantity, event) => {
+                  console.log(`Add ${quantity} of ${product.title} to cart!`); // Enhanced log
+                }}
+                tags={product.tags}
+                imageAspectRatio={product.imageAspectRatio}
+                objectFit={product.objectFit} // No cast needed here if 'product' is typed as 'Product'
+              />
+            )
+          )}
         </div>
         <div className="mt-6 text-center sm:hidden">
           <a
@@ -91,24 +125,37 @@ export default function Home() {
             Our Unique Selling Propositions
           </h2>
           <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8">
-            {uspData.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-start space-x-3 sm:space-x-4 text-left"
-              >
-                <div className="flex-shrink-0 pt-1">
-                  <Image src={item.icon} alt="" width={36} aria-hidden="true" />
+            {uspData.map(
+              (
+                item // 'item' is now correctly typed as 'UspItem'
+              ) => (
+                <div
+                  key={item.id}
+                  className="flex items-start space-x-3 sm:space-x-4 text-left"
+                >
+                  <div className="flex-shrink-0 pt-1">
+                    <Image
+                      src={item.icon}
+                      alt=""
+                      width={36} // Keep these for Next.js optimization & layout shift prevention
+                      height={36} // Keep these for Next.js optimization & layout shift prevention
+                      aria-hidden="true"
+                      className="w-9 h-9" // Example: Using Tailwind classes for 36x36px (if your base size is 4px, 9*4=36)
+                      // Or, more explicitly: className="w-[36px] h-[36px]"
+                    />
+                    {/* Preserved your original Image tag for USP items, ensure height is handled by CSS or aspect ratio if needed */}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold text-gray-800 leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 leading-snug">
+                      {item.subtitle}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-base font-semibold text-gray-800 leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 leading-snug">
-                    {item.subtitle}
-                  </p>
-                </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </MaxWidthWrapper>
       </section>
